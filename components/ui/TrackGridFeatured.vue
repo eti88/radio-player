@@ -41,11 +41,10 @@ export default {
 };
 </script>
 
-<style>
-.v-slide-group__prev--disabled {
-  display: none !important;
-}
-/*.v-slide-group__next--disabled {
-  display: none !important;
-}*/
+<style lang="sass">
+.v-slide-group__prev--disabled
+  display: none !important
+
+.v-slide-group__next, .v-slide-group__prev
+  min-width:22px !important
 </style>

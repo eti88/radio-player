@@ -1,6 +1,5 @@
 <template>
   <page-template>
-    <track-grid-featured :tracks="tracks" v-if="false" />
     <track-grid-featured title="Radio Italiane" :tracks="radios" />
   </page-template>
 </template>
@@ -30,7 +29,7 @@ export default {
           cover: `${process.env.IPFS}/QmbKQYBtgXgRm18MWZBA37XWLSz7yuozzZZzHFFVMmCue1`,
           subtitle: "Italy",
           source:
-            "http://radiom2o-lh.akamaihd.net/i/RadioM2o_Live_1@42518/master.m3u8",
+            "https://radiom2o-lh.akamaihd.net/i/RadioM2o_Live_1@42518/master.m3u8",
           isHls: true
         },
         {
@@ -38,7 +37,7 @@ export default {
           cover: `${process.env.IPFS}/Qmcc52t9oNGie7iWN752JbBfMkmq4ZFKbwgUNu7k3djSZ8`,
           subtitle: "Italy",
           source:
-            "http://radiodeejay-lh.akamaihd.net/i/RadioDeejay_Live_1@189857/master.m3u8",
+            "https://radiodeejay-lh.akamaihd.net/i/RadioDeejay_Live_1@189857/master.m3u8",
           isHls: true
         },
         {
@@ -59,7 +58,7 @@ export default {
           title: "Virgin Radio",
           cover: `${process.env.IPFS}/QmXXJZA9S5FgMGEH2ctH33EbQEnDT8xfK62Mgzxw4FFCnL`,
           subtitle: "Italy",
-          source: "http://icecast.unitedradio.it/Virgin.mp3",
+          source: "https://icecast.unitedradio.it/Virgin.mp3",
           isHls: false
         },
         {

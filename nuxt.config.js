@@ -49,6 +49,10 @@ export default {
     },
     {
       rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+    },
+    {
+      rel: "stylesheet",
       href: "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
     },
       // {
@@ -115,7 +119,7 @@ export default {
    */
   vuetify: {
     customVariables: ["~/assets/variables.scss"],
-    treeShake: true,
+    treeShake: false,
     theme: {
       dark: true,
       themes: {
@@ -136,8 +140,8 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {
-    analyze: true,
-    extractCSS: true,
+    // analyze: true,
+    // extractCSS: true,
     extend(config, ctx) {
       config.node = {
         fs: "empty"

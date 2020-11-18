@@ -18,7 +18,11 @@
         <v-list-item>
           <!-- Init Cover -->
           <v-list-item-avatar tile>
-            <v-avatar size="40px" tile v-if="this.currentTrack && this.currentTrack.cover !== ''">
+            <v-avatar
+              size="40px"
+              tile
+              v-if="this.currentTrack && this.currentTrack.cover !== ''"
+            >
               <img :src="this.currentTrack.cover" />
             </v-avatar>
             <v-icon v-else color="grey">mdi-disc</v-icon>
@@ -27,8 +31,12 @@
 
           <!-- Init Title and description -->
           <v-list-item-content>
-            <v-list-item-title>{{ this.currentTrack ? this.currentTrack.title : `` }}</v-list-item-title>
-            <v-list-item-subtitle>{{ this.currentTrack ? this.currentTrack.subtitle : `` }}</v-list-item-subtitle>
+            <v-list-item-title>{{
+              this.currentTrack ? this.currentTrack.title : ``
+            }}</v-list-item-title>
+            <v-list-item-subtitle>{{
+              this.currentTrack ? this.currentTrack.subtitle : ``
+            }}</v-list-item-subtitle>
           </v-list-item-content>
           <!-- End Title and description -->
 
@@ -37,7 +45,12 @@
           <!-- Init Player actions -->
           <v-list-item-icon>
             <!-- init btn prev -->
-            <v-btn icon class="mx-3" :disabled="true">
+            <v-btn
+              icon
+              class="mx-3"
+              :disabled="true"
+              v-if="$vuetify.breakpoint.mdAndUp"
+            >
               <v-icon size="30">mdi-skip-previous</v-icon>
             </v-btn>
             <!-- end btn prev -->
@@ -62,23 +75,37 @@
                 'mx-1': $vuetify.breakpoint.smAndDown
               }"
             >
-              <v-icon v-if="isPaused" size="40" @click="onPlay" :disabled="!canPlay">mdi-play</v-icon>
+              <v-icon
+                v-if="isPaused"
+                size="40"
+                @click="onPlay"
+                :disabled="!canPlay"
+                >mdi-play</v-icon
+              >
               <v-icon v-else size="40" @click="onPause">mdi-pause</v-icon>
             </v-btn>
             <!-- end btn play/pause -->
 
             <!-- init btn next -->
-            <v-btn icon class="mx-3" :disabled="true">
+            <v-btn
+              icon
+              class="mx-3"
+              :disabled="true"
+              v-if="$vuetify.breakpoint.mdAndUp"
+            >
               <v-icon size="30">mdi-skip-next</v-icon>
             </v-btn>
             <!-- end btn next -->
           </v-list-item-icon>
           <!-- End Player actions -->
 
-          <v-spacer></v-spacer>
+          <v-spacer v-if="$vuetify.breakpoint.mdAndUp"></v-spacer>
 
           <!-- init duration -->
-          <v-list-item-content class="text-right">
+          <v-list-item-content
+            class="text-right"
+            v-if="$vuetify.breakpoint.mdAndUp"
+          >
             <v-list-item-subtitle class="caption">
               {{ toHHMMSS(currentTime) }} /
               {{ toHHMMSS(duration) }}
@@ -87,7 +114,7 @@
           <!-- end duration -->
 
           <!-- init btn fullScreen -->
-          <v-list-item-icon>
+          <v-list-item-icon v-if="$vuetify.breakpoint.mdAndUp">
             <v-btn icon class="mx-1">
               <v-icon v-if="!fullScreen" size="30">mdi-menu-up</v-icon>
               <v-icon v-else size="30">mdi-menu-down</v-icon>
@@ -108,29 +135,29 @@ export default {
   props: {
     loading: {
       type: Boolean,
-      default: false,
+      default: false
     },
     fullScreen: {
       type: Boolean,
-      default: false,
+      default: false
     },
     playing: {
       type: Boolean,
-      default: false,
+      default: false
     },
     cover: {
       type: String,
       default:
-        "https://lh3.googleusercontent.com/45RB3wqaBT-PZdYDwn-Whe75nl1ZFuRLKIKccNgN7SqbhcWxQg41BJGYoQSOKrp7k9catCquaj_cLhKn=w226-h226-l90-rj",
+        "https://lh3.googleusercontent.com/45RB3wqaBT-PZdYDwn-Whe75nl1ZFuRLKIKccNgN7SqbhcWxQg41BJGYoQSOKrp7k9catCquaj_cLhKn=w226-h226-l90-rj"
     },
     title: {
       type: String,
-      default: "The Revolution",
+      default: "The Revolution"
     },
     description: {
       type: String,
-      default: "dsadsad",
-    },
+      default: "dsadsad"
+    }
   },
   data() {
     return {
@@ -140,7 +167,7 @@ export default {
       duration: 0,
       currentTime: 0,
       manifestParsed: false,
-      isPaused: true,
+      isPaused: true
     };
   },
   mounted() {
@@ -288,13 +315,13 @@ export default {
       }
 
       this.onPlay();
-    },
+    }
   },
   watch: {
     currentTrack() {
       console.log("------------------ new track");
       this.reload();
-    },
+    }
   },
   computed: {
     canPlay() {
@@ -302,25 +329,26 @@ export default {
     },
     currentTrack() {
       return this.$store.getters[`player/currentTrack`];
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style>
-#player {
-  width: 100%;
-}
+<style lang="sass">
+#player
+  width: 100%
+  .v-slider--horizontal
+    margin-left: 0
+    margin-right: 0
 
-.v-slider--horizontal .v-slider__track-container {
-  height: 5px !important;
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-  cursor: pointer;
-}
+.v-slider--horizontal
+  .v-slider__track-container
+    height: 5px !important
+    margin-left: 0px !important
+    margin-right: 0px !important
+    cursor: pointer
 
-.v-slider__thumb {
-  z-index: 1;
-  cursor: pointer;
-}
+.v-slider__thumb
+  z-index: 1
+  cursor: pointer
 </style>

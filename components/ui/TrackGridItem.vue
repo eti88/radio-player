@@ -17,59 +17,68 @@
     >
       <template v-slot:placeholder>
         <v-row class="fill-height ma-0" align="center" justify="center">
-          <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+          <v-progress-circular
+            indeterminate
+            color="grey lighten-5"
+          ></v-progress-circular>
         </v-row>
       </template>
     </v-img>
     <v-list-item class="px-0">
       <v-list-item-content>
         <v-list-item-title class="font-weight-medium">
-          <router-link nuxt to="/playlist" class="track-grid__item_title">{{ title }}</router-link>
+          <router-link nuxt to="/" class="track-grid__item_title">{{
+            title
+          }}</router-link>
         </v-list-item-title>
-        <v-list-item-subtitle class="text-wrap track-grid__item_subtitle" v-html="subtitle"></v-list-item-subtitle>
+        <v-list-item-subtitle
+          class="text-wrap track-grid__item_subtitle"
+          v-html="subtitle"
+        ></v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
   </v-card>
 </template>
 
-<style lang="css">
-/* .track-grid__item_title {
-  color: #ffffff !important;
-  text-decoration: none;
-  line-height: 1.5 !important;
-} */
-.track-grid__item_subtitle {
-  line-height: 1.5 !important;
-}
+<style lang="sass">
+.track-grid__item a:hover
+  text-decoration: underline !important
+
+.theme--light
+  .track-grid__item a
+    color: #000 !important
+
+.theme--dark
+  .track-grid__item a
+    color: #fff !important
+
+.track-grid__item_subtitle
+  line-height: 1.5 !important
 </style>
 
 <script>
 export default {
   props: {
-    size: {
-      type: Number,
-      default: 225,
-    },
     cover: {
       type: String,
-      default: "",
+      default: ""
     },
     title: {
       type: String,
-      default: "",
+      default: ""
     },
     subtitle: {
       type: String,
-      default: "",
+      default: ""
     },
     source: {
       type: String,
-      default: "",
+      default: ""
     },
     isHls: {
       type: Boolean,
-      default: true,
-    },
+      default: true
+    }
   },
   methods: {
     onClick(cover, title, subtitle, source, isHls) {
@@ -78,9 +87,14 @@ export default {
         title: title,
         subtitle: subtitle,
         source: source,
-        isHls: isHls,
+        isHls: isHls
       });
-    },
+    }
   },
+  computed: {
+    size() {
+      return this.$vuetify.breakpoint.mdAndUp ? 225 : 150;
+    }
+  }
 };
 </script>
