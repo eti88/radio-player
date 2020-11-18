@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
+    "build": "NUXT_PORT=3434 nuxt build",
+    "start": "NUXT_PORT=3434 nuxt start",
+    "generate": "NUXT_PORT=3434 nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.0",
