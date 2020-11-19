@@ -109,9 +109,9 @@ export default {
     manifest: {
       name: process.env.SEO_TITLE ? process.env.SEO_TITLE : `BitSong Blockchain Music Player`,
       short_name: process.env.SHORT_TITLE ? process.env.SHORT_TITLE : `BitSong Blockchain Music Player`,
-      theme_color: "#37474F",
+      theme_color: "#000000",
       description: process.env.SEO_DESCRIPTION ? process.env.SEO_DESCRIPTION : `BitSong Blockchain Music Player allows you to interact with media files.`,
-      background_color: "#F4F4F4",
+      background_color: "#000000",
       display: "standalone",
       start_url: "/",
       lang: 'en'
