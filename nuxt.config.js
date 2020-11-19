@@ -6,7 +6,8 @@ import colors from "vuetify/es5/util/colors";
 export default {
   env: {
     IPFS: process.env.IPFS || 'http://127.0.0.1:8080/ipfs/',
-    VERSION: pkg.version
+    VERSION: pkg.version,
+    GA_ID: process.env.GA_ID ? process.env.GA_ID : undefined
   },
   /*
    ** Nuxt rendering mode
