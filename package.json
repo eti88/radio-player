@@ -15,6 +15,7 @@
     "@nuxtjs/proxy": "^2.0.1",
     "@nuxtjs/pwa": "^3.0.2",
     "hls.js": "^0.14.12",
+    "node-fetch": "^2.6.1",
     "nuxt": "^2.14.7",
     "nuxt-vuex-localstorage": "^1.2.7"
   },

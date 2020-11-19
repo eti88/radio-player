@@ -5,13 +5,14 @@
     </h2>
     <v-sheet elevation="0" color="transparent">
       <v-slide-group center-active class="ml-n2">
-        <v-slide-item v-for="(track, i) in tracks" :key="i">
+        <v-slide-item v-for="(item, i) in items" :key="i">
           <track-grid-item
-            :cover="track.cover"
-            :title="track.title"
-            :subtitle="track.subtitle"
-            :source="track.source"
-            :isHls="track.isHls"
+            :picture="item.picture"
+            :name="item.name"
+            :country="item.country"
+            :city="item.city"
+            :stream_url="item.stream_url"
+            :isHls="item.stream_type === 'hls'"
           ></track-grid-item>
         </v-slide-item>
       </v-slide-group>
@@ -28,7 +29,7 @@ export default {
       type: String,
       default: "Nuove uscite"
     },
-    tracks: {
+    items: {
       type: Array,
       default() {
         return [];
@@ -40,11 +41,3 @@ export default {
   }
 };
 </script>
-
-<style lang="sass">
-.v-slide-group__prev--disabled
-  display: none !important
-
-.v-slide-group__next, .v-slide-group__prev
-  min-width:22px !important
-</style>

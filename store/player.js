@@ -13,3 +13,9 @@ export const mutations = {
     state.currentTrack = payload
   }
 }
+
+export const actions = {
+  stop({ commit }) {
+    commit('setCurrentTrack', null)
+  }
+}

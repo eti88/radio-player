@@ -1,18 +1,17 @@
 <template>
-  <v-footer app class="pa-0" v-show="this.currentTrack">
+  <v-footer app class="pa-0">
     <audio ref="audio"></audio>
-    <v-card id="player">
+    <v-card id="player" v-if="$store.getters['player/currentTrack'] !== null">
       <v-slider
         class="mx-0 player-slider"
-        v-model="currentTime"
         color="red accent-3"
         height="6"
         :step="1"
         :min="0"
-        :max="duration"
+        :max="100"
+        :value="100"
         hide-details
         background-color="grey darken-3"
-        @click.native="onSeek"
       />
       <v-list>
         <v-list-item>
@@ -107,17 +106,18 @@
             v-if="$vuetify.breakpoint.mdAndUp"
           >
             <v-list-item-subtitle class="caption">
-              {{ toHHMMSS(currentTime) }} /
-              {{ toHHMMSS(duration) }}
+              {{ toHHMMSS(currentTime) }}
             </v-list-item-subtitle>
           </v-list-item-content>
           <!-- end duration -->
 
           <!-- init btn fullScreen -->
-          <v-list-item-icon v-if="$vuetify.breakpoint.mdAndUp">
-            <v-btn icon class="mx-1">
-              <v-icon v-if="!fullScreen" size="30">mdi-menu-up</v-icon>
-              <v-icon v-else size="30">mdi-menu-down</v-icon>
+          <v-list-item-icon>
+            <v-btn icon @click="onStop">
+              <v-icon v-if="$vuetify.breakpoint.mdAndUp" size="30"
+                >mdi-close</v-icon
+              >
+              <v-icon v-else size="30">mdi-stop</v-icon>
             </v-btn>
           </v-list-item-icon>
           <!-- end btn fullScreen -->
@@ -321,6 +321,20 @@ export default {
       console.log("--- pause ---");
       this.$refs.audio.pause();
     },
+    onStop() {
+      console.log("--- stop ---");
+      this.$refs.audio.pause();
+      this.hls.stopLoad();
+      this.hls.detachMedia();
+
+      // this.currentTime = 0;
+      // this.hls = null;
+      // this.bufferTimer = null;
+      // this.manifestParsed = null;
+      // this.isPaused = true;
+
+      this.$store.dispatch("player/stop");
+    },
     reload() {
       this.isPaused = true;
       this.hls.stopLoad();
@@ -343,8 +357,10 @@ export default {
   },
   watch: {
     currentTrack() {
-      console.log("------------------ new track");
-      this.reload();
+      if (this.$store.getters[`player/currentTrack`] !== null) {
+        console.log("------------------ new track");
+        this.reload();
+      }
     }
   },
   computed: {

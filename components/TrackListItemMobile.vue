@@ -1,0 +1,104 @@
+<template>
+  <v-list-item class="px-0">
+    <v-img
+      max-width="32"
+      max-height="32"
+      :src="item.picture"
+      class="mr-4 ml-2"
+      v-if="item.picture"
+      @click.stop="
+        onClick(
+          item.picture,
+          item.name,
+          `${item.city}, ${item.country}`,
+          item.stream_url,
+          item.stream_type === 'hls'
+        )
+      "
+    ></v-img>
+    <v-btn
+      class="mr-4 ml-1"
+      v-else
+      icon
+      @click.stop="
+        onClick(
+          item.picture,
+          item.name,
+          `${item.city}, ${item.country}`,
+          item.stream_url,
+          item.stream_type === 'hls'
+        )
+      "
+    >
+      <v-icon size="22" color="grey">
+        mdi-radio
+      </v-icon>
+    </v-btn>
+    <v-list-item-content>
+      <v-list-item-title
+        class="font-weight-medium"
+        v-html="item.name"
+        @click="
+          onClick(
+            item.picture,
+            item.name,
+            `${item.city}, ${item.country}`,
+            item.stream_url,
+            item.stream_type === 'hls'
+          )
+        "
+      >
+      </v-list-item-title>
+      <v-list-item-subtitle class="grey--text">
+        <template v-for="(genre, i) in item.genres">
+          <nuxt-link
+            class="track-list__item_link"
+            :to="`/genre/${genre}`"
+            v-text="genre"
+            :key="genre"
+          >
+          </nuxt-link>
+          <span :key="i" v-if="i < item.genres.length - 1" class="ml-n1 mr-1"
+            >•</span
+          >
+        </template>
+      </v-list-item-subtitle>
+    </v-list-item-content>
+
+    <v-list-item-action class="text-right">
+      <v-btn icon>
+        <v-icon color="grey">mdi-heart-outline</v-icon>
+      </v-btn>
+    </v-list-item-action>
+    <v-list-item-action class="text-right ml-0">
+      <v-btn icon color="grey">
+        <v-icon>mdi-dots-vertical</v-icon>
+      </v-btn>
+    </v-list-item-action>
+  </v-list-item>
+</template>
+
+<script>
+export default {
+  props: {
+    item: {
+      type: Object,
+      default() {
+        return {};
+      }
+    }
+  },
+
+  methods: {
+    onClick(cover, title, subtitle, source, isHls) {
+      this.$store.commit(`player/setCurrentTrack`, {
+        cover: cover,
+        title: title,
+        subtitle: subtitle,
+        source: source,
+        isHls: isHls
+      });
+    }
+  }
+};
+</script>

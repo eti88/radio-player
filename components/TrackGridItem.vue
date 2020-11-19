@@ -9,11 +9,11 @@
     color="transparent"
   >
     <v-img
-      :src="cover"
+      :src="picture"
       :height="size"
       width="auto"
       style="border-radius: 6px !important;"
-      @click="onClick(cover, title, subtitle, source, isHls)"
+      @click="onClick(picture, name, `${city}, ${country}`, stream_url, isHls)"
     >
       <template v-slot:placeholder>
         <v-row class="fill-height ma-0" align="center" justify="center">
@@ -24,19 +24,15 @@
         </v-row>
       </template>
     </v-img>
-    <v-list-item class="px-0">
-      <v-list-item-content>
-        <v-list-item-title class="font-weight-medium">
-          <router-link nuxt to="/" class="track-grid__item_title">{{
-            title
-          }}</router-link>
-        </v-list-item-title>
-        <v-list-item-subtitle
-          class="text-wrap track-grid__item_subtitle"
-          v-html="subtitle"
-        ></v-list-item-subtitle>
-      </v-list-item-content>
-    </v-list-item>
+    <div class="pt-2 track-grid__item_title">
+      <router-link nuxt to="/" class="font-weight-medium">{{
+        name
+      }}</router-link>
+    </div>
+    <div class="text-wrap track-grid__item_subtitle">
+      <router-link nuxt :to="`/${country}/${city}`">{{ city }}</router-link
+      >, <router-link nuxt :to="`/${country}`">{{ country }}</router-link>
+    </div>
   </v-card>
 </template>
 
@@ -45,33 +41,42 @@
   text-decoration: underline !important
 
 .theme--light
-  .track-grid__item a
+  .track-grid__item_title a
     color: #000 !important
 
 .theme--dark
-  .track-grid__item a
+  .track-grid__item_title a
     color: #fff !important
+  .track-grid__item_subtitle a
+    color: rgba(255, 255, 255, 0.7)
+
 
 .track-grid__item_subtitle
   line-height: 1.5 !important
+  font-size: 0.875rem
+  color: rgba(255, 255, 255, 0.7)
 </style>
 
 <script>
 export default {
   props: {
-    cover: {
+    picture: {
       type: String,
       default: ""
     },
-    title: {
+    name: {
       type: String,
       default: ""
     },
-    subtitle: {
+    city: {
       type: String,
       default: ""
     },
-    source: {
+    country: {
+      type: String,
+      default: ""
+    },
+    stream_url: {
       type: String,
       default: ""
     },

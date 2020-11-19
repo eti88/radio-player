@@ -67,4 +67,10 @@ a
 
 .theme--dark.v-application
   background-color: #000
+
+.v-slide-group__prev--disabled
+  display: none !important
+
+.v-slide-group__next, .v-slide-group__prev
+  min-width:22px !important
 </style>
