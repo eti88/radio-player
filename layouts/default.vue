@@ -2,10 +2,11 @@
   <v-app>
     <toolbar />
     <update-available-dialog v-if="update_available"></update-available-dialog>
-    <v-content>
+    <v-content class="mb-8">
       <nuxt />
     </v-content>
     <bitsong-player />
+    <v-footer> </v-footer>
   </v-app>
 </template>
 
