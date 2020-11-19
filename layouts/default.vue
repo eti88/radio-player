@@ -12,7 +12,7 @@
 <script>
 import Toolbar from "@/components/Toolbar";
 import BitsongPlayer from "@/components/BitsongPlayer";
-import UpdateAvailableDialog from '@/components/UpdateAvailableDialog'
+import UpdateAvailableDialog from "@/components/UpdateAvailableDialog";
 
 export default {
   components: {
@@ -24,25 +24,25 @@ export default {
   data() {
     return {
       update_available: false
-    }
+    };
   },
 
   async mounted() {
     const workbox = await window.$workbox;
-    if ( workbox ) {
-      workbox.addEventListener( 'waiting', async (event) => {
-        console.log('waiting-----------------', event );
-        this.update_available = true
+    if (workbox) {
+      workbox.addEventListener("waiting", async event => {
+        console.log("waiting-----------------", event);
+        this.update_available = true;
       });
 
-      workbox.addEventListener('installed', (event) => {
+      workbox.addEventListener("installed", event => {
         if (event.isUpdate) {
-          console.log('----------- update available -----------')
-          this.update_available = true
+          console.log("----------- update available -----------");
+          this.update_available = true;
         }
-      })
+      });
     }
-  },
+  }
 };
 </script>
 
@@ -52,9 +52,9 @@ a
 
 .v-application
   .text-h2
-    font-size: 2.5rem!important
+    font-size: 2.15rem!important
     font-weight: 600
-    line-height: 3.75rem
+    line-height: 3.65rem
     letter-spacing: -.03em!important
     font-family: "Poppins", sans-serif !important
 

@@ -5,7 +5,7 @@
     tile
     class="ma-3 track-grid__item"
     :max-width="size"
-    :width="$vuetify.breakpoint.mdAndUp ? '100%' : '290px'"
+    :width="$vuetify.breakpoint.mdAndUp ? '225px' : '290px'"
     color="transparent"
   >
     <v-img

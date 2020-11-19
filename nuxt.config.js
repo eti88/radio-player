@@ -86,7 +86,7 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ["@nuxtjs/vuetify","@nuxtjs/pwa",],
+  buildModules: ["@nuxtjs/vuetify", "@nuxtjs/pwa",],
   /*
    ** Nuxt.js modules
    */
@@ -118,7 +118,7 @@ export default {
     },
     workbox: {
       // dev: process.env.WORKBOX_DEBUG,
-      enabled: true,
+      // enabled: true,
       config: { debug: process.env.WORKBOX_DEBUG },
 
       // importScripts: [
@@ -144,8 +144,8 @@ export default {
       runtimeCaching: [
         {
           urlPattern: '/.*',
-          handler:    'networkFirst',
-          method:     'GET',
+          handler: 'networkFirst',
+          method: 'GET',
           strategyOptions: {
             cacheExpiration: {
               maxEntries: 10,

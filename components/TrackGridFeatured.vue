@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h2 class="text-h2 mb-4">
+    <h2 class="text-h2 mb-1">
       {{ title }}
     </h2>
     <v-sheet elevation="0" color="transparent">
-      <v-slide-group show-arrows center-active class="ml-n2">
+      <v-slide-group center-active class="ml-n2">
         <v-slide-item v-for="(track, i) in tracks" :key="i">
           <track-grid-item
             :cover="track.cover"
