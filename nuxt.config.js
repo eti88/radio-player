@@ -76,6 +76,9 @@ export default {
   plugins: [{
     src: "~/plugins/app.js",
     ssr: false
+  }, {
+    src: "~/plugins/seo-gtag.js",
+    ssr: false
   }
   ],
   /*

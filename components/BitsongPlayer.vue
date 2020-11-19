@@ -185,11 +185,21 @@ export default {
     this.hls.attachMedia(audio);
 
     this.hls.on(Hls.Events.MANIFEST_PARSED, (evt, data) => {
+      this.$gtag("event", "hls.js", {
+        event_name: "MANIFEST_PARSED",
+        title: this.currentTrack.title
+      });
+
       this.manifestParsed = true;
       this.bufferData();
     });
 
     this.hls.on(Hls.Events.MEDIA_DETACHED, () => {
+      this.$gtag("event", "hls.js", {
+        event_name: "MEDIA_DETACHED",
+        title: this.currentTrack.title
+      });
+
       this.manifestParsed = false;
       clearInterval(this.bufferTimer);
     });
@@ -244,13 +254,24 @@ export default {
     handleEvents(evt) {
       switch (evt.type) {
         case "play":
+          this.$gtag("event", "audio_player", {
+            event_name: "Play",
+            title: this.currentTrack.title
+          });
           this.isPaused = false;
           break;
         case "pause":
+          this.$gtag("event", "audio_player", {
+            event_name: "Pause",
+            title: this.currentTrack.title
+          });
           this.isPaused = true;
           break;
         case "loadedmetadata":
-          console.log("--- metadata loaded");
+          this.$gtag("event", "audio_player", {
+            event_name: "Metadata Loaded",
+            title: this.currentTrack.title
+          });
           this.bufferData();
           this.$refs.audio.play();
         case "error":
@@ -274,13 +295,16 @@ export default {
                   "The audio could not be loaded, either because the server or network failed or because the format is not supported";
                 break;
             }
-            console.error(errorTxt);
           }
       }
     },
     onSeek() {
       console.log("--- seek ---");
       this.$refs.audio.currentTime = Math.round(this.currentTime);
+      this.$gtag("event", "audio_player", {
+        event_name: "Seek",
+        title: this.currentTrack.title
+      });
     },
     onPlay() {
       console.log("--- play ---");
