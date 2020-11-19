@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import TrackGridItem from "@/components/ui/TrackGridItem";
+import TrackGridItem from "@/components/TrackGridItem";
 
 export default {
   props: {

@@ -93,7 +93,7 @@ export default {
   },
   computed: {
     size() {
-      return this.$vuetify.breakpoint.mdAndUp ? 225 : 150;
+      return this.$vuetify.breakpoint.mdAndUp ? 225 : 140;
     }
   }
 };

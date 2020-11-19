@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ToolbarContent from "@/components/ui/ToolbarContent";
+import ToolbarContent from "@/components/ToolbarContent";
 
 export default {
   components: {

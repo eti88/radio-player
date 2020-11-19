@@ -3,7 +3,7 @@
 A simple UI to interact with public radio streams.
 
 <p>
-<img src="https://img.shields.io/badge/version-0.1.0-blue.svg" />
+<img src="https://img.shields.io/badge/version-0.2.0-blue.svg" />
 <a href="https://twitter.com/bitsongofficial">
 <img alt="Twitter: BitSong" src="https://img.shields.io/twitter/follow/bitsongofficial.svg?style=social"  target="_blank" />
 </a>

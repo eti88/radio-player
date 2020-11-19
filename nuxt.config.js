@@ -1,9 +1,12 @@
+import pkg from './package.json'
+
 require("dotenv").config();
 import colors from "vuetify/es5/util/colors";
 
 export default {
   env: {
-    IPFS: process.env.IPFS || 'http://127.0.0.1:8080/ipfs/'
+    IPFS: process.env.IPFS || 'http://127.0.0.1:8080/ipfs/',
+    VERSION: pkg.version
   },
   /*
    ** Nuxt rendering mode
@@ -21,7 +24,7 @@ export default {
    */
   head: {
     titleTemplate: titleChunk => {
-      return titleChunk ? `${titleChunk} | BitSong` : "BitSong";
+      return titleChunk ? `${titleChunk} | BitSong` : "BitSong Blockchain Music Player";
     },
     // title: 'BitSong',
     meta: [{
@@ -34,7 +37,7 @@ export default {
     {
       hid: "description",
       name: "description",
-      content: "BitSong, blockchain music streaming"
+      content: `BitSong Blockchain Music Player allows you to interact with media files.`
     }
     ],
     script: [],
@@ -43,10 +46,10 @@ export default {
       type: "image/x-icon",
       href: "/favicon.png"
     },
-    {
-      rel: "stylesheet",
-      href: "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;800&display=swap"
-    },
+    // {
+    //   rel: "stylesheet",
+    //   href: "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;800&display=swap"
+    // },
     {
       rel: "stylesheet",
       href: "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
@@ -83,7 +86,7 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ["@nuxtjs/vuetify"],
+  buildModules: ["@nuxtjs/vuetify","@nuxtjs/pwa",],
   /*
    ** Nuxt.js modules
    */
@@ -98,8 +101,151 @@ export default {
         localStorage: ["app"],
         sessionStorage: []
       }
-    ]
+    ],
+    "@nuxtjs/pwa"
   ],
+
+  pwa: {
+    manifest: {
+      name: process.env.SEO_TITLE ? process.env.SEO_TITLE : `BitSong Blockchain Music Player`,
+      short_name: process.env.SHORT_TITLE ? process.env.SHORT_TITLE : `BitSong Blockchain Music Player`,
+      theme_color: "#37474F",
+      description: process.env.SEO_DESCRIPTION ? process.env.SEO_DESCRIPTION : `BitSong Blockchain Music Player allows you to interact with media files.`,
+      background_color: "#F4F4F4",
+      display: "standalone",
+      start_url: "/",
+      lang: 'en'
+    },
+    workbox: {
+      // dev: process.env.WORKBOX_DEBUG,
+      enabled: true,
+      config: { debug: process.env.WORKBOX_DEBUG },
+
+      // importScripts: [
+      //   '/offline-sw.js',
+      // ],
+
+      cleanupOutdatedCaches: true,
+
+      /*preCaching: [
+        'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;600;700;800&display=swap'
+        'https://fonts.googleapis.com/css?family=Material+Icons',
+      ],*/
+
+      cacheNames: {
+        suffix: pkg.version
+      },
+      cacheOptions: {
+        cacheId: pkg.name,
+        revision: pkg.version
+      },
+
+      // Runtime caching caches pages as we browse
+      runtimeCaching: [
+        {
+          urlPattern: '/.*',
+          handler:    'networkFirst',
+          method:     'GET',
+          strategyOptions: {
+            cacheExpiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 1, // 1 day
+              purgeOnQuotaError: true,
+            }
+          },
+        },
+
+        // Cache fonts
+        {
+          urlPattern: 'https://fonts.googleapis.com',
+          handler: 'NetworkFirst',
+          method: 'GET',
+          strategyOptions: {
+            cacheName: 'assets',
+            cacheExpiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
+              purgeOnQuotaError: true,
+            }
+          },
+        },
+        {
+          urlPattern: 'https://fonts.gstatic.com',
+          handler: 'StaleWhileRevalidate',
+          method: 'GET',
+          strategyOptions: {
+            cacheName: 'assets',
+            /*cacheableResponse: {
+              statuses: [ 200 ],
+            },*/
+            cacheExpiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
+              purgeOnQuotaError: true,
+            }
+          },
+        },
+
+        // Cache Amazon S3
+        {
+          urlPattern: 'https://s3.amazonaws.com',
+          handler: 'StaleWhileRevalidate',
+          method: 'GET',
+          strategyOptions: {
+            cacheName: 'assets',
+            cacheExpiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
+              purgeOnQuotaError: true,
+            }
+          },
+        },
+
+        // Cache IPFS
+        {
+          urlPattern: process.env.IPFS,
+          handler: 'StaleWhileRevalidate',
+          method: 'GET',
+          strategyOptions: {
+            cacheName: 'ipfs',
+            cacheExpiration: {
+              maxEntries: 1000,
+              maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
+              purgeOnQuotaError: true,
+            }
+          },
+        },
+
+        // Cache basic API responses
+        {
+          urlPattern: process.env.LCD,
+          handler: 'NetworkFirst',
+          method: 'GET',
+          strategyOptions: {
+            cacheName: 'bitsong-lcd',
+          },
+        },
+      ],
+
+      // Automatically cache for offline usage
+      offlineAssets: [
+        // Route Locations
+        /*
+        '/',
+        '/bank',
+        '/staking',
+        */
+
+        // Assets
+        '/bitsong_logo_circle_red.svg',
+        '/bitsong_logo_red.svg',
+        'https://fonts.googleapis.com/css?family=Material+Icons',
+        'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap',
+        'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap'
+      ],
+    }
+  },
+
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options

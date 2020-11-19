@@ -1,13 +1,13 @@
 <template>
   <page-template>
-    <track-grid-featured title="Radio Italiane" :tracks="radios" />
+    <track-grid-featured title="Italians Radio" :tracks="radios" />
   </page-template>
 </template>
 
 <script>
-import PageTemplate from "@/components/ui/PageTemplate";
+import PageTemplate from "@/components/PageTemplate";
 
-import TrackGridFeatured from "@/components/ui/TrackGridFeatured";
+import TrackGridFeatured from "@/components/TrackGridFeatured";
 
 export default {
   components: {
@@ -18,11 +18,12 @@ export default {
     return {
       radios: [
         {
-          title: "Radio Monte Carlo",
-          cover: `${process.env.IPFS}/QmNS1xtJN6xtLmBXx47E5y8NnuHJUQycmXCxg56gGQ7qtE`,
+          title: "Radio Deejay",
+          cover: `${process.env.IPFS}/Qmcc52t9oNGie7iWN752JbBfMkmq4ZFKbwgUNu7k3djSZ8`,
           subtitle: "Italy",
-          source: "http://edge.radiomontecarlo.net/RMC.mp3",
-          isHls: false
+          source:
+            "https://radiodeejay-lh.akamaihd.net/i/RadioDeejay_Live_1@189857/master.m3u8",
+          isHls: true
         },
         {
           title: "Radio M2O",
@@ -33,25 +34,10 @@ export default {
           isHls: true
         },
         {
-          title: "Radio Deejay",
-          cover: `${process.env.IPFS}/Qmcc52t9oNGie7iWN752JbBfMkmq4ZFKbwgUNu7k3djSZ8`,
-          subtitle: "Italy",
-          source:
-            "https://radiodeejay-lh.akamaihd.net/i/RadioDeejay_Live_1@189857/master.m3u8",
-          isHls: true
-        },
-        {
           title: "Radio Subasio",
           cover: `${process.env.IPFS}/QmNkmywWitbAwogeNSFPWyNFBHNr85JavmDoiRtYy11Cyk`,
           subtitle: "Italy",
           source: "https://icy.unitedradio.it/Subasio.mp3",
-          isHls: false
-        },
-        {
-          title: "Radio Freccia",
-          cover: `${process.env.IPFS}/QmeuWhWd5EyPbjabCF5kF1yg2kSLRwywTqwePhR5hM8oTw`,
-          subtitle: "Italy",
-          source: "https://streamingv2.shoutcast.com/radiofreccia",
           isHls: false
         },
         {
@@ -62,10 +48,10 @@ export default {
           isHls: false
         },
         {
-          title: "Radio 101",
-          cover: `https://www.r101.it/upload/1564237987695.png`,
+          title: "Radio Freccia",
+          cover: `${process.env.IPFS}/QmeuWhWd5EyPbjabCF5kF1yg2kSLRwywTqwePhR5hM8oTw`,
           subtitle: "Italy",
-          source: "http://icecast.unitedradio.it/r101",
+          source: "https://streamingv2.shoutcast.com/radiofreccia",
           isHls: false
         },
         {
@@ -74,7 +60,21 @@ export default {
           subtitle: "Italy",
           source: "https://ice02.fluidstream.net/ibiza.aac",
           isHls: false
-        }
+        },
+        {
+          title: "Radio Monte Carlo",
+          cover: `${process.env.IPFS}/QmNS1xtJN6xtLmBXx47E5y8NnuHJUQycmXCxg56gGQ7qtE`,
+          subtitle: "Italy",
+          source: "http://edge.radiomontecarlo.net/RMC.mp3",
+          isHls: false
+        },
+        {
+          title: "Radio 101",
+          cover: `https://www.r101.it/upload/1564237987695.png`,
+          subtitle: "Italy",
+          source: "http://icecast.unitedradio.it/r101",
+          isHls: false
+        },
       ]
     };
   }

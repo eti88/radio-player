@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <toolbar />
+    <update-available-dialog v-if="update_available"></update-available-dialog>
     <v-content>
       <nuxt />
     </v-content>
@@ -9,13 +10,38 @@
 </template>
 
 <script>
-import Toolbar from "@/components/ui/Toolbar";
-import BitsongPlayer from "@/components/ui/BitsongPlayer";
+import Toolbar from "@/components/Toolbar";
+import BitsongPlayer from "@/components/BitsongPlayer";
+import UpdateAvailableDialog from '@/components/UpdateAvailableDialog'
 
 export default {
   components: {
     Toolbar,
     BitsongPlayer,
+    UpdateAvailableDialog
+  },
+
+  data() {
+    return {
+      update_available: false
+    }
+  },
+
+  async mounted() {
+    const workbox = await window.$workbox;
+    if ( workbox ) {
+      workbox.addEventListener( 'waiting', async (event) => {
+        console.log('waiting-----------------', event );
+        this.update_available = true
+      });
+
+      workbox.addEventListener('installed', (event) => {
+        if (event.isUpdate) {
+          console.log('----------- update available -----------')
+          this.update_available = true
+        }
+      })
+    }
   },
 };
 </script>
