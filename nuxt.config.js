@@ -4,6 +4,11 @@ require("dotenv").config();
 import colors from "vuetify/es5/util/colors";
 
 export default {
+  loading: {
+    color: '#C62828',
+    background: 'black'
+  },
+
   env: {
     API: process.env.API || 'http://localhost:3001/api/v1',
     IPFS: process.env.IPFS || 'http://127.0.0.1:8080/ipfs/',
