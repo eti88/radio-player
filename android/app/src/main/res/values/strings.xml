@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">BitSong Radio Player</string>
+    <string name="title_activity_main">BitSong Radio Player</string>
+    <string name="package_name">io.bitsong.play</string>
+    <string name="custom_url_scheme">io.bitsong.play</string>
+</resources>

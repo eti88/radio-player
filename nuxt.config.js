@@ -112,143 +112,144 @@ export default {
 
   pwa: {
     manifest: {
-      name: process.env.SEO_TITLE ? process.env.SEO_TITLE : `BitSong Blockchain Music Player`,
-      short_name: process.env.SHORT_TITLE ? process.env.SHORT_TITLE : `BitSong Blockchain Music Player`,
+      name: process.env.SEO_TITLE || `BitSong Blockchain Music Player`,
+      short_name: process.env.SHORT_TITLE || `BitSong Blockchain Music Player`,
       theme_color: "#000000",
-      description: process.env.SEO_DESCRIPTION ? process.env.SEO_DESCRIPTION : `BitSong Blockchain Music Player allows you to interact with media files.`,
+      description: process.env.SEO_DESCRIPTION || `BitSong Blockchain Music Player allows you to interact with media files.`,
       background_color: "#000000",
       display: "standalone",
       start_url: "/",
-      lang: 'en'
+      lang: 'en',
+      useWebmanifestExtension: false
     },
-    workbox: {
-      // dev: process.env.WORKBOX_DEBUG,
-      // enabled: true,
-      config: { debug: process.env.WORKBOX_DEBUG },
+    // workbox: {
+    //   // dev: process.env.WORKBOX_DEBUG,
+    //   // enabled: true,
+    //   config: { debug: process.env.WORKBOX_DEBUG },
 
-      // importScripts: [
-      //   '/offline-sw.js',
-      // ],
+    //   // importScripts: [
+    //   //   '/offline-sw.js',
+    //   // ],
 
-      cleanupOutdatedCaches: true,
+    //   cleanupOutdatedCaches: true,
 
-      /*preCaching: [
-        'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;600;700;800&display=swap'
-        'https://fonts.googleapis.com/css?family=Material+Icons',
-      ],*/
+    //   /*preCaching: [
+    //     'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;600;700;800&display=swap'
+    //     'https://fonts.googleapis.com/css?family=Material+Icons',
+    //   ],*/
 
-      cacheNames: {
-        suffix: pkg.version
-      },
-      cacheOptions: {
-        cacheId: pkg.name,
-        revision: pkg.version
-      },
+    //   cacheNames: {
+    //     suffix: pkg.version
+    //   },
+    //   cacheOptions: {
+    //     cacheId: pkg.name,
+    //     revision: pkg.version
+    //   },
 
-      // Runtime caching caches pages as we browse
-      runtimeCaching: [
-        {
-          urlPattern: '/.*',
-          handler: 'networkFirst',
-          method: 'GET',
-          strategyOptions: {
-            cacheExpiration: {
-              maxEntries: 10,
-              maxAgeSeconds: 60 * 60 * 24 * 1, // 1 day
-              purgeOnQuotaError: true,
-            }
-          },
-        },
+    //   // Runtime caching caches pages as we browse
+    //   runtimeCaching: [
+    //     {
+    //       urlPattern: '/.*',
+    //       handler: 'networkFirst',
+    //       method: 'GET',
+    //       strategyOptions: {
+    //         cacheExpiration: {
+    //           maxEntries: 10,
+    //           maxAgeSeconds: 60 * 60 * 24 * 1, // 1 day
+    //           purgeOnQuotaError: true,
+    //         }
+    //       },
+    //     },
 
-        // Cache fonts
-        {
-          urlPattern: 'https://fonts.googleapis.com',
-          handler: 'NetworkFirst',
-          method: 'GET',
-          strategyOptions: {
-            cacheName: 'assets',
-            cacheExpiration: {
-              maxEntries: 10,
-              maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
-              purgeOnQuotaError: true,
-            }
-          },
-        },
-        {
-          urlPattern: 'https://fonts.gstatic.com',
-          handler: 'StaleWhileRevalidate',
-          method: 'GET',
-          strategyOptions: {
-            cacheName: 'assets',
-            /*cacheableResponse: {
-              statuses: [ 200 ],
-            },*/
-            cacheExpiration: {
-              maxEntries: 10,
-              maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
-              purgeOnQuotaError: true,
-            }
-          },
-        },
+    //     // Cache fonts
+    //     {
+    //       urlPattern: 'https://fonts.googleapis.com',
+    //       handler: 'NetworkFirst',
+    //       method: 'GET',
+    //       strategyOptions: {
+    //         cacheName: 'assets',
+    //         cacheExpiration: {
+    //           maxEntries: 10,
+    //           maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
+    //           purgeOnQuotaError: true,
+    //         }
+    //       },
+    //     },
+    //     {
+    //       urlPattern: 'https://fonts.gstatic.com',
+    //       handler: 'StaleWhileRevalidate',
+    //       method: 'GET',
+    //       strategyOptions: {
+    //         cacheName: 'assets',
+    //         /*cacheableResponse: {
+    //           statuses: [ 200 ],
+    //         },*/
+    //         cacheExpiration: {
+    //           maxEntries: 10,
+    //           maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
+    //           purgeOnQuotaError: true,
+    //         }
+    //       },
+    //     },
 
-        // Cache Amazon S3
-        {
-          urlPattern: 'https://s3.amazonaws.com',
-          handler: 'StaleWhileRevalidate',
-          method: 'GET',
-          strategyOptions: {
-            cacheName: 'assets',
-            cacheExpiration: {
-              maxEntries: 10,
-              maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
-              purgeOnQuotaError: true,
-            }
-          },
-        },
+    //     // Cache Amazon S3
+    //     {
+    //       urlPattern: 'https://s3.amazonaws.com',
+    //       handler: 'StaleWhileRevalidate',
+    //       method: 'GET',
+    //       strategyOptions: {
+    //         cacheName: 'assets',
+    //         cacheExpiration: {
+    //           maxEntries: 10,
+    //           maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
+    //           purgeOnQuotaError: true,
+    //         }
+    //       },
+    //     },
 
-        // Cache IPFS
-        {
-          urlPattern: process.env.IPFS,
-          handler: 'StaleWhileRevalidate',
-          method: 'GET',
-          strategyOptions: {
-            cacheName: 'ipfs',
-            cacheExpiration: {
-              maxEntries: 1000,
-              maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
-              purgeOnQuotaError: true,
-            }
-          },
-        },
+    //     // Cache IPFS
+    //     {
+    //       urlPattern: process.env.IPFS,
+    //       handler: 'StaleWhileRevalidate',
+    //       method: 'GET',
+    //       strategyOptions: {
+    //         cacheName: 'ipfs',
+    //         cacheExpiration: {
+    //           maxEntries: 1000,
+    //           maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
+    //           purgeOnQuotaError: true,
+    //         }
+    //       },
+    //     },
 
-        // Cache basic API responses
-        {
-          urlPattern: process.env.LCD,
-          handler: 'NetworkFirst',
-          method: 'GET',
-          strategyOptions: {
-            cacheName: 'bitsong-lcd',
-          },
-        },
-      ],
+    //     // Cache basic API responses
+    //     {
+    //       urlPattern: process.env.LCD,
+    //       handler: 'NetworkFirst',
+    //       method: 'GET',
+    //       strategyOptions: {
+    //         cacheName: 'bitsong-lcd',
+    //       },
+    //     },
+    //   ],
 
-      // Automatically cache for offline usage
-      offlineAssets: [
-        // Route Locations
-        /*
-        '/',
-        '/bank',
-        '/staking',
-        */
+    //   // Automatically cache for offline usage
+    //   offlineAssets: [
+    //     // Route Locations
+    //     /*
+    //     '/',
+    //     '/bank',
+    //     '/staking',
+    //     */
 
-        // Assets
-        '/bitsong_logo_circle_red.svg',
-        '/bitsong_logo_red.svg',
-        'https://fonts.googleapis.com/css?family=Material+Icons',
-        'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap',
-        'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap'
-      ],
-    }
+    //     // Assets
+    //     '/bitsong_logo_circle_red.svg',
+    //     '/bitsong_logo_red.svg',
+    //     'https://fonts.googleapis.com/css?family=Material+Icons',
+    //     'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap',
+    //     'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap'
+    //   ],
+    // }
   },
 
   /*
@@ -293,10 +294,11 @@ export default {
   build: {
     // analyze: true,
     // extractCSS: true,
+    publicPath: '/nuxt/',
     extend(config, ctx) {
-      config.node = {
-        fs: "empty"
-      };
+      // config.node = {
+      //   fs: "empty"
+      // };
       // // Optimisation
       // if (ctx && ctx.isClient) {
       //   config.optimization.splitChunks.maxSize = 100000
