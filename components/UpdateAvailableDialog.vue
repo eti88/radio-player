@@ -1,13 +1,9 @@
 <template>
-  <v-dialog
-    persistent
-    max-width="400"
-    :value="true"
-  >
+  <v-dialog persistent max-width="400" :value="true">
     <v-card>
       <v-card-title>Update available!</v-card-title>
       <div class="subtitle-1 mx-6 mb-2">
-        A new update is available. Please, reload the console.
+        A new update is available. Please, reload the bitsong player.
       </div>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -21,8 +17,8 @@
 export default {
   methods: {
     reload() {
-      window.location.reload(true)
-    }
-  }
-}
+      window.location.reload(true);
+    },
+  },
+};
 </script>
