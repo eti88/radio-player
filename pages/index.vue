@@ -1,27 +1,23 @@
 <template>
   <page-template>
     <track-grid-featured
+      v-if="italy_radios.length"
       class="mb-8"
       title="Top Radio in Italy"
       :items="italy_radios"
     />
     <track-grid-featured
+      v-if="spain_radios.length"
       class="mb-8"
       title="Top Radio in Spain"
       :items="spain_radios"
     />
-    <h2 class="text-h2 mb-1">
-      Chillout Radio
-    </h2>
-    <track-list class="mb-8" :items="chillout" />
-    <h2 class="text-h2 mb-1">
-      Pop Radio
-    </h2>
-    <track-list class="mb-8" :items="pop" />
-    <h2 class="text-h2 mb-1">
-      Electro Radio
-    </h2>
-    <track-list class="mb-8" :items="electro" />
+    <h2 class="text-h2 mb-1" v-if="chillout.length">Chillout Radio</h2>
+    <track-list class="mb-8" v-if="chillout.length" :items="chillout" />
+    <h2 class="text-h2 mb-1" v-if="pop.length">Pop Radio</h2>
+    <track-list class="mb-8" v-if="pop.length" :items="pop" />
+    <h2 class="text-h2 mb-1" v-if="electro.length">Electro Radio</h2>
+    <track-list class="mb-8" v-if="electro.length" :items="electro" />
   </page-template>
 </template>
 
@@ -32,7 +28,7 @@ import TrackGridFeatured from "@/components/TrackGridFeatured";
 export default {
   components: {
     PageTemplate,
-    TrackGridFeatured
+    TrackGridFeatured,
   },
 
   async created() {
@@ -58,8 +54,8 @@ export default {
       spain_radios: [],
       chillout: [],
       pop: [],
-      electro: []
+      electro: [],
     };
-  }
+  },
 };
 </script>
