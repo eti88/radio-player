@@ -159,7 +159,7 @@ export default {
       runtimeCaching: [
         {
           urlPattern: '/.*',
-          handler: 'networkFirst',
+          handler: 'StaleWhileRevalidate',
           method: 'GET',
           strategyOptions: {
             cacheExpiration: {
