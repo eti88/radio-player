@@ -61,7 +61,7 @@
               color="red accent-3"
               :class="{
                 'mx-3': $vuetify.breakpoint.mdAndUp,
-                'mx-1': $vuetify.breakpoint.smAndDown
+                'mx-1': $vuetify.breakpoint.smAndDown,
               }"
             />
             <!-- end loading -->
@@ -71,7 +71,7 @@
               icon
               :class="{
                 'mx-3': $vuetify.breakpoint.mdAndUp,
-                'mx-1': $vuetify.breakpoint.smAndDown
+                'mx-1': $vuetify.breakpoint.smAndDown,
               }"
             >
               <v-icon
@@ -129,35 +129,34 @@
 
 <script>
 import Hls from "hls.js";
-import HlsjsIpfsLoader from "@/lib/hls-ipfs";
+import { Howl } from "howler";
 
 export default {
   props: {
     loading: {
       type: Boolean,
-      default: false
+      default: false,
     },
     fullScreen: {
       type: Boolean,
-      default: false
+      default: false,
     },
     playing: {
       type: Boolean,
-      default: false
+      default: false,
     },
     cover: {
       type: String,
-      default:
-        "https://lh3.googleusercontent.com/45RB3wqaBT-PZdYDwn-Whe75nl1ZFuRLKIKccNgN7SqbhcWxQg41BJGYoQSOKrp7k9catCquaj_cLhKn=w226-h226-l90-rj"
+      default: "",
     },
     title: {
       type: String,
-      default: "The Revolution"
+      default: "",
     },
     description: {
       type: String,
-      default: "dsadsad"
-    }
+      default: "",
+    },
   },
   data() {
     return {
@@ -167,56 +166,55 @@ export default {
       duration: 0,
       currentTime: 0,
       manifestParsed: false,
-      isPaused: true
+      isPaused: true,
     };
   },
   mounted() {
     const audio = this.$refs.audio;
 
-    if (!Hls.isSupported()) throw new Error("Hls not supported!");
+    // if (!Hls.isSupported()) throw new Error("Hls not supported!");
 
-    // disable hlsjs ipfs loader, due to a lag on large files
-    // Hls.DefaultConfig.loader = HlsjsIpfsLoader;
-    Hls.DefaultConfig.debug = true;
+    // // disable hlsjs ipfs loader, due to a lag on large files
+    // Hls.DefaultConfig.debug = true;
 
-    this.hls = new Hls();
-    // disable hlsjs ipfs loader, due to a lag on large files
-    // this.hls.config.ipfs = this.$db.getNode();
-    this.hls.attachMedia(audio);
+    // this.hls = new Hls();
+    // // disable hlsjs ipfs loader, due to a lag on large files
+    // // this.hls.config.ipfs = this.$db.getNode();
+    // this.hls.attachMedia(audio);
 
-    this.hls.on(Hls.Events.MANIFEST_PARSED, (evt, data) => {
-      this.$gtag("event", "hls.js", {
-        event_name: "MANIFEST_PARSED",
-        title: this.currentTrack.title
-      });
+    // this.hls.on(Hls.Events.MANIFEST_PARSED, (evt, data) => {
+    //   this.$gtag("event", "hls.js", {
+    //     event_name: "MANIFEST_PARSED",
+    //     title: this.currentTrack.title
+    //   });
 
-      this.manifestParsed = true;
-      this.bufferData();
-    });
+    //   this.manifestParsed = true;
+    //   this.bufferData();
+    // });
 
-    this.hls.on(Hls.Events.MEDIA_DETACHED, () => {
-      this.$gtag("event", "hls.js", {
-        event_name: "MEDIA_DETACHED",
-        title: this.currentTrack.title
-      });
+    // this.hls.on(Hls.Events.MEDIA_DETACHED, () => {
+    //   this.$gtag("event", "hls.js", {
+    //     event_name: "MEDIA_DETACHED",
+    //     title: this.currentTrack.title
+    //   });
 
-      this.manifestParsed = false;
-      clearInterval(this.bufferTimer);
-    });
+    //   this.manifestParsed = false;
+    //   clearInterval(this.bufferTimer);
+    // });
 
-    audio.addEventListener("resize", this.handleEvents);
-    audio.addEventListener("seeking", this.handleEvents);
-    audio.addEventListener("seeked", this.handleEvents);
-    audio.addEventListener("pause", this.handleEvents);
-    audio.addEventListener("play", this.handleEvents);
-    audio.addEventListener("canplay", this.handleEvents);
-    audio.addEventListener("canplaythrough", this.handleEvents);
-    audio.addEventListener("ended", this.handleEvents);
-    audio.addEventListener("playing", this.handleEvents);
-    audio.addEventListener("error", this.handleEvents);
-    audio.addEventListener("loadedmetadata", this.handleEvents);
-    audio.addEventListener("loadeddata", this.handleEvents);
-    audio.addEventListener("durationchange", this.handleEvents);
+    // audio.addEventListener("resize", this.handleEvents);
+    // audio.addEventListener("seeking", this.handleEvents);
+    // audio.addEventListener("seeked", this.handleEvents);
+    // audio.addEventListener("pause", this.handleEvents);
+    // audio.addEventListener("play", this.handleEvents);
+    // audio.addEventListener("canplay", this.handleEvents);
+    // audio.addEventListener("canplaythrough", this.handleEvents);
+    // audio.addEventListener("ended", this.handleEvents);
+    // audio.addEventListener("playing", this.handleEvents);
+    // audio.addEventListener("error", this.handleEvents);
+    // audio.addEventListener("loadedmetadata", this.handleEvents);
+    // audio.addEventListener("loadeddata", this.handleEvents);
+    // audio.addEventListener("durationchange", this.handleEvents);
   },
   methods: {
     // TODO: move to utils/filters
@@ -256,21 +254,21 @@ export default {
         case "play":
           this.$gtag("event", "audio_player", {
             event_name: "Play",
-            title: this.currentTrack.title
+            title: this.currentTrack.title,
           });
           this.isPaused = false;
           break;
         case "pause":
           this.$gtag("event", "audio_player", {
             event_name: "Pause",
-            title: this.currentTrack.title
+            title: this.currentTrack.title,
           });
           this.isPaused = true;
           break;
         case "loadedmetadata":
           this.$gtag("event", "audio_player", {
             event_name: "Metadata Loaded",
-            title: this.currentTrack.title
+            title: this.currentTrack.title,
           });
           this.bufferData();
           this.$refs.audio.play();
@@ -303,7 +301,7 @@ export default {
       this.$refs.audio.currentTime = Math.round(this.currentTime);
       this.$gtag("event", "audio_player", {
         event_name: "Seek",
-        title: this.currentTrack.title
+        title: this.currentTrack.title,
       });
     },
     onPlay() {
@@ -336,24 +334,40 @@ export default {
       this.$store.dispatch("player/stop");
     },
     reload() {
-      this.isPaused = true;
-      this.hls.stopLoad();
-      this.hls.detachMedia();
+      const sound = new Howl({
+        src: [this.currentTrack.source],
+        html5: true,
+        format: ["mp3", "aac", "flac"],
+      });
+      console.log(this.currentTrack.source);
 
-      console.log("ishls", this.currentTrack.isHls);
+      // sound.once('load', function(){
+      //   sound.play();
+      // });
+      sound.play();
 
-      if (this.currentTrack.isHls) {
-        this.hls.attachMedia(this.$refs.audio);
-        //this.hls.config.ipfsHash = this.hash;
-        console.log(this.currentTrack.source);
-        this.hls.loadSource(String(this.currentTrack.source));
-      } else {
-        console.log("--- add source to audio el ", this.currentTrack.source);
-        this.$refs.audio.src = this.currentTrack.source;
-      }
+      // Fires when the sound finishes playing.
+      sound.on("end", function () {
+        console.log("Finished!");
+      });
+      // this.isPaused = true;
+      // this.hls.stopLoad();
+      // this.hls.detachMedia();
 
-      this.onPlay();
-    }
+      // console.log("ishls", this.currentTrack.isHls);
+
+      // if (this.currentTrack.isHls) {
+      //   this.hls.attachMedia(this.$refs.audio);
+      //   //this.hls.config.ipfsHash = this.hash;
+      //   console.log(this.currentTrack.source);
+      //   this.hls.loadSource(String(this.currentTrack.source));
+      // } else {
+      //   console.log("--- add source to audio el ", this.currentTrack.source);
+      //   this.$refs.audio.src = this.currentTrack.source;
+      // }
+
+      // this.onPlay();
+    },
   },
   watch: {
     currentTrack() {
@@ -361,7 +375,7 @@ export default {
         console.log("------------------ new track");
         this.reload();
       }
-    }
+    },
   },
   computed: {
     canPlay() {
@@ -369,8 +383,8 @@ export default {
     },
     currentTrack() {
       return this.$store.getters[`player/currentTrack`];
-    }
-  }
+    },
+  },
 };
 </script>
 

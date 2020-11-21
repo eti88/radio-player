@@ -30,9 +30,7 @@
         )
       "
     >
-      <v-icon size="22" color="grey">
-        mdi-radio
-      </v-icon>
+      <v-icon size="22" color="grey"> mdi-radio </v-icon>
     </v-btn>
     <v-list-item-title
       class="font-weight-medium"
@@ -48,7 +46,7 @@
       "
     >
     </v-list-item-title>
-    <v-list-item-title class="grey--text" style="max-width:320px">
+    <v-list-item-title class="grey--text" style="max-width: 320px">
       <nuxt-link
         class="track-list__item_link"
         :to="`${item.country}/${item.city}`"
@@ -92,20 +90,20 @@ export default {
       type: Object,
       default() {
         return {};
-      }
-    }
+      },
+    },
   },
 
   methods: {
     onClick(cover, title, subtitle, source, isHls) {
-      this.$store.commit(`player/setCurrentTrack`, {
+      this.$store.commit(`player/SET_CURRENT_TRACK`, {
         cover: cover,
         title: title,
         subtitle: subtitle,
         source: source,
-        isHls: isHls
+        isHls: isHls,
       });
-    }
-  }
+    },
+  },
 };
 </script>

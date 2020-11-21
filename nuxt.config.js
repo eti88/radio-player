@@ -112,7 +112,12 @@ export default {
         sessionStorage: []
       }
     ],
-    "@nuxtjs/pwa"
+    "@nuxtjs/pwa",
+    [
+      '@nuxtjs/device',
+      //{defaultUserAgent: 'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 6 Build/LYZ28E) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.39 Mobile Safari/537.36'}
+      { defaultUserAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36' }
+    ]
   ],
 
   pwa: {
@@ -128,7 +133,7 @@ export default {
     },
     workbox: {
       // dev: process.env.WORKBOX_DEBUG,
-      // enabled: true,
+      enabled: true,
       config: { debug: process.env.WORKBOX_DEBUG },
 
       // importScripts: [

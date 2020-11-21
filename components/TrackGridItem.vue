@@ -12,7 +12,7 @@
       :src="picture"
       :height="size"
       width="auto"
-      style="border-radius: 6px !important;"
+      style="border-radius: 6px !important"
       @click="onClick(picture, name, `${city}, ${country}`, stream_url, isHls)"
     >
       <template v-slot:placeholder>
@@ -50,7 +50,6 @@
   .track-grid__item_subtitle a
     color: rgba(255, 255, 255, 0.7)
 
-
 .track-grid__item_subtitle
   line-height: 1.5 !important
   font-size: 0.875rem
@@ -62,44 +61,44 @@ export default {
   props: {
     picture: {
       type: String,
-      default: ""
+      default: "",
     },
     name: {
       type: String,
-      default: ""
+      default: "",
     },
     city: {
       type: String,
-      default: ""
+      default: "",
     },
     country: {
       type: String,
-      default: ""
+      default: "",
     },
     stream_url: {
       type: String,
-      default: ""
+      default: "",
     },
     isHls: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   methods: {
     onClick(cover, title, subtitle, source, isHls) {
-      this.$store.commit(`player/setCurrentTrack`, {
+      this.$store.commit(`player/SET_CURRENT_TRACK`, {
         cover: cover,
         title: title,
         subtitle: subtitle,
         source: source,
-        isHls: isHls
+        isHls: isHls,
       });
-    }
+    },
   },
   computed: {
     size() {
       return this.$vuetify.breakpoint.mdAndUp ? 225 : 140;
-    }
-  }
+    },
+  },
 };
 </script>

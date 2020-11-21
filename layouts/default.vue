@@ -5,45 +5,51 @@
     <v-content class="mb-8">
       <nuxt />
     </v-content>
-    <bitsong-player />
+    <b-player v-show="currentTrack !== null"></b-player>
     <v-footer> </v-footer>
   </v-app>
 </template>
 
 <script>
 import Toolbar from "@/components/Toolbar";
-import BitsongPlayer from "@/components/BitsongPlayer";
 import UpdateAvailableDialog from "@/components/UpdateAvailableDialog";
+import BPlayer from "@/components/BPlayer";
 
 export default {
   components: {
     Toolbar,
-    BitsongPlayer,
-    UpdateAvailableDialog
+    UpdateAvailableDialog,
+    BPlayer,
   },
 
   data() {
     return {
-      update_available: false
+      update_available: false,
     };
   },
 
   async mounted() {
     const workbox = await window.$workbox;
     if (workbox) {
-      workbox.addEventListener("waiting", async event => {
+      workbox.addEventListener("waiting", async (event) => {
         console.log("waiting-----------------", event);
         this.update_available = true;
       });
 
-      workbox.addEventListener("installed", event => {
+      workbox.addEventListener("installed", (event) => {
         if (event.isUpdate) {
           console.log("----------- update available -----------");
           this.update_available = true;
         }
       });
     }
-  }
+  },
+
+  computed: {
+    currentTrack() {
+      return this.$store.getters["player/currentTrack"];
+    },
+  },
 };
 </script>
 
@@ -73,5 +79,5 @@ a
   display: none !important
 
 .v-slide-group__next, .v-slide-group__prev
-  min-width:22px !important
+  min-width: 22px !important
 </style>
