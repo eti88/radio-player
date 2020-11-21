@@ -1,5 +1,0 @@
-io/bitsong/play/MainActivity.java
- io.bitsong.play.MainActivity
- io.bitsong.play.MainActivity$1
-io/bitsong/play/BuildConfig.java
- io.bitsong.play.BuildConfig

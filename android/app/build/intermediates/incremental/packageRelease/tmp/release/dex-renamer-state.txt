@@ -1,4 +1,0 @@
-#Sat Nov 21 02:40:02 CET 2020
-base.0=/home/abit/Progetti/BitSong/radio-player/android/app/build/intermediates/dex/release/mergeDexRelease/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
