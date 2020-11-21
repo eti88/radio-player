@@ -264,10 +264,7 @@ export default {
     proxy: true
   },
   proxy: {
-    "/ipfs/": {
-      target: process.env.IPFS,
-      changeOrigin: true
-    }
+
   },
   /*
    ** vuetify module configuration
@@ -299,9 +296,9 @@ export default {
     // analyze: true,
     // extractCSS: true,
     extend(config, ctx) {
-      config.node = {
-        fs: "empty"
-      };
+      // config.node = {
+      //   fs: "empty"
+      // };
       // // Optimisation
       // if (ctx && ctx.isClient) {
       //   config.optimization.splitChunks.maxSize = 100000
