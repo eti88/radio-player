@@ -66,7 +66,11 @@ export default {
     paused(val) {
       if (val) {
         clearInterval(this.bufferTimer);
-        this.provider.html5.pause();
+        if (this.provider.html5 !== null) {
+          this.provider.html5.pause();
+        } else if (this.provider.hls !== null) {
+          this.$refs.hlsAudio.pause();
+        }
       }
     },
     playing(val) {
@@ -143,10 +147,11 @@ export default {
         this.provider.html5 = null;
         this.$store.dispatch("player/stop");
       } else if (this.provider.hls !== null) {
-        this.$refs.hlsAudio.stop();
+        this.$refs.hlsAudio.pause();
         this.provider.hls.stopLoad();
         this.provider.hls.detachMedia();
         this.provider.hls = null;
+        this.currentTime = 0;
         this.$store.dispatch("player/stop");
       }
     },
