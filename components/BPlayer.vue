@@ -143,6 +143,7 @@ export default {
         this.provider.html5 = null;
         this.$store.dispatch("player/stop");
       } else if (this.provider.hls !== null) {
+        this.$refs.hlsAudio.stop();
         this.provider.hls.stopLoad();
         this.provider.hls.detachMedia();
         this.provider.hls = null;
