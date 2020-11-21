@@ -31,6 +31,8 @@ export default {
   async mounted() {
     const workbox = await window.$workbox;
     if (workbox) {
+      console.log("workbox enabled");
+
       workbox.addEventListener("waiting", async (event) => {
         console.log("waiting-----------------", event);
         this.update_available = true;
