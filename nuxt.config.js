@@ -13,7 +13,8 @@ export default {
     API: process.env.API || 'http://localhost:3001/api/v1',
     IPFS: process.env.IPFS || 'http://127.0.0.1:8080/ipfs/',
     VERSION: pkg.version,
-    GA_ID: process.env.GA_ID || undefined
+    GA_ID: process.env.GA_ID || undefined,
+    WORKBOX: process.env.WORKBOX || false
   },
   /*
    ** Nuxt rendering mode
@@ -33,7 +34,6 @@ export default {
     titleTemplate: titleChunk => {
       return titleChunk ? `${titleChunk} | BitSong` : "BitSong Blockchain Music Player";
     },
-    // title: 'BitSong',
     meta: [{
       charset: "utf-8"
     },
@@ -133,7 +133,7 @@ export default {
     },
     workbox: {
       // dev: process.env.WORKBOX_DEBUG,
-      enabled: true,
+      enabled: process.env.WORKBOX,
       config: { debug: process.env.WORKBOX_DEBUG },
 
       // importScripts: [
@@ -173,13 +173,13 @@ export default {
         // Cache fonts
         {
           urlPattern: 'https://fonts.googleapis.com',
-          handler: 'NetworkFirst',
+          handler: 'StaleWhileRevalidate',
           method: 'GET',
           strategyOptions: {
             cacheName: 'assets',
             cacheExpiration: {
               maxEntries: 10,
-              maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
+              maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
               purgeOnQuotaError: true,
             }
           },
@@ -195,7 +195,7 @@ export default {
             },*/
             cacheExpiration: {
               maxEntries: 10,
-              maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
+              maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
               purgeOnQuotaError: true,
             }
           },
@@ -225,7 +225,7 @@ export default {
             cacheName: 'ipfs',
             cacheExpiration: {
               maxEntries: 1000,
-              maxAgeSeconds: 60 * 60 * 24 * 1, // ( 1 day ) 1 year
+              maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
               purgeOnQuotaError: true,
             }
           },
@@ -269,10 +269,7 @@ export default {
     proxy: true
   },
   proxy: {
-    "/ipfs/": {
-      target: process.env.IPFS,
-      changeOrigin: true
-    }
+
   },
   /*
    ** vuetify module configuration
@@ -304,9 +301,9 @@ export default {
     // analyze: true,
     // extractCSS: true,
     extend(config, ctx) {
-      config.node = {
-        fs: "empty"
-      };
+      // config.node = {
+      //   fs: "empty"
+      // };
       // // Optimisation
       // if (ctx && ctx.isClient) {
       //   config.optimization.splitChunks.maxSize = 100000

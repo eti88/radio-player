@@ -1,13 +1,13 @@
 {
   "name": "radio-player",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build": "NUXT_PORT=3434 nuxt build",
+    "build": "nuxt build",
     "start": "NUXT_PORT=3434 nuxt start",
-    "generate": "NUXT_PORT=3434 nuxt generate"
+    "generate": "nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.2",
