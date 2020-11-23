@@ -181,9 +181,7 @@ export default {
       }
 
       if (process.env.NODE_ENV === "production") {
-        this.$gtag("event", "stop_radio", {
-          title: this.currentTrack.title
-        });
+        this.$gtag("event", "stop_radio");
       }
     },
     _setupHlsListeners() {
