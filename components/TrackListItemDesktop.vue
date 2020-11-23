@@ -58,7 +58,7 @@
           class="track-list__item_link"
           :to="`/radio/genre/${genre.slug}`"
           v-text="genre.name"
-          :key="genre"
+          :key="genre.slug"
         >
         </nuxt-link>
         <span :key="i" v-if="i < item.genres.length - 1" class="ml-n1 mr-1"
