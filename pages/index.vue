@@ -25,7 +25,9 @@
     </h2>
 
     <template v-for="genre in genres">
-      <h3 :key="`h-${genre.genre}`" class="text-h3">{{ genre.genre }} Radio</h3>
+      <h3 :key="`h-${genre.genre}`" class="text-h3 grey--text text--darken-2">
+        {{ genre.genre }} Radio
+      </h3>
       <track-list :key="genre.genre" class="mb-8" :items="genre.radios" />
     </template>
   </page-template>
