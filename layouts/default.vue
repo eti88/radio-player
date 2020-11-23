@@ -66,6 +66,8 @@ a
     line-height: 3.65rem
     letter-spacing: -.03em!important
     font-family: "Poppins", sans-serif !important
+    a
+      color: #E53935
   .text-h3
     font-size: 1.85rem!important
     font-weight: 600
