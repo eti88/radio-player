@@ -1,7 +1,7 @@
 <template>
   <page-template>
     <div class="d-flex">
-      <v-btn icon to="/" exact class="ml-n3 mt-1">
+      <v-btn icon to="/" exact class="ml-n3 mt-1" color="red darken-1">
         <v-icon>
           mdi-chevron-left
         </v-icon>
@@ -14,7 +14,7 @@
         class="mb-8"
         :items="genre.radios"
       >
-        <template v-slot:title> {{ genre.genre }} Radio </template>
+        <template v-slot:title> {{ genre.genre }} </template>
       </track-grid-featured>
     </template>
   </page-template>

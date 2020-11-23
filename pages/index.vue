@@ -18,7 +18,7 @@
     <h2 class="text-h2 mb-1" v-if="genres.length">
       Mood & Genres
       <v-btn :to="`/radio`" icon>
-        <v-icon>
+        <v-icon color="red darken-1">
           mdi-arrow-right
         </v-icon>
       </v-btn>

@@ -1,7 +1,7 @@
 <template>
   <page-template>
     <div class="d-flex">
-      <v-btn icon to="/" exact class="ml-n3 mt-1">
+      <v-btn icon to="/radio" exact class="ml-n3 mt-1" color="red darken-1">
         <v-icon>
           mdi-chevron-left
         </v-icon>
@@ -15,7 +15,6 @@
         :items="country.radios"
       >
         <template v-slot:title>
-          Top in
           {{ country.country }}
         </template>
         <template v-slot:action>
@@ -23,7 +22,7 @@
             :to="`/radio/genre/${slug}/${country.radios[0].country.slug}`"
             icon
           >
-            <v-icon>
+            <v-icon color="red darken-1">
               mdi-arrow-right
             </v-icon>
           </v-btn>

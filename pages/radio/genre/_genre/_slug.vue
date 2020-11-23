@@ -1,7 +1,13 @@
 <template>
   <page-template>
     <div class="d-flex">
-      <v-btn icon :to="`/radio/genre/${genre_slug}`" exact class="ml-n3 mt-1">
+      <v-btn
+        icon
+        :to="`/radio/genre/${genre_slug}`"
+        exact
+        class="ml-n3 mt-1"
+        color="red darken-1"
+      >
         <v-icon>
           mdi-chevron-left
         </v-icon>
