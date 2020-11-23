@@ -61,9 +61,12 @@ export default {
       if (this.currentTrack !== null) {
         console.log("----- new track -----", this.currentTrack);
         this.loadAudio();
-        this.$gtag("event", "select_radio", {
-          title: this.currentTrack.title
-        });
+
+        if (process.env.NODE_ENV === "production") {
+          this.$gtag("event", "select_radio", {
+            title: this.currentTrack.title
+          });
+        }
       }
     },
     paused(val) {
@@ -75,9 +78,11 @@ export default {
           this.$refs.hlsAudio.pause();
         }
 
-        this.$gtag("event", "pause_radio", {
-          title: this.currentTrack.title
-        });
+        if (process.env.NODE_ENV === "production") {
+          this.$gtag("event", "pause_radio", {
+            title: this.currentTrack.title
+          });
+        }
       }
     },
     playing(val) {
@@ -90,9 +95,11 @@ export default {
           this.$refs.hlsAudio.play();
         }
 
-        this.$gtag("event", "play_radio", {
-          title: this.currentTrack.title
-        });
+        if (process.env.NODE_ENV === "production") {
+          this.$gtag("event", "play_radio", {
+            title: this.currentTrack.title
+          });
+        }
 
         this.bufferTimer = setInterval(() => {
           if (ctx.provider.html5 !== null) {
@@ -101,11 +108,13 @@ export default {
             this.currentTime = Math.round(ctx.$refs.hlsAudio.currentTime);
           }
 
-          if ((this.currentTime - 1) % 600 === 0) {
-            this.$gtag("event", "listen_radio", {
-              range: toHHMMSS(this.currentTime),
-              title: this.currentTrack.title
-            });
+          if (process.env.NODE_ENV === "production") {
+            if ((this.currentTime - 1) % 600 === 0) {
+              this.$gtag("event", "listen_radio", {
+                range: toHHMMSS(this.currentTime),
+                title: this.currentTrack.title
+              });
+            }
           }
         }, 1000);
       }
@@ -158,10 +167,6 @@ export default {
       console.log("---- unload track ----");
       clearInterval(this.bufferTimer);
 
-      this.$gtag("event", "stop_radio", {
-        title: this.currentTrack.title
-      });
-
       if (this.provider.html5 !== null) {
         this.provider.html5.stop();
         this.provider.html5 = null;
@@ -173,6 +178,12 @@ export default {
         this.provider.hls = null;
         this.currentTime = 0;
         this.$store.dispatch("player/stop");
+      }
+
+      if (process.env.NODE_ENV === "production") {
+        this.$gtag("event", "stop_radio", {
+          title: this.currentTrack.title
+        });
       }
     },
     _setupHlsListeners() {
