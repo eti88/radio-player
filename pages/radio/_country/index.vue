@@ -1,7 +1,7 @@
 <template>
   <page-template>
     <div class="d-flex">
-      <v-btn icon to="/" exact class="ml-n3 mt-1" color="red darken-1">
+      <v-btn icon to="/radio" exact class="ml-n3 mt-1" color="red darken-1">
         <v-icon>
           mdi-chevron-left
         </v-icon>
@@ -25,6 +25,14 @@ import PageTemplate from "@/components/PageTemplate";
 import TrackGridFeatured from "@/components/TrackGridFeatured";
 
 export default {
+  head() {
+    const title = `Radio in ${this.name}`;
+    return {
+      title: title,
+      meta: [{ hid: "og-title", name: "og:title", content: title }]
+    };
+  },
+
   components: {
     PageTemplate,
     TrackGridFeatured
@@ -38,7 +46,7 @@ export default {
 
   data() {
     return {
-      name: null,
+      name: "",
       genres: []
     };
   },

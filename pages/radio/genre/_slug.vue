@@ -37,6 +37,14 @@ import PageTemplate from "@/components/PageTemplate";
 import TrackGridFeatured from "@/components/TrackGridFeatured";
 
 export default {
+  head() {
+    const title = `${this.name} Radio`;
+    return {
+      title: title,
+      meta: [{ hid: "og-title", name: "og:title", content: title }]
+    };
+  },
+
   components: {
     PageTemplate,
     TrackGridFeatured
@@ -50,7 +58,7 @@ export default {
 
   data() {
     return {
-      name: null,
+      name: "",
       countries: []
     };
   },

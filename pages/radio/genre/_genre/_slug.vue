@@ -37,6 +37,14 @@ import PageTemplate from "@/components/PageTemplate";
 import TrackGridItem from "@/components/TrackGridItem";
 
 export default {
+  head() {
+    const title = `${this.genre} Radio in ${this.country}`;
+    return {
+      title: title,
+      meta: [{ hid: "og-title", name: "og:title", content: title }]
+    };
+  },
+
   components: {
     PageTemplate,
     TrackGridItem

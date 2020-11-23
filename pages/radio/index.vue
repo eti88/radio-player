@@ -25,6 +25,14 @@ import TrackGridFeatured from "@/components/TrackGridFeatured";
 import Genres from "@/components/Genres";
 
 export default {
+  head() {
+    const title = `Mood & Genres`;
+    return {
+      title: title,
+      meta: [{ hid: "og-title", name: "og:title", content: title }]
+    };
+  },
+
   components: {
     PageTemplate,
     TrackGridFeatured,

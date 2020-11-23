@@ -19,7 +19,7 @@
 <script>
 import Hls from "hls.js";
 import { Howl } from "howler";
-import { PLAYER_STATUS } from "@/lib/utils";
+import { PLAYER_STATUS, toHHMMSS } from "@/lib/utils";
 
 import PlayerContainer from "@/components/Player/Container";
 import PlayerPicture from "@/components/Player/Picture";
@@ -61,6 +61,9 @@ export default {
       if (this.currentTrack !== null) {
         console.log("----- new track -----", this.currentTrack);
         this.loadAudio();
+        this.$gtag("event", "select_radio", {
+          title: this.currentTrack.title
+        });
       }
     },
     paused(val) {
@@ -71,6 +74,10 @@ export default {
         } else if (this.provider.hls !== null) {
           this.$refs.hlsAudio.pause();
         }
+
+        this.$gtag("event", "pause_radio", {
+          title: this.currentTrack.title
+        });
       }
     },
     playing(val) {
@@ -83,15 +90,24 @@ export default {
           this.$refs.hlsAudio.play();
         }
 
+        this.$gtag("event", "play_radio", {
+          title: this.currentTrack.title
+        });
+
         this.bufferTimer = setInterval(() => {
           if (ctx.provider.html5 !== null) {
             this.currentTime = ctx.provider.html5.seek();
           } else if (ctx.provider.hls !== null) {
             this.currentTime = Math.round(ctx.$refs.hlsAudio.currentTime);
-          } else {
-            //clearInterval(this.bufferTimer);
           }
-        }, 100);
+
+          if ((this.currentTime - 1) % 600 === 0) {
+            this.$gtag("event", "listen_radio", {
+              range: toHHMMSS(this.currentTime),
+              title: this.currentTrack.title
+            });
+          }
+        }, 1000);
       }
     }
   },
@@ -141,6 +157,10 @@ export default {
     unloadAudio() {
       console.log("---- unload track ----");
       clearInterval(this.bufferTimer);
+
+      this.$gtag("event", "stop_radio", {
+        title: this.currentTrack.title
+      });
 
       if (this.provider.html5 !== null) {
         this.provider.html5.stop();
