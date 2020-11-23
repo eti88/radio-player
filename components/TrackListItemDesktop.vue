@@ -1,12 +1,13 @@
 <template>
   <v-list-item>
-    <v-img
-      max-width="32"
-      max-height="32"
-      :src="item.picture"
+    <track-img
+      :size="32"
+      :size-btn="25"
+      :picture="item.picture"
+      :streamUrl="item.stream_url"
       class="mr-4"
       v-if="item.picture"
-      @click.stop="
+      v-on:select="
         onClick(
           item.picture,
           item.name,
@@ -15,23 +16,8 @@
           item.stream_type === 'hls'
         )
       "
-    ></v-img>
-    <v-btn
-      class="mr-4 ml-n1"
-      v-else
-      icon
-      @click.stop="
-        onClick(
-          item.picture,
-          item.name,
-          `${item.city.name}, ${item.country.name}`,
-          item.stream_url,
-          item.stream_type === 'hls'
-        )
-      "
-    >
-      <v-icon size="22" color="grey"> mdi-radio </v-icon>
-    </v-btn>
+    ></track-img>
+
     <v-list-item-title
       class="font-weight-medium"
       v-html="item.name"
@@ -80,6 +66,8 @@
 </template>
 
 <script>
+import TrackImg from "@/components/TrackImg";
+
 export default {
   props: {
     item: {
@@ -88,6 +76,10 @@ export default {
         return {};
       }
     }
+  },
+
+  components: {
+    TrackImg
   },
 
   methods: {

@@ -3,7 +3,6 @@
     <v-card>
       <v-card-title>Stream error</v-card-title>
       <div class="subtitle-1 mx-6 mb-2">
-        {{ error }}
         Sorry, this stream is not supported by this device. We are working to
         make this stream compatible with your device as well.
       </div>

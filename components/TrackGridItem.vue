@@ -1,6 +1,5 @@
 <template>
   <v-card
-    draggable
     flat
     tile
     class="ma-3 track-grid__item"
@@ -8,22 +7,14 @@
     :width="$vuetify.breakpoint.mdAndUp ? '225px' : '290px'"
     color="transparent"
   >
-    <v-img
-      :src="picture"
-      :height="size"
-      width="auto"
-      style="border-radius: 6px !important"
-      @click="onClick(picture, name, `${city}, ${country}`, stream_url, isHls)"
-    >
-      <template v-slot:placeholder>
-        <v-row class="fill-height ma-0" align="center" justify="center">
-          <v-progress-circular
-            indeterminate
-            color="grey lighten-5"
-          ></v-progress-circular>
-        </v-row>
-      </template>
-    </v-img>
+    <track-img
+      :picture="picture"
+      :streamUrl="stream_url"
+      v-on:select="
+        onClick(picture, name, `${city}, ${country}`, stream_url, isHls)
+      "
+    ></track-img>
+
     <div class="pt-2 track-grid__item_title">
       <router-link nuxt to="/" class="font-weight-medium">{{
         name
@@ -57,6 +48,9 @@
 </style>
 
 <script>
+import PlayerBtnPlay from "@/components/Player/BtnPlay";
+import TrackImg from "@/components/TrackImg";
+
 export default {
   props: {
     picture: {
@@ -84,6 +78,12 @@ export default {
       default: true
     }
   },
+
+  components: {
+    PlayerBtnPlay,
+    TrackImg
+  },
+
   methods: {
     onClick(cover, title, subtitle, source, isHls) {
       this.$store.commit(`player/SET_CURRENT_TRACK`, {
@@ -97,7 +97,16 @@ export default {
   },
   computed: {
     size() {
-      return this.$vuetify.breakpoint.mdAndUp ? 225 : 140;
+      return this.$vuetify.breakpoint.mdAndUp ? 205 : 130;
+    },
+    currentTrack() {
+      return this.$store.getters["player/currentTrack"];
+    },
+    isPlaying() {
+      return this.$store.getters["player/playing"];
+    },
+    isLoading() {
+      return this.$store.getters["player/loading"];
     }
   }
 };
