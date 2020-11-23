@@ -30,8 +30,8 @@
       }}</router-link>
     </div>
     <div class="text-wrap track-grid__item_subtitle">
-      <router-link nuxt :to="`/${country}/${city}`">{{ city }}</router-link
-      >, <router-link nuxt :to="`/${country}`">{{ country }}</router-link>
+      {{ city }},
+      <router-link nuxt :to="`/radio/${country}`">{{ country }}</router-link>
     </div>
   </v-card>
 </template>
@@ -61,28 +61,28 @@ export default {
   props: {
     picture: {
       type: String,
-      default: "",
+      default: ""
     },
     name: {
       type: String,
-      default: "",
+      default: ""
     },
     city: {
       type: String,
-      default: "",
+      default: ""
     },
     country: {
       type: String,
-      default: "",
+      default: ""
     },
     stream_url: {
       type: String,
-      default: "",
+      default: ""
     },
     isHls: {
       type: Boolean,
-      default: true,
-    },
+      default: true
+    }
   },
   methods: {
     onClick(cover, title, subtitle, source, isHls) {
@@ -91,14 +91,14 @@ export default {
         title: title,
         subtitle: subtitle,
         source: source,
-        isHls: isHls,
+        isHls: isHls
       });
-    },
+    }
   },
   computed: {
     size() {
       return this.$vuetify.breakpoint.mdAndUp ? 225 : 140;
-    },
-  },
+    }
+  }
 };
 </script>

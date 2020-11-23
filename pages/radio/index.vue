@@ -1,5 +1,6 @@
 <template>
   <page-template>
+    <genres class="mb-8"></genres>
     <template v-for="country in countries">
       <track-grid-featured
         :key="country.country"
@@ -14,19 +15,6 @@
           </nuxt-link>
         </template>
       </track-grid-featured>
-    </template>
-    <h2 class="text-h2 mb-1" v-if="genres.length">
-      Mood & Genres
-      <v-btn :to="`/radio`" icon>
-        <v-icon>
-          mdi-arrow-right
-        </v-icon>
-      </v-btn>
-    </h2>
-
-    <template v-for="genre in genres">
-      <h3 :key="`h-${genre.genre}`" class="text-h3">{{ genre.genre }} Radio</h3>
-      <track-list :key="genre.genre" class="mb-8" :items="genre.radios" />
     </template>
   </page-template>
 </template>

@@ -1,16 +1,23 @@
 <template>
   <div>
-    <h2 class="text-h2 mb-1">
-      {{ title }}
-    </h2>
+    <div class="d-flex">
+      <h2 class="text-h2 mb-1">
+        <slot name="title" />
+        <slot name="action" v-if="$vuetify.breakpoint.mdAndUp" />
+      </h2>
+      <v-spacer></v-spacer>
+      <div class="mt-3">
+        <slot name="action" v-if="$vuetify.breakpoint.smAndDown" />
+      </div>
+    </div>
     <v-sheet elevation="0" color="transparent">
       <v-slide-group center-active class="ml-n2">
         <v-slide-item v-for="(item, i) in items" :key="i">
           <track-grid-item
             :picture="item.picture"
             :name="item.name"
-            :country="item.country"
-            :city="item.city"
+            :country="item.country.name"
+            :city="item.city.name"
             :stream_url="item.stream_url"
             :isHls="item.stream_type === 'hls'"
           ></track-grid-item>
@@ -25,10 +32,6 @@ import TrackGridItem from "@/components/TrackGridItem";
 
 export default {
   props: {
-    title: {
-      type: String,
-      default: "Nuove uscite"
-    },
     items: {
       type: Array,
       default() {

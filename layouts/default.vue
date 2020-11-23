@@ -19,12 +19,12 @@ export default {
   components: {
     Toolbar,
     UpdateAvailableDialog,
-    BPlayer,
+    BPlayer
   },
 
   data() {
     return {
-      update_available: false,
+      update_available: false
     };
   },
 
@@ -33,12 +33,12 @@ export default {
     if (workbox) {
       console.log("workbox enabled");
 
-      workbox.addEventListener("waiting", async (event) => {
+      workbox.addEventListener("waiting", async event => {
         console.log("waiting-----------------", event);
         this.update_available = true;
       });
 
-      workbox.addEventListener("installed", (event) => {
+      workbox.addEventListener("installed", event => {
         if (event.isUpdate) {
           console.log("----------- update available -----------");
           this.update_available = true;
@@ -50,8 +50,8 @@ export default {
   computed: {
     currentTrack() {
       return this.$store.getters["player/currentTrack"];
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -64,6 +64,12 @@ a
     font-size: 2.15rem!important
     font-weight: 600
     line-height: 3.65rem
+    letter-spacing: -.03em!important
+    font-family: "Poppins", sans-serif !important
+  .text-h3
+    font-size: 1.85rem!important
+    font-weight: 600
+    line-height: 2.65rem
     letter-spacing: -.03em!important
     font-family: "Poppins", sans-serif !important
 

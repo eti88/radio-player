@@ -10,7 +10,7 @@
         onClick(
           item.picture,
           item.name,
-          `${item.city}, ${item.country}`,
+          `${item.city.name}, ${item.country.name}`,
           item.stream_url,
           item.stream_type === 'hls'
         )
@@ -24,7 +24,7 @@
         onClick(
           item.picture,
           item.name,
-          `${item.city}, ${item.country}`,
+          `${item.city.name}, ${item.country.name}`,
           item.stream_url,
           item.stream_type === 'hls'
         )
@@ -39,7 +39,7 @@
         onClick(
           item.picture,
           item.name,
-          `${item.city}, ${item.country}`,
+          `${item.city.name}, ${item.country.name}`,
           item.stream_url,
           item.stream_type === 'hls'
         )
@@ -47,21 +47,17 @@
     >
     </v-list-item-title>
     <v-list-item-title class="grey--text" style="max-width: 320px">
-      <nuxt-link
-        class="track-list__item_link"
-        :to="`${item.country}/${item.city}`"
-        v-text="`${item.city},`"
-      ></nuxt-link>
+      {{ item.city.name }},
       <nuxt-link class="track-list__item_link" :to="`/${item.country}`">
-        {{ item.country }}
+        {{ item.country.name }}
       </nuxt-link>
     </v-list-item-title>
     <v-list-item-title class="grey--text">
       <template v-for="(genre, i) in item.genres">
         <nuxt-link
           class="track-list__item_link"
-          :to="`/genre/${genre}`"
-          v-text="genre"
+          :to="`/radio/genre/${genre.slug}`"
+          v-text="genre.name"
           :key="genre"
         >
         </nuxt-link>
@@ -90,8 +86,8 @@ export default {
       type: Object,
       default() {
         return {};
-      },
-    },
+      }
+    }
   },
 
   methods: {
@@ -101,9 +97,9 @@ export default {
         title: title,
         subtitle: subtitle,
         source: source,
-        isHls: isHls,
+        isHls: isHls
       });
-    },
-  },
+    }
+  }
 };
 </script>

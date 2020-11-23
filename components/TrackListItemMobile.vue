@@ -10,7 +10,7 @@
         onClick(
           item.picture,
           item.name,
-          `${item.city}, ${item.country}`,
+          `${item.city.name}, ${item.country.name}`,
           item.stream_url,
           item.stream_type === 'hls'
         )
@@ -24,7 +24,7 @@
         onClick(
           item.picture,
           item.name,
-          `${item.city}, ${item.country}`,
+          `${item.city.name}, ${item.country.name}`,
           item.stream_url,
           item.stream_type === 'hls'
         )
@@ -40,7 +40,7 @@
           onClick(
             item.picture,
             item.name,
-            `${item.city}, ${item.country}`,
+            `${item.city.name}, ${item.country.name}`,
             item.stream_url,
             item.stream_type === 'hls'
           )
@@ -51,9 +51,9 @@
         <template v-for="(genre, i) in item.genres">
           <nuxt-link
             class="track-list__item_link"
-            :to="`/genre/${genre}`"
-            v-text="genre"
-            :key="genre"
+            :to="`/radio/genre/${genre.slug}`"
+            v-text="genre.name"
+            :key="genre.slug"
           >
           </nuxt-link>
           <span :key="i" v-if="i < item.genres.length - 1" class="ml-n1 mr-1"
@@ -83,8 +83,8 @@ export default {
       type: Object,
       default() {
         return {};
-      },
-    },
+      }
+    }
   },
 
   methods: {
@@ -94,9 +94,9 @@ export default {
         title: title,
         subtitle: subtitle,
         source: source,
-        isHls: isHls,
+        isHls: isHls
       });
-    },
-  },
+    }
+  }
 };
 </script>
