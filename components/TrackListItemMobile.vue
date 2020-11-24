@@ -6,45 +6,16 @@
       :src="item.picture"
       class="mr-4 ml-2"
       v-if="item.picture"
-      @click.stop="
-        onClick(
-          item.picture,
-          item.name,
-          `${item.city.name}, ${item.country.name}`,
-          item.stream_url,
-          item.stream_type === 'hls'
-        )
-      "
+      @click.stop="onClick(item)"
     ></v-img>
-    <v-btn
-      class="mr-4 ml-1"
-      v-else
-      icon
-      @click.stop="
-        onClick(
-          item.picture,
-          item.name,
-          `${item.city.name}, ${item.country.name}`,
-          item.stream_url,
-          item.stream_type === 'hls'
-        )
-      "
-    >
+    <v-btn class="mr-4 ml-1" v-else icon @click.stop="onClick(item)">
       <v-icon size="22" color="grey"> mdi-radio </v-icon>
     </v-btn>
     <v-list-item-content>
       <v-list-item-title
         class="font-weight-medium"
         v-html="item.name"
-        @click="
-          onClick(
-            item.picture,
-            item.name,
-            `${item.city.name}, ${item.country.name}`,
-            item.stream_url,
-            item.stream_type === 'hls'
-          )
-        "
+        @click="onClick(item)"
       >
       </v-list-item-title>
       <v-list-item-subtitle class="grey--text">
@@ -83,20 +54,14 @@ export default {
       type: Object,
       default() {
         return {};
-      }
-    }
+      },
+    },
   },
 
   methods: {
-    onClick(cover, title, subtitle, source, isHls) {
-      this.$store.commit(`player/SET_CURRENT_TRACK`, {
-        cover: cover,
-        title: title,
-        subtitle: subtitle,
-        source: source,
-        isHls: isHls
-      });
-    }
-  }
+    onClick(item) {
+      this.$store.dispatch(`player/setCurrentTrack`, item);
+    },
+  },
 };
 </script>

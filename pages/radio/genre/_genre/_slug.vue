@@ -19,15 +19,7 @@
     <v-container fluid>
       <v-row>
         <template v-for="radio in radios">
-          <track-grid-item
-            :key="radio.slug"
-            :picture="radio.picture"
-            :name="radio.name"
-            :country="radio.country.name"
-            :city="radio.city.name"
-            :stream_url="radio.stream_url"
-            :isHls="radio.stream_type === 'hls'"
-          ></track-grid-item>
+          <track-grid-item :key="radio.slug" :item="radio"></track-grid-item>
         </template>
       </v-row>
     </v-container>

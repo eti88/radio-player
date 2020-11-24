@@ -7,29 +7,13 @@
       :streamUrl="item.stream_url"
       class="mr-4"
       v-if="item.picture"
-      v-on:select="
-        onClick(
-          item.picture,
-          item.name,
-          `${item.city.name}, ${item.country.name}`,
-          item.stream_url,
-          item.stream_type === 'hls'
-        )
-      "
+      v-on:select="onClick(item)"
     ></track-img>
 
     <v-list-item-title
       class="font-weight-medium"
       v-html="item.name"
-      @click="
-        onClick(
-          item.picture,
-          item.name,
-          `${item.city.name}, ${item.country.name}`,
-          item.stream_url,
-          item.stream_type === 'hls'
-        )
-      "
+      @click="onClick(item)"
     >
     </v-list-item-title>
     <v-list-item-title class="grey--text" style="max-width: 320px">
@@ -74,24 +58,18 @@ export default {
       type: Object,
       default() {
         return {};
-      }
-    }
+      },
+    },
   },
 
   components: {
-    TrackImg
+    TrackImg,
   },
 
   methods: {
-    onClick(cover, title, subtitle, source, isHls) {
-      this.$store.commit(`player/SET_CURRENT_TRACK`, {
-        cover: cover,
-        title: title,
-        subtitle: subtitle,
-        source: source,
-        isHls: isHls
-      });
-    }
-  }
+    onClick(item) {
+      this.$store.dispatch(`player/setCurrentTrack`, item);
+    },
+  },
 };
 </script>

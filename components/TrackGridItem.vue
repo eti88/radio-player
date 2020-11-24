@@ -8,21 +8,21 @@
     color="transparent"
   >
     <track-img
-      :picture="picture"
-      :streamUrl="stream_url"
-      v-on:select="
-        onClick(picture, name, `${city}, ${country}`, stream_url, isHls)
-      "
+      :picture="item.picture"
+      :streamUrl="item.stream_url"
+      v-on:select="onClick(item)"
     ></track-img>
 
     <div class="pt-2 track-grid__item_title">
       <router-link nuxt to="/" class="font-weight-medium">{{
-        name
+        item.name
       }}</router-link>
     </div>
     <div class="text-wrap track-grid__item_subtitle">
-      {{ city }},
-      <router-link nuxt :to="`/radio/${country}`">{{ country }}</router-link>
+      {{ item.city.name }},
+      <router-link nuxt :to="`/radio/${item.country.slug}`">{{
+        item.country.name
+      }}</router-link>
     </div>
   </v-card>
 </template>
@@ -53,47 +53,23 @@ import TrackImg from "@/components/TrackImg";
 
 export default {
   props: {
-    picture: {
-      type: String,
-      default: ""
+    item: {
+      type: Object,
+      default() {
+        return {};
+      },
     },
-    name: {
-      type: String,
-      default: ""
-    },
-    city: {
-      type: String,
-      default: ""
-    },
-    country: {
-      type: String,
-      default: ""
-    },
-    stream_url: {
-      type: String,
-      default: ""
-    },
-    isHls: {
-      type: Boolean,
-      default: true
-    }
   },
 
   components: {
     PlayerBtnPlay,
-    TrackImg
+    TrackImg,
   },
 
   methods: {
-    onClick(cover, title, subtitle, source, isHls) {
-      this.$store.commit(`player/SET_CURRENT_TRACK`, {
-        cover: cover,
-        title: title,
-        subtitle: subtitle,
-        source: source,
-        isHls: isHls
-      });
-    }
+    onClick(item) {
+      this.$store.dispatch(`player/setCurrentTrack`, item);
+    },
   },
   computed: {
     size() {
@@ -107,7 +83,7 @@ export default {
     },
     isLoading() {
       return this.$store.getters["player/loading"];
-    }
-  }
+    },
+  },
 };
 </script>

@@ -1,11 +1,13 @@
 <template>
   <page-template>
     <page-menu></page-menu>
+
+    <recently-listened></recently-listened>
+
     <template v-for="country in countries">
       <track-grid-featured
         :key="country.country"
         class="mb-8"
-        :title="`Top Radio in ${country.country}`"
         :items="country.radios"
       >
         <template v-slot:title>
@@ -19,9 +21,7 @@
     <h2 class="text-h2 mb-1" v-if="genres.length">
       Mood & Genres
       <v-btn :to="`/radio`" icon>
-        <v-icon color="red darken-1">
-          mdi-arrow-right
-        </v-icon>
+        <v-icon color="red darken-1"> mdi-arrow-right </v-icon>
       </v-btn>
     </h2>
 
@@ -45,13 +45,13 @@ export default {
     PageTemplate,
     TrackGridFeatured,
     Genres,
-    PageMenu
+    PageMenu,
   },
 
   data() {
     return {
       countries: [],
-      genres: []
+      genres: [],
     };
   },
 
@@ -60,6 +60,12 @@ export default {
 
     this.countries = explore.countries;
     this.genres = explore.genres;
-  }
+  },
+
+  computed: {
+    recents() {
+      return this.$store.getters["recent/radios"];
+    },
+  },
 };
 </script>

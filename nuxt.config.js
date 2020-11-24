@@ -108,7 +108,7 @@ export default {
     [
       "nuxt-vuex-localstorage",
       {
-        localStorage: ["app"],
+        localStorage: ["app", "recent"],
         sessionStorage: []
       }
     ],

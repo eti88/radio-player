@@ -37,37 +37,37 @@ export default {
   props: {
     picture: {
       type: String,
-      default: ""
+      default: "",
     },
     streamUrl: {
       type: String,
-      default: ""
+      default: "",
     },
     size: {
       type: Number,
       default() {
         return this.$vuetify.breakpoint.mdAndUp ? 205 : 150;
-      }
+      },
     },
     sizeBtn: {
       type: [String, Number],
-      default: "60"
-    }
+      default: "60",
+    },
   },
 
   components: {
-    PlayerBtnPlay
+    PlayerBtnPlay,
   },
 
   methods: {
-    onClick(cover, title, subtitle, source, isHls) {
+    onClick() {
       this.$emit("select");
-    }
+    },
   },
   computed: {
     currentTrack() {
       return this.$store.getters["player/currentTrack"];
-    }
-  }
+    },
+  },
 };
 </script>
