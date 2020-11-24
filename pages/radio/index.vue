@@ -1,5 +1,6 @@
 <template>
   <page-template>
+    <page-menu></page-menu>
     <genres class="mb-8"></genres>
     <template v-for="country in countries">
       <track-grid-featured
@@ -23,6 +24,7 @@
 import PageTemplate from "@/components/PageTemplate";
 import TrackGridFeatured from "@/components/TrackGridFeatured";
 import Genres from "@/components/Genres";
+import PageMenu from "@/components/PageMenu";
 
 export default {
   head() {
@@ -36,7 +38,8 @@ export default {
   components: {
     PageTemplate,
     TrackGridFeatured,
-    Genres
+    Genres,
+    PageMenu
   },
 
   data() {
