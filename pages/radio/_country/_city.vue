@@ -4,7 +4,7 @@
     <div class="d-flex mb-4">
       <v-btn
         icon
-        to="/radio/by-location"
+        :to="`/radio/${country}`"
         exact
         class="ml-n3 mt-1"
         color="red darken-1"
@@ -15,22 +15,7 @@
         Radio in <span class="red--text text--darken-1">{{ name }}</span>
       </h3>
     </div>
-
-    <cities :country="slug" class="mb-8"></cities>
-
-    <template v-for="genre in genres">
-      <track-grid-featured
-        :key="genre.genre"
-        class="mb-8"
-        :items="genre.radios"
-      >
-        <template v-slot:title>
-          <span class="text-h3 grey--text text--darken-1">{{
-            genre.genre
-          }}</span>
-        </template>
-      </track-grid-featured>
-    </template>
+    <track-list class="mb-8" :items="radios" />
   </page-template>
 </template>
 
@@ -58,21 +43,22 @@ export default {
 
   asyncData({ params }) {
     return {
-      slug: params.country,
+      slug: params.city,
+      country: params.country,
     };
   },
 
   data() {
     return {
       name: "",
-      genres: [],
+      radios: [],
     };
   },
 
   async created() {
-    const radios = await this.$api.getRadiosByCountry(this.slug);
-    this.name = radios.country;
-    this.genres = radios.genres;
+    const city = await this.$api.getRadiosByCity(this.slug);
+    this.name = city.name;
+    this.radios = city.radios;
   },
 };
 </script>

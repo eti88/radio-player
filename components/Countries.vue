@@ -1,9 +1,9 @@
 <template>
   <v-container fluid class="pa-0">
     <v-row>
-      <v-col cols="6" md="2" class="py-0" v-for="i in genres" :key="i.slug">
+      <v-col cols="6" md="2" class="py-0" v-for="i in countries" :key="i.slug">
         <v-alert colored-border :color="createRandomColor()" border="left">
-          <nuxt-link :to="`/radio/genre/${i.slug}`">
+          <nuxt-link :to="`/radio/${i.slug}`">
             <span
               class="w-100 fill-height text-truncate white--text font-weight-medium"
               >{{ i.name }}</span
@@ -19,15 +19,12 @@
 export default {
   data() {
     return {
-      onboarding: 0,
-      genres: [],
-      length: 2,
+      countries: [],
     };
   },
   async created() {
     try {
-      const genres = await this.$api.getGenres();
-      this.genres = genres;
+      this.countries = await this.$api.getCountries();
     } catch (e) {
       console.error(e);
     }
@@ -41,16 +38,16 @@ export default {
 </script>
 
 <style>
-#genres .v-alert__content::first-letter {
+#countries .v-alert__content::first-letter {
   text-transform: uppercase !important;
   font-size: 16px !important;
 }
 
-#genres {
+#countries {
   align-content: space-between;
 }
 
-#genres a.span {
+#countries a.span {
   color: #fff !important;
 }
 </style>

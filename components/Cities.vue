@@ -1,0 +1,63 @@
+<template>
+  <div>
+    <v-container fluid class="pa-0">
+      <v-row>
+        <v-col cols="6" md="2" class="py-0" v-for="i in cities" :key="i.slug">
+          <v-alert colored-border :color="createRandomColor()" border="left">
+            <nuxt-link :to="`/radio/${country}/${i.slug}`">
+              <span
+                class="w-100 fill-height text-truncate white--text font-weight-medium"
+                >{{ i.name }}</span
+              >
+            </nuxt-link>
+          </v-alert>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    country: {
+      type: String,
+      required: true,
+    },
+  },
+
+  data() {
+    return {
+      cities: [],
+    };
+  },
+  async created() {
+    try {
+      const country = await this.$api.getCitiesByCountry(this.country);
+      this.cities = country.cities;
+    } catch (e) {
+      console.error(e);
+    }
+  },
+  methods: {
+    createRandomColor() {
+      return "hsla(" + Math.random() * 360 + ", 70%, 65%, 1)";
+    },
+  },
+};
+</script>
+
+<style>
+#countries .v-alert__content::first-letter {
+  text-transform: uppercase !important;
+  font-size: 16px !important;
+}
+
+#countries {
+  align-content: space-between;
+}
+
+#countries a.span {
+  color: #fff !important;
+}
+</style>

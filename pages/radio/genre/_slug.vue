@@ -1,10 +1,15 @@
 <template>
   <page-template>
+    <page-menu></page-menu>
     <div class="d-flex">
-      <v-btn icon to="/radio" exact class="ml-n3 mt-1" color="red darken-1">
-        <v-icon>
-          mdi-chevron-left
-        </v-icon>
+      <v-btn
+        icon
+        to="/radio/genre"
+        exact
+        class="ml-n3 mt-1"
+        color="red darken-1"
+      >
+        <v-icon> mdi-chevron-left </v-icon>
       </v-btn>
       <h3 class="text-h3 mb-2">{{ name }} Radio</h3>
     </div>
@@ -15,16 +20,16 @@
         :items="country.radios"
       >
         <template v-slot:title>
-          {{ country.country }}
+          <span class="text-h3 grey--text text--darken-1">{{
+            country.country
+          }}</span>
         </template>
         <template v-slot:action>
           <v-btn
             :to="`/radio/genre/${slug}/${country.radios[0].country.slug}`"
             icon
           >
-            <v-icon color="red darken-1">
-              mdi-arrow-right
-            </v-icon>
+            <v-icon color="red darken-1"> mdi-arrow-right </v-icon>
           </v-btn>
         </template>
       </track-grid-featured>
@@ -41,25 +46,25 @@ export default {
     const title = `${this.name} Radio`;
     return {
       title: title,
-      meta: [{ hid: "og-title", name: "og:title", content: title }]
+      meta: [{ hid: "og-title", name: "og:title", content: title }],
     };
   },
 
   components: {
     PageTemplate,
-    TrackGridFeatured
+    TrackGridFeatured,
   },
 
   asyncData({ params }) {
     return {
-      slug: params.slug
+      slug: params.slug,
     };
   },
 
   data() {
     return {
       name: "",
-      countries: []
+      countries: [],
     };
   },
 
@@ -67,6 +72,6 @@ export default {
     const radios = await this.$api.getRadiosByGenre(this.slug);
     this.name = radios.genre;
     this.countries = radios.countries;
-  }
+  },
 };
 </script>

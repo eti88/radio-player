@@ -1,6 +1,16 @@
 <template>
   <page-template>
     <page-menu></page-menu>
+
+    <div class="d-flex mb-4">
+      <v-btn icon to="/" exact class="ml-n3 mt-3" color="red darken-1">
+        <v-icon> mdi-chevron-left </v-icon>
+      </v-btn>
+      <h2 class="text-h2 mb-1">
+        Mood & <span class="red--text text--darken-1">Genres</span>
+      </h2>
+    </div>
+
     <genres class="mb-8"></genres>
     <template v-for="country in countries">
       <track-grid-featured
@@ -31,7 +41,7 @@ export default {
     const title = `Mood & Genres`;
     return {
       title: title,
-      meta: [{ hid: "og-title", name: "og:title", content: title }]
+      meta: [{ hid: "og-title", name: "og:title", content: title }],
     };
   },
 
@@ -39,13 +49,13 @@ export default {
     PageTemplate,
     TrackGridFeatured,
     Genres,
-    PageMenu
+    PageMenu,
   },
 
   data() {
     return {
       countries: [],
-      genres: []
+      genres: [],
     };
   },
 
@@ -54,6 +64,6 @@ export default {
 
     this.countries = explore.countries;
     this.genres = explore.genres;
-  }
+  },
 };
 </script>
