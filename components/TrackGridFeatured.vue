@@ -10,18 +10,22 @@
         <slot name="action" v-if="$vuetify.breakpoint.smAndDown" />
       </div>
     </div>
-    <v-sheet elevation="0" color="transparent">
-      <v-slide-group center-active class="ml-n2">
-        <v-slide-item v-for="(item, i) in items" :key="i">
-          <track-grid-item :item="item"></track-grid-item>
-        </v-slide-item>
-      </v-slide-group>
-    </v-sheet>
+    <slider v-if="$vuetify.breakpoint.smAndDown">
+      <template v-for="(item, i) in items">
+        <track-grid-item :key="i" :item="item"></track-grid-item>
+      </template>
+    </slider>
+    <v-slide-group v-else center-active class="ml-n2">
+      <v-slide-item v-for="(item, i) in items" :key="i">
+        <track-grid-item :item="item"></track-grid-item>
+      </v-slide-item>
+    </v-slide-group>
   </div>
 </template>
 
 <script>
 import TrackGridItem from "@/components/TrackGridItem";
+import Slider from "@/components/Slider";
 
 export default {
   props: {
@@ -32,8 +36,10 @@ export default {
       },
     },
   },
+
   components: {
     TrackGridItem,
+    Slider,
   },
 };
 </script>
