@@ -3,6 +3,8 @@ import pkg from './package.json'
 require("dotenv").config();
 import colors from "vuetify/es5/util/colors";
 
+import axios from 'axios'
+
 export default {
   loading: {
     color: '#C62828',
@@ -119,6 +121,13 @@ export default {
       { defaultUserAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36' }
     ]
   ],
+
+  // Generate config
+  generate: {
+    routes() {
+      return axios.get(`${process.env.API}/generator`).then(res => res.data)
+    }
+  },
 
   pwa: {
     manifest: {
