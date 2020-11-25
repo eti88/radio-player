@@ -1,6 +1,6 @@
 {
   "name": "radio-player",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
@@ -14,7 +14,7 @@
     "@nuxtjs/device": "^1.2.7",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/proxy": "^2.0.1",
-    "@nuxtjs/pwa": "^3.0.2",
+    "@nuxtjs/pwa": "^3.2.2",
     "hls.js": "^0.14.12",
     "howler": "^2.2.1",
     "node-fetch": "^2.6.1",
