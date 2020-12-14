@@ -37,5 +37,9 @@ export const actions = {
       radios.splice(radios.indexOf(presentRadio), 1);
       commit('SET_RADIOS', radios)
     }
+  },
+
+  clear({ commit }) {
+    commit('SET_RADIOS', [])
   }
 }

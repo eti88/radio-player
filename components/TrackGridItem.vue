@@ -4,6 +4,8 @@
     tile
     class="ma-3 track-grid__item"
     :max-width="size"
+    :min-width="size"
+    :min-height="size"
     :width="$vuetify.breakpoint.mdAndUp ? '225px' : '290px'"
     color="transparent"
   >
@@ -57,19 +59,19 @@ export default {
       type: Object,
       default() {
         return {};
-      },
-    },
+      }
+    }
   },
 
   components: {
     PlayerBtnPlay,
-    TrackImg,
+    TrackImg
   },
 
   methods: {
     onClick(item) {
       this.$store.dispatch(`player/setCurrentTrack`, item);
-    },
+    }
   },
   computed: {
     size() {
@@ -83,7 +85,7 @@ export default {
     },
     isLoading() {
       return this.$store.getters["player/loading"];
-    },
-  },
+    }
+  }
 };
 </script>

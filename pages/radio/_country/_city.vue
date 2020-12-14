@@ -30,7 +30,7 @@ export default {
     const title = `Radio in ${this.name}`;
     return {
       title: title,
-      meta: [{ hid: "og-title", name: "og:title", content: title }],
+      meta: [{ hid: "og-title", name: "og:title", content: title }]
     };
   },
 
@@ -38,27 +38,27 @@ export default {
     PageTemplate,
     PageMenu,
     TrackGridFeatured,
-    Cities,
+    Cities
   },
 
   asyncData({ params }) {
     return {
       slug: params.city,
-      country: params.country,
+      country: params.country
     };
   },
 
   data() {
     return {
       name: "",
-      radios: [],
+      radios: []
     };
   },
 
   async created() {
-    const city = await this.$api.getRadiosByCity(this.slug);
-    this.name = city.name;
-    this.radios = city.radios;
-  },
+    const response = await this.$api.getRadiosByCity(this.slug);
+    this.name = response.city.name;
+    this.radios = response.radios;
+  }
 };
 </script>

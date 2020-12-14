@@ -31,5 +31,9 @@ export const actions = {
     }
 
     commit('SET_RADIOS', radios.slice(0, 25))
+  },
+
+  clear({ commit }) {
+    commit('SET_RADIOS', [])
   }
 }
