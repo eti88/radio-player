@@ -63,7 +63,7 @@ export default {
     onClick(item) {
       const track = {
         ...item,
-        type: "radio"
+        type: "podcast"
       };
       this.$store.dispatch(`player/setCurrentTrack`, track);
     },

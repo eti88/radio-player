@@ -4,12 +4,25 @@
       :background="podcast.imageURL"
       :cover="podcast.imageURL"
       :title="podcast.title"
-      :description="podcast.subtitle"
+      :description="podcast.subtitle || podcast.description"
+      :author="podcast.author"
+      :link="podcast.link"
+      :explicit="podcast.explicit"
     ></channel-header>
+
+    <v-container fluid>
+      <v-row>
+        <v-col md="9" class="mx-auto">
+          <track-podcast-list :items="episodes" />
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
 <script>
+import { convertEpisodesToItems } from "@/lib/utils";
+
 export default {
   async asyncData({ app, params }) {
     const podcast = await app.$api.getPodcast(params.channel);
@@ -28,7 +41,7 @@ export default {
 
   async created() {
     const episodes = await this.$api.getPodcastEpisodes(this.slug);
-    this.episodes = episodes.data;
+    this.episodes = convertEpisodesToItems(episodes.data);
   }
 };
 </script>

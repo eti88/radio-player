@@ -41,16 +41,33 @@ export const mutations = {
 
 export const actions = {
   setCurrentTrack({ commit, dispatch }, payload) {
-    const radio = {
-      cover: payload.picture,
-      title: payload.name,
-      subtitle: `${payload.city.name}, ${payload.country.name}`,
-      source: payload.stream_url,
-      isHls: payload.stream_type === "hls",
-    }
-    commit('SET_CURRENT_TRACK', radio)
+    let track
 
-    dispatch('recent/addRadio', payload, { root: true })
+    if (payload.type === 'radio') {
+      track = {
+        type: 'radio',
+        cover: payload.picture,
+        title: payload.name,
+        subtitle: `${payload.city.name}, ${payload.country.name}`,
+        source: payload.stream_url,
+        isHls: payload.stream_type === "hls",
+      }
+    }
+
+    if (payload.type === 'podcast') {
+      track = {
+        type: 'podcast',
+        cover: payload.picture,
+        title: payload.title,
+        subtitle: payload.subtitle,
+        source: payload.streamUrl,
+        isHls: false,
+      }
+    }
+
+    commit('SET_CURRENT_TRACK', track)
+
+    //dispatch('recent/addRadio', payload, { root: true })
   },
 
   stop({ commit }) {

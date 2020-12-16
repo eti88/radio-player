@@ -1,7 +1,10 @@
 <template>
   <v-footer app class="pa-0">
     <v-card id="player">
-      <player-progress-bar />
+      <player-progress-bar
+        :currentTime="currentTime"
+        :maxDuration="maxDuration"
+      />
       <v-list-item class="px-4 py-2">
         <slot />
       </v-list-item>
@@ -13,9 +16,19 @@
 import PlayerProgressBar from "@/components/Player/ProgressBar";
 
 export default {
-  components: {
-    PlayerProgressBar,
+  props: {
+    currentTime: {
+      type: Number,
+      default: 0
+    },
+    maxDuration: {
+      type: Number,
+      default: 0
+    }
   },
+  components: {
+    PlayerProgressBar
+  }
 };
 </script>
 

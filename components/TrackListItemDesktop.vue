@@ -59,17 +59,21 @@ export default {
       type: Object,
       default() {
         return {};
-      },
-    },
+      }
+    }
   },
 
   components: {
-    TrackImg,
+    TrackImg
   },
 
   methods: {
     onClick(item) {
-      this.$store.dispatch(`player/setCurrentTrack`, item);
+      const track = {
+        ...item,
+        type: "radio"
+      };
+      this.$store.dispatch(`player/setCurrentTrack`, track);
     },
     onFavorite(item) {
       if (!this.isFavorite(item)) {
@@ -80,11 +84,11 @@ export default {
     },
     isFavorite(item) {
       return this.$store.getters["favorites/radios"].find(
-        (r) => r.stream_url === item.stream_url
+        r => r.stream_url === item.stream_url
       )
         ? true
         : false;
-    },
-  },
+    }
+  }
 };
 </script>

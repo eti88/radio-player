@@ -17,6 +17,14 @@
             <v-col align-self="center" class="flex-grow-1 flex-shrink-0">
               <h1 class="text-h2">
                 {{ title }}
+                <v-tooltip top v-if="explicit">
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon v-bind="attrs" v-on="on">
+                      mdi-alpha-e-box
+                    </v-icon>
+                  </template>
+                  <span>Explicit</span>
+                </v-tooltip>
               </h1>
 
               <v-list-item class="px-0" v-if="subtitles.length">
@@ -30,6 +38,16 @@
                 </v-list-item-content>
               </v-list-item>
               <p v-html="description"></p>
+              <div class="mt-n3 mb-2">
+                by
+                <a
+                  :href="link"
+                  target="_blank"
+                  rel="nofollow"
+                  class="font-weight-medium"
+                  >{{ author }}</a
+                >
+              </div>
               <v-card-actions class="px-0">
                 <v-btn depressed color="white" light>
                   <v-icon left>mdi-play</v-icon>
@@ -79,6 +97,15 @@ export default {
     description: {
       type: String,
       default: ""
+    },
+    author: {
+      type: String
+    },
+    link: {
+      type: String
+    },
+    explicit: {
+      type: Boolean
     }
   }
 };

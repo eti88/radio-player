@@ -1,11 +1,14 @@
 <template>
-  <player-container>
+  <player-container :maxDuration="maxDuration" :currentTime="currentTime">
     <player-picture></player-picture>
     <player-title></player-title>
     <v-spacer></v-spacer>
     <player-actions></player-actions>
     <v-spacer v-if="$vuetify.breakpoint.mdAndUp"></v-spacer>
-    <player-duration :currentTime="currentTime"></player-duration>
+    <player-duration
+      :maxDuration="maxDuration"
+      :currentTime="currentTime"
+    ></player-duration>
     <player-btn-stop></player-btn-stop>
     <player-error-dialog
       v-if="error !== null"
@@ -50,7 +53,8 @@ export default {
       },
       error: null,
       bufferTimer: null,
-      currentTime: 0
+      currentTime: 0,
+      maxDuration: 0
     };
   },
 
@@ -106,6 +110,10 @@ export default {
             this.currentTime = ctx.provider.html5.seek();
           } else if (ctx.provider.hls !== null) {
             this.currentTime = Math.round(ctx.$refs.hlsAudio.currentTime);
+
+            if (ctx.currentTrack.type !== "radio") {
+              this.maxDuration = Math.round(ctx.$refs.hlsAudio.duration);
+            }
           }
 
           if (process.env.NODE_ENV === "production") {

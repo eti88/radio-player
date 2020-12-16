@@ -70,7 +70,11 @@ export default {
 
   methods: {
     onClick(item) {
-      this.$store.dispatch(`player/setCurrentTrack`, item);
+      const track = {
+        ...item,
+        type: "radio"
+      };
+      this.$store.dispatch(`player/setCurrentTrack`, track);
     }
   },
   computed: {
