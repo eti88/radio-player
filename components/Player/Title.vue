@@ -1,7 +1,7 @@
 <template>
   <v-list-item-content>
     <v-list-item-title v-text="title"></v-list-item-title>
-    <v-list-item-subtitle v-text="subtitle"></v-list-item-subtitle>
+    <v-list-item-subtitle>{{ subtitle | stripHtml }}</v-list-item-subtitle>
   </v-list-item-content>
 </template>
 
@@ -16,7 +16,7 @@ export default {
     },
     subtitle() {
       return this.currentTrack ? this.currentTrack.subtitle : "";
-    },
-  },
+    }
+  }
 };
 </script>

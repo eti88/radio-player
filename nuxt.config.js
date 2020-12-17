@@ -88,6 +88,9 @@ export default {
   }, {
     src: "~/plugins/seo-gtag.js",
     ssr: false
+  }, {
+    src: "~/plugins/filters.js",
+    ssr: false
   }
   ],
   /*

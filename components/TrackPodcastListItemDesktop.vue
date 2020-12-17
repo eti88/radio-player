@@ -18,7 +18,7 @@
     >
     </v-list-item-title>
     <v-list-item-title class="ml-4 grey--text" style="max-width:800px">
-      {{ item.subtitle }}
+      {{ item.subtitle | stripHtml }}
     </v-list-item-title>
     <v-spacer></v-spacer>
     <v-list-item-action class="text-right">
