@@ -21,10 +21,15 @@
       {{ item.subtitle | stripHtml }}
     </v-list-item-title>
     <v-spacer></v-spacer>
+    <v-list-item-title
+      class="grey--text text-right mr-4"
+      v-html="toHHMMSS(item.duration)"
+      style="max-width:70px"
+    >
+    </v-list-item-title>
     <v-list-item-action class="text-right">
-      <v-btn icon @click.stop="onFavorite(item)">
-        <v-icon color="red darken-4" v-if="isFavorite(item)">mdi-heart</v-icon>
-        <v-icon color="grey" v-else>mdi-heart-outline</v-icon>
+      <v-btn icon>
+        <v-icon color="grey">mdi-heart-outline</v-icon>
       </v-btn>
     </v-list-item-action>
     <v-list-item-action class="text-right">
@@ -37,6 +42,7 @@
 
 <script>
 import TrackImg from "@/components/TrackImg";
+import { toHHMMSS } from "@/lib/utils";
 
 export default {
   props: {
@@ -53,6 +59,9 @@ export default {
   },
 
   methods: {
+    toHHMMSS(val) {
+      return toHHMMSS(val);
+    },
     onClick(item) {
       const track = {
         ...item,

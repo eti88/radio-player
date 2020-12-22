@@ -21,10 +21,7 @@
       }}</router-link>
     </div>
     <div class="text-wrap track-grid__item_subtitle">
-      {{ item.city.name }},
-      <router-link nuxt :to="`/radio/${item.country.slug}`">{{
-        item.country.name
-      }}</router-link>
+      {{ item.subtitle }}
     </div>
   </v-card>
 </template>

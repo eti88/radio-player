@@ -5,6 +5,8 @@
     <favorites></favorites>
     <recently-listened></recently-listened>
 
+    <podcast-slider class="mb-8"></podcast-slider>
+
     <template v-for="country in countries">
       <track-grid-featured
         :key="country.country"
@@ -41,32 +43,52 @@ import TrackGridFeatured from "@/components/TrackGridFeatured";
 import Genres from "@/components/Genres";
 import PageMenu from "@/components/PageMenu";
 
+import { convertRadiosToItems } from "@/lib/utils";
+
 export default {
   components: {
     PageTemplate,
     TrackGridFeatured,
     Genres,
-    PageMenu,
+    PageMenu
   },
 
   data() {
     return {
       countries: [],
-      genres: [],
+      genres: []
     };
   },
 
   async created() {
     const explore = await this.$api.getByExplore();
+    this.countries = this.convertCountriesToItems(explore.countries);
+    this.genres = this.convertGenresToItems(explore.genres);
+  },
 
-    this.countries = explore.countries;
-    this.genres = explore.genres;
+  methods: {
+    convertCountriesToItems(countries) {
+      return countries.map(c => {
+        return {
+          ...c,
+          radios: convertRadiosToItems(c.radios)
+        };
+      });
+    },
+    convertGenresToItems(genres) {
+      return genres.map(g => {
+        return {
+          ...g,
+          radios: convertRadiosToItems(g.radios)
+        };
+      });
+    }
   },
 
   computed: {
     recents() {
       return this.$store.getters["recent/radios"];
-    },
-  },
+    }
+  }
 };
 </script>

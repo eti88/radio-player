@@ -1,11 +1,16 @@
 <template>
-  <v-list color="transparent">
+  <v-list color="transparent" style="margin-top:-60px">
     <template v-for="(item, i) in items">
       <track-podcast-list-item-desktop
         :key="item.id"
         :item="item"
         v-if="$vuetify.breakpoint.mdAndUp"
       ></track-podcast-list-item-desktop>
+      <track-podcast-list-item-mobile
+        v-else
+        :key="item.id"
+        :item="item"
+      ></track-podcast-list-item-mobile>
       <v-divider :key="i" v-if="i < items.length - 1"></v-divider>
     </template>
   </v-list>

@@ -2,14 +2,17 @@
   <v-img
     :src="background"
     gradient="to bottom, rgba(0,0,0,.4), rgba(0,0,0,1)"
-    :height="height"
+    :height="$vuetify.breakpoint.mdAndUp ? height : ``"
   >
     <v-container fluid class="d-flex align-end fill-height">
       <v-row align="end">
         <v-col md="9" class="mx-auto py-8">
           <v-row justify="start" align="start">
             <v-col
-              class="flex-grow-0 flex-shrink-0 pr-6 pl-0"
+              :class="{
+                'flex-grow-0 flex-shrink-0 pr-6 pl-0':
+                  $vuetify.breakpoint.mdAndUp
+              }"
               v-if="cover !== null"
             >
               <v-img :src="cover" max-width="265" max-height="265" />

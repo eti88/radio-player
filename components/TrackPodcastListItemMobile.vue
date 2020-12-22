@@ -4,33 +4,23 @@
       max-width="32"
       max-height="32"
       :src="item.picture"
+      :streamUrl="item.stream_url"
       class="mr-4 ml-2"
       v-if="item.picture"
       @click.stop="onClick(item)"
     ></v-img>
     <v-btn class="mr-4 ml-1" v-else icon @click.stop="onClick(item)">
-      <v-icon size="22" color="grey"> mdi-radio </v-icon>
+      <v-icon size="22" color="grey"> mdi-podcast </v-icon>
     </v-btn>
     <v-list-item-content>
       <v-list-item-title
         class="font-weight-medium"
-        v-html="item.name"
+        v-html="item.title"
         @click="onClick(item)"
       >
       </v-list-item-title>
       <v-list-item-subtitle class="grey--text">
-        <template v-for="(genre, i) in item.genres">
-          <nuxt-link
-            class="track-list__item_link"
-            :to="`/radio/genre/${genre.slug}`"
-            v-text="genre.name"
-            :key="genre.slug"
-          >
-          </nuxt-link>
-          <span :key="i" v-if="i < item.genres.length - 1" class="ml-n1 mr-1"
-            >•</span
-          >
-        </template>
+        {{ item.subtitle | stripHtml }}
       </v-list-item-subtitle>
     </v-list-item-content>
 
