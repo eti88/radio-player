@@ -66,7 +66,7 @@
                 </div>
               </v-col>
             </v-row>
-            <send-token-dialog
+            <bank-send
               v-if="showModal"
               v-on:cancel="onCloseSend"
             />
@@ -81,7 +81,7 @@
 import Markup from "@/components/Wallet/Common/Markup.vue"
 import Amount from "@/components/Wallet/Common/Amount.vue"
 import BankReceiveDialog from '@/components/Wallet/Dialogs/ReceiveDialog'
-import SendTokenDialog from '@/components/Wallet/Dialogs/SendTokenDialog.vue'
+import BankSend from '@/components/Wallet/Bank/Send'
 import { convertMicroToMacroAmount } from '@/lib/utils'
 
 export default {
@@ -89,7 +89,7 @@ export default {
     Markup,
     Amount,
     BankReceiveDialog,
-    SendTokenDialog
+    BankSend
   },
 
   data () {

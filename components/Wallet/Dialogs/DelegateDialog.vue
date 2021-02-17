@@ -5,7 +5,7 @@
     max-width="800"
     :value="true"
   >
-    <v-card>
+    <v-card flat>
       <v-card-text>
         <staking-delegations
           class="mb-8"

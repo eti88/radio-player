@@ -5,7 +5,7 @@
     max-width="800"
     :value="true"
   >
-    <v-card>
+    <v-card flat>
       <v-card-text class="pa-5">
         <validator-detail
             :validator="value"
