@@ -1,19 +1,19 @@
 <template>
   <page-template>
-    <ProfileWallet class="col-md-10 mx-auto" />
+    <wallet-overview class="col-md-10 mx-auto" />
     <wallet-tabs class="mt-8 col-md-10" />
   </page-template>
 </template>
 
 <script>
 import PageTemplate from "@/components/PageTemplate";
-import ProfileWallet from "~/components/Wallet/ProfileWallet.vue";
+import WalletOverview from "~/components/Wallet/WalletOverview.vue";
 import WalletTabs from "~/components/Wallet/WalletTabs/WalletTabs.vue";
 
 export default {
   components: {
     PageTemplate,
-    ProfileWallet,
+    WalletOverview,
     WalletTabs
   },
 
