@@ -25,7 +25,7 @@
             <v-spacer></v-spacer>
             <p>
               or
-              <router-link to="/wallet/create">create a new wallet</router-link>
+              <router-link to="/auth/create">create a new wallet</router-link>
             </p>
             <v-spacer></v-spacer>
           </v-card-actions>
@@ -51,17 +51,17 @@ export default {
         {
           icon: "mdi-file-key-outline",
           label: "Keystore file",
-          to: "/wallet/import/keystore"
+          to: "/auth/import/keystore"
         },
         {
           icon: "mdi-shield-key-outline",
           label: "Mnemonic phrase",
-          to: "/wallet/import/mnemonic"
+          to: "/auth/import/mnemonic"
         },
         {
           icon: "mdi-key-outline",
           label: "Private key",
-          to: "/wallet/import/privatekey"
+          to: "/auth/import/privatekey"
         }
       ]
     };

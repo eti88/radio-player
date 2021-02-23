@@ -108,7 +108,7 @@ export default {
         {
           icon: "mdi-exit-to-app",
           title: "Log out",
-          to: "/wallet/logout"
+          to: "/auth/logout"
         }
       ];
     }

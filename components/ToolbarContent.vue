@@ -20,7 +20,7 @@
       v-if="$vuetify.breakpoint.mdAndUp && !isLoggedIn"
       active-class="no-active"
       class="mr-2"
-      to="/wallet/create"
+      to="/auth/create"
       color="primary"
       dark
       >Connect Wallet</v-btn
@@ -28,7 +28,7 @@
     <v-btn
       v-if="$vuetify.breakpoint.smAndDown && !isLoggedIn"
       icon
-      to="/wallet/import"
+      to="/auth/import"
     >
       <v-icon size="28">mdi-account-circle</v-icon>
     </v-btn>

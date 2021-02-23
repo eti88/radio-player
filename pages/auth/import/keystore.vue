@@ -85,7 +85,7 @@
               <v-spacer></v-spacer>
               <p>
                 or
-                <router-link to="/wallet/import"
+                <router-link to="/auth/import"
                   >select another method</router-link
                 >
               </p>
