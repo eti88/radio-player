@@ -62,10 +62,17 @@
               </div>
               <!-- End Social link radio -->
               <v-card-actions class="px-0">
-                <v-btn class="pr-4" color="white" depressed light>
+                <v-btn
+                  class="pr-4"
+                  color="white"
+                  depressed
+                  light
+                  @click.stop="onPlay(radio)"
+                >
                   <v-icon left>mdi-play</v-icon>
                   Play
                 </v-btn>
+                <!-- TODO: Connect to contextual action -->
                 <v-btn outlined>
                   <v-icon left>mdi-plus-box-multiple</v-icon>
                   Follow
@@ -136,6 +143,11 @@ export default {
   data() {
     return {
       showDetails: false 
+    }
+  },
+  methods: {
+    onPlay(item) {
+      this.$store.dispatch(`player/setCurrentTrack`, item);
     }
   }
 };
