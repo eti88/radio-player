@@ -41,7 +41,11 @@ export default {
       const genres = await this.$api.getGenres();
       if (this.filter) {
         this.genres = genres.filter((item) => {
-          return this.items.genres.indexOf(item.id) !== -1
+          if (typeof this.items.genres !== 'undefined') {
+            return this.items.genres.indexOf(item.id) !== -1
+          } else {
+            return this.items.indexOf(item.id) !== -1 
+          }
         })
       } else {
         this.genres = genres;

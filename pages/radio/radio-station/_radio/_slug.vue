@@ -1,42 +1,45 @@
 <template>
   <div>
     <radio-header
-      :background="radio.picture"
-      :cover="radio.picture"
-      :author="radio.name"
-      :description="radio.short_description || radio.country.name"
-      :link="radio.website"
+      :radio="radio"
       :explicit="false"
-      :genres="radio.genres"
       style="top:-65px;"
     />
-
-    <v-container fluid>
-      <v-row>
-        <v-col cols="12" md="9" lg="9" class="mx-auto">
-          <radio-tabs
-            :tracks="tracks"
-            :country="radio.country"
-            :city="radio.city"
-            :topic="radio.topic"
-            :contact="radio.contact"
-            :description="radio.description"
-          />
+    <!-- Body tadio page -->
+    <genres
+      v-if="radio.genres.length > 0"
+      :items="radio.genres"
+      :filter="true"
+      style="height: 35px;"
+    />
+   <v-container fluid>
+    <v-row>
+      <v-col md="10" class="mx-auto">
+          <track-grid-featured
+            class="mb-8"
+            :items="[radio]"
+          >
+            <template v-slot:title>
+              Live stream
+            </template>
+          </track-grid-featured>
         </v-col>
       </v-row>
     </v-container>
+    <!-- End Body tadio page -->
   </div>
 </template>
 
 <script>
-import RadioHeader from '@/components/RadioHeader.vue'
-import RadioTabs from '@/components/Radio/RadioTabs.vue'
+import RadioHeader from '@/components/Radio/RadioHeader.vue'
+
 
 export default {
 
   components: {
     RadioHeader,
-    RadioTabs
+    
+
   },
 
   async asyncData({ app, params }) {
