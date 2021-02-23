@@ -29,6 +29,9 @@ export default async (ctx, inject) => {
   // init chain
   await client.initChain()
 
+  // get validator set
+  ctx.app.store.dispatch(`validators/getAll`)
+
   // set account
   if (ctx.app.store.getters['wallet/address'] !== null) {
     try {
