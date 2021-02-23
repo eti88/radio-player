@@ -17,6 +17,18 @@
 
 <script>
 export default {
+  props: {
+    items: {
+      type: Array,
+      default() {
+        return []
+      }
+    },
+    filter: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       onboarding: 0,
@@ -27,7 +39,13 @@ export default {
   async created() {
     try {
       const genres = await this.$api.getGenres();
-      this.genres = genres;
+      if (this.filter) {
+        this.genres = genres.filter((item) => {
+          return this.items.genres.indexOf(item.id) !== -1
+        })
+      } else {
+        this.genres = genres;
+      }
     } catch (e) {
       console.error(e);
     }

@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="pa-0">
+  <page-template>
     <v-row>
       <v-col cols="12" class="py-0">
         <v-card>
@@ -74,7 +74,7 @@
         </v-card>
       </v-col>
     </v-row>
-  </v-container>
+  </page-template>
 </template>
 
 <script>

@@ -5,7 +5,7 @@ export const state = () => ({
   gas_price: process.env.DEFAULT_GAS_PRICE,
   gas_limit: process.env.DEFAULT_GAS_LIMIT,
   decimals: process.env.DECIMALS,
-  address_length: process.env.ADDRESS_LENGTH,
+  address_length: process.env.ADDRESS_length,
   address_start_regex: process.env.ADDRESS_START_REGEX,
 })
 

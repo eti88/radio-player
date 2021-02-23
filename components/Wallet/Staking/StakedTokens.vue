@@ -38,7 +38,12 @@
                 :valoper="item.validator.address"
                 size="26px"
               />
-              <span class="ml-2 caption-1">
+              <dot-status-with-tooltip
+                :status="item.status === 2"
+                :msg="item.status === 2 ? 'Active' : 'Inactive'"
+                class="mx-2"
+              />
+              <span class="caption-1">
                 {{ item.validator.name }}
               </span>
             </v-flex>
@@ -52,10 +57,6 @@
             class="my-auto"
             :micro-amount="item.staked_balance.amount"
             :denom="item.staked_balance.denom"
-          />
-          <dot-status-with-tooltip
-            :status="item.status === 2"
-            :msg="item.status === 2 ? 'Active' : 'Inactive'"
           />
         </template>
 

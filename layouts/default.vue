@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <toolbar />
+    <toolbar class="bg-transaprent" />
     <update-available-dialog v-if="update_available"></update-available-dialog>
     <v-main class="mb-8">
       <nuxt />
@@ -90,4 +90,6 @@ a
 
 .v-slide-group__next, .v-slide-group__prev
   min-width: 22px !important
+.bg-transparent
+  background-color: transparent !important
 </style>

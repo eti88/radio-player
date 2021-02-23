@@ -16,7 +16,7 @@
     ></track-img>
 
     <div class="pt-2 track-grid__item_title">
-      <router-link nuxt to="/" class="font-weight-medium">{{
+      <router-link nuxt :to="`/radio/radio-station/${item.slug}`" class="font-weight-medium">{{
         item.name
       }}</router-link>
     </div>

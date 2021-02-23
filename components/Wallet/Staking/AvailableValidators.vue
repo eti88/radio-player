@@ -44,7 +44,12 @@
                 :valoper="item.operator_address"
                 size="26px"
               />
-              <span class="ml-2 caption-1">
+              <dot-status-with-tooltip
+                :status="item.status === 2"
+                :msg="item.status === 2 ? 'Active' : 'Inactive'"
+                class="mx-2"
+              />
+              <span class="caption-1">
                 {{ item.description.moniker }}
               </span>
             </v-flex>
@@ -61,11 +66,6 @@
               <!-- TODO: Calculate percentage of tokens like bisong explorer -->
               0.00%
             </span>
-            <dot-status-with-tooltip
-              :status="item.status === 2"
-              :msg="item.status === 2 ? 'Active' : 'Inactive'"
-              class="ml-2"
-            />
           </td>
           <!-- Commission cell -->
           <td class="text-right">
