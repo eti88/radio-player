@@ -1,13 +1,24 @@
 <template>
-  <Staking class="pa-5" />
+  <v-flex>
+    <staked-tokens />
+    <available-validators />
+  </v-flex>
 </template>
 
 <script>
-import Staking from "~/components/Wallet/WalletTabs/Tabs/Staking.vue";
+import StakedTokens from "@/components/Wallet/Staking/StakedTokens";
+import AvailableValidators from "@/components/Wallet/Staking/AvailableValidators";
 
 export default {
   components: {
-    Staking
+    StakedTokens,
+    AvailableValidators
+  },
+
+  computed: {
+    address() {
+      return this.$store.getters[`wallet/address`];
+    }
   }
 };
 </script>

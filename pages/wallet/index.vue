@@ -1,13 +1,13 @@
 <template>
-  <Balance class="pa-5" />
+  <coin-list />
 </template>
 
 <script>
-import Balance from "~/components/Wallet/WalletTabs/Tabs/Balance.vue";
+import CoinList from "@/components/Wallet/Bank/CoinList";
 
 export default {
   components: {
-    Balance
+    CoinList
   }
 };
 </script>
