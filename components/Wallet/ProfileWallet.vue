@@ -93,9 +93,7 @@ export default {
 
   computed: {
     address() {
-      return "bitsong13kfw8fw58h7zqk6vrsrllvvdee5xw8us9380m6";
-      // TODO: replace
-      // return this.$store.getters['wallet/address']
+      return this.$store.getters["wallet/address"];
     },
     explorerUrl() {
       return process.env.URL_ACCOUNT_EXPLORER;
@@ -109,21 +107,8 @@ export default {
     async getAccount() {
       try {
         this.loading = true;
-        /*
-         * TODO: Disabled for mochup (missing .env parameters)
-        let account = await this.client.getAccount(this.address)
-        account = account.result.result
-        */
-        const account = {
-          value: {
-            coins: [
-              {
-                denom: "ubtsg",
-                amount: "100000000"
-              }
-            ]
-          }
-        };
+
+        let account = await this.$btsg.getAccount(this.address);
 
         if (account.value != null && account.value.coins.length === 0) {
           this.balance = {
@@ -152,8 +137,10 @@ export default {
     async getCounterValue() {
       const response = await this.$api.getTokenUsdPrice("bitsong", "usd");
       if (response !== null) {
-        const value = response.bitsong.usd * this.balance.amount;
-        this.currency = convertMicroToMacroAmount(value, this.decimals - 2);
+        const value =
+          response.bitsong.usd *
+          parseFloat(convertMicroToMacroAmount(this.balance.amount, 6));
+        this.currency = value * 100;
       }
     },
     onOpenSend() {
