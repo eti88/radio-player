@@ -1,0 +1,182 @@
+<template>
+  <v-card elevation="0">
+    <v-card-title>
+      <v-toolbar flat color="transparent">
+        <v-toolbar-title>All Validators</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="query"
+          label="Search"
+          autocomplete="off"
+          data-vv-name="recipient"
+          clearable
+          solo
+          dense
+          hide-details
+          append-icon="mdi-magnify"
+        />
+        <v-btn-toggle v-model="queryType" class="ml-2" mandatory>
+          <v-btn text outlined height="38" class="text-uppercase" value="all">
+            All
+          </v-btn>
+          <v-btn text outlined height="38" color="green" class="text-uppercase" value="active">
+            Active
+          </v-btn>
+        </v-btn-toggle>
+      </v-toolbar>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="filterValidators(validators, query, queryType)"
+      :loading="loading"
+      class="px-5"
+    >
+      <v-progress-linear v-slot:progress color="blue" indeterminate></v-progress-linear>
+
+      <template v-slot:item="{ item }">
+
+        <tr @click.stop="onSelectRow(item)">
+          <td>
+            <!-- Name cell -->
+            <v-flex class="d-flex flex-row align-center">
+              <validator-avatar
+                :identity="item.tokens"
+                :valoper="item.operator_address"
+                size="26px"
+              />
+              <dot-status-with-tooltip
+                :status="item.status === 2"
+                :msg="item.status === 2 ? 'Active' : 'Inactive'"
+                class="mx-2"
+              />
+              <span class="caption-1">
+                {{ item.description.moniker }}
+              </span>
+            </v-flex>
+          </td>
+          <td class="text-right">
+            <!-- Tokens cell -->
+            <amount
+              style="font-size: 1.4em;"
+              class="my-auto"
+              :micro-amount="item.tokens"
+              :denom="denom"
+            />
+            <span>
+              <!-- TODO: Calculate percentage of tokens like bisong explorer -->
+              0.00%
+            </span>
+          </td>
+          <!-- Commission cell -->
+          <td class="text-right">
+            <warning-commission-icon
+              v-if="item.details !== null && item.commission.commission_rates.rate > 0.5"
+            />
+            <span class="mr-5">
+              {{ item.details !== null ? item.commission.commission_rates.rate * 100 : 0 }}%
+            </span>
+          </td>
+        </tr>
+      </template>
+    </v-data-table>
+    <validator-dialog 
+      v-if="showModal"
+      :value="selected"
+      v-on:cancel="onClose"
+    />
+  </v-card>
+</template>
+
+<script>
+import ValidatorAvatar from '@/components/Wallet/Common/AvatarToken.vue'
+import Amount from '@/components/Wallet/Common/Amount.vue'
+import DotStatusWithTooltip from '@/components/Wallet/Common/DotStatusWithTooltip.vue'
+import WarningCommissionIcon from '@/components/Wallet/Common/WarningCommissionIcon.vue'
+
+export default {
+
+  components: {
+    ValidatorAvatar,
+    Amount,
+    DotStatusWithTooltip,
+    WarningCommissionIcon
+  },
+
+  // TODO: replace placeholders
+  data () {
+    return {
+      loading: false,
+      showModal: false,
+      query: null,
+      queryType: 'all',
+      selected: null,
+      headers: [
+        { text: 'Name', value: 'description' },
+        { text: 'Tokens', value: 'tokens', align: 'right' },
+        { text: 'Commission', value: 'commission', align: 'right' }
+      ],
+      validators: []
+    }
+  },
+
+  computed: {
+    denom () {
+      return process.env.MICROSTAKEDENOM
+    },
+    decimals () {
+      return this.$store.getters["app/decimals"];
+    }
+  },
+
+  async created () {
+    await this.getValidators()
+  },
+  
+  methods: {
+    async getValidators () {
+      const validators = await this.$btsg.getValidators()
+
+      if (validators.result.length > 0) {
+        this.validators = validators.result
+          .sort((a, b) => {
+            return b.tokens - a.tokens
+          })
+      }
+    },
+    filterValidators (items, query, type) {
+      if (items === null) {
+        return []
+      }
+
+      let results = items
+      if (query !== null) {
+        results = results.filter(x => x.description.moniker.toLowerCase().includes(query.toLowerCase()))
+      }
+
+      if (type === 'active') {
+        results = results.filter(x => x.status === 2)
+      }
+
+      return results
+    },
+    onClose () {
+      this.showModal = false
+      this.selected = null
+    },
+    onSelectRow (row) {
+      this.selected = row
+      this.showModal = true
+    }
+  }
+
+}
+</script>
+
+<style>
+.theme--light.v-data-table tbody tr:nth-of-type(even) {
+  background-color: rgba(0, 0, 0, .1) !important;
+}
+.theme--dark.v-data-table tbody tr:nth-of-type(even) {
+  background-color: rgba(0, 0, 0, .1);
+}
+</style>

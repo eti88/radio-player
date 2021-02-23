@@ -16,7 +16,11 @@ export default {
     IPFS: process.env.IPFS || 'http://127.0.0.1:8080/ipfs/',
     VERSION: pkg.version,
     GA_ID: process.env.GA_ID || undefined,
-    WORKBOX: process.env.WORKBOX || false
+    WORKBOX: process.env.WORKBOX || false,
+    MICROSTAKEDENOM: process.env.MICROSTAKEDENOM ? process.env.MICROSTAKEDENOM : `ubtsg`,
+    LCD: process.env.LCD ? process.env.LCD : `http://localhost:1317`,
+    ADDRESS_PREFIX: process.env.ADDRESS_PREFIX ? process.env.ADDRESS_PREFIX : `bitsong`,
+    HD_PATH: process.env.HD_PATH ? process.env.HD_PATH : `44'/118'/0'/0/`
   },
   /*
    ** Nuxt rendering mode
@@ -88,6 +92,8 @@ export default {
   }, {
     src: "~/plugins/seo-gtag.js",
     ssr: false
+  }, {
+    src: "~/plugins/vee-validate.js"
   }
   ],
   /*
@@ -110,7 +116,7 @@ export default {
     [
       "nuxt-vuex-localstorage",
       {
-        localStorage: ["app", "recent", "favorites"],
+        localStorage: ["app", "recent", "favorites", "wallet"],
         sessionStorage: []
       }
     ],

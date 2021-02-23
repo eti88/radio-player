@@ -10,16 +10,22 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@bitsongofficial/js-sdk": "https://github.com/bitsongofficial/js-sdk#v0.6.0-dev",
+    "@chenfengyuan/vue-qrcode": "^1.0.2",
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/device": "^1.2.7",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/proxy": "^2.0.1",
     "@nuxtjs/pwa": "^3.2.2",
+    "bignumber.js": "^9.0.1",
     "hls.js": "^0.14.12",
     "howler": "^2.2.1",
+    "jdenticon": "^2.2.0",
     "node-fetch": "^2.6.1",
     "nuxt": "^2.14.7",
-    "nuxt-vuex-localstorage": "^1.2.7"
+    "nuxt-vuex-localstorage": "^1.2.7",
+    "vee-validate": "^3.4.5",
+    "vue-qrcode-reader": "^2.3.14"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.11.2",
