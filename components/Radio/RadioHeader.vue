@@ -70,12 +70,22 @@
                   <v-icon left>mdi-plus-box-multiple</v-icon>
                   Follow
                 </v-btn>
-                <v-btn
-                  icon
-                  @click.stop="() => showDetails = true"
-                >
-                  <v-icon>mdi-dots-vertical</v-icon>
-                </v-btn>
+                <v-menu offset-x>
+                  <template v-slot:activator="{ on }">
+                    <v-btn
+                      icon
+                      class="ml-4"
+                      v-on="on"
+                    >
+                      <v-icon>mdi-dots-vertical</v-icon>
+                    </v-btn>
+                  </template>
+                  <v-list class="pa-3">
+                    <v-list-tile @click.stop="() => showDetails = true">
+                      <v-list-tile-title>Details</v-list-tile-title>
+                    </v-list-tile>
+                  </v-list>
+                </v-menu>
               </v-card-actions>
             </v-col>
             <dialog-radio-details
