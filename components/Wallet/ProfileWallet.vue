@@ -23,7 +23,7 @@
               </v-col>
               <v-col cols="2" class="pt-0">
                 <v-flex class="d-flex flex-row flex-md-column">
-                  <v-btn icon @click.stop="showAddress = true">
+                  <v-btn icon @click.stop="onShowAddress">
                     <v-icon>mdi-qrcode-scan</v-icon>
                   </v-btn>
                   <v-btn title="Send token" icon @click.stop="onOpenSend">
@@ -33,7 +33,7 @@
               </v-col>
             </v-row>
           </v-container>
-          <bank-receive-dialog v-if="showAddress" v-on:close="onCloseAddress" />
+          
         </v-col>
         <v-col cols="12" md="4">
           <h6 class="text-h6">Your balance</h6>
@@ -64,7 +64,7 @@
 <script>
 import Markup from "@/components/Wallet/Common/Markup.vue";
 import Amount from "@/components/Wallet/Common/Amount.vue";
-import BankReceiveDialog from "@/components/Wallet/Dialogs/ReceiveDialog";
+import DialogWalletAddress from "@/components/Wallet/Dialogs/DialogWalletAddress";
 import BankSend from "@/components/Wallet/Bank/Send";
 import { convertMicroToMacroAmount } from "@/lib/utils";
 
@@ -72,7 +72,7 @@ export default {
   components: {
     Markup,
     Amount,
-    BankReceiveDialog,
+    DialogWalletAddress,
     BankSend
   },
 
@@ -81,7 +81,6 @@ export default {
       loading: false,
       balance: null,
       currency: 0,
-      showAddress: false,
       showModal: false
     };
   },
@@ -143,14 +142,14 @@ export default {
         this.currency = value * 100;
       }
     },
+    onShowAddress() {
+      this.$store.commit(`wallet/tooglePopup`)
+    },
     onOpenSend() {
       this.showModal = true;
     },
     onCloseSend() {
       this.showModal = false;
-    },
-    onCloseAddress() {
-      this.showAddress = false;
     }
   }
 };
