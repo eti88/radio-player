@@ -17,81 +17,77 @@
     <v-row no-gutters>
       <v-col cols="12">
         <v-list color="transparent">
-         <template v-for="(token, i) in tokens">
-          <owned-token-item :key="i" :token="token" />
-        </template>
-      </v-list>
+          <template v-for="(token, i) in tokens">
+            <owned-token-item :key="i" :token="token" />
+          </template>
+        </v-list>
       </v-col>
     </v-row>
   </v-flex>
 </template>
 
 <script>
-import OwnedTokenItem from '@/components/Wallet/Bank/OwnedTokenItem.vue'
+import OwnedTokenItem from "@/components/Wallet/Bank/OwnedTokenItem.vue";
 
 export default {
+  components: {
+    OwnedTokenItem
+  },
 
-    components: {
-      OwnedTokenItem
-    },
+  data() {
+    return {
+      loading: false,
+      tokens: []
+    };
+  },
 
-    data () {
-      return {
-        loading: false,
-        tokens: []
-      }
-    },
+  async created() {
+    await this.getTokens(this.address);
+  },
 
-    async created () {
-      await this.getTokens(this.address)
-    },
-
-    computed: {
-      address () {
-        return 'bitsong13kfw8fw58h7zqk6vrsrllvvdee5xw8us9380m6'
-        // TODO: replace
-        // return this.$store.getters['wallet/address']
-      }
-    },
-
-    methods: {
-      async getTokens (address) {
-        // TODO: Placeholder
-        this.tokens = [
-          {
-            description: {
-              identity: 'stellar',
-              description: 'bitsong13kfw8fw58h7zqk6vrsrllvvdee5xw8us9380m6'
-            },
-            balance: {
-              amount: '8853057037',
-              denom: 'xlm'
-            },
-            available: null,
-            allocated: 0,
-            allocation_earn: 0
-          },
-          {
-            description: {
-              identity: 'ripple',
-              description: 'bitsong13kfw8fw58h7zqk6vrsrllvvdee5xw8us9380m6'
-            },
-            balance: {
-              amount: '11530580370',
-              denom: 'xrp'
-            },
-            available: {
-              balance: {
-                amount: '11530570370',
-                denom: 'xrp'
-              }
-            },
-            allocated: '11110100000000',
-            allocation_earn: '10000000'
-          }
-        ]
-      }
+  computed: {
+    address() {
+      return this.$store.getters["wallet/address"];
     }
+  },
 
-}
+  methods: {
+    async getTokens(address) {
+      // TODO: Placeholder
+      this.tokens = [
+        {
+          description: {
+            identity: "stellar",
+            description: "bitsong13kfw8fw58h7zqk6vrsrllvvdee5xw8us9380m6"
+          },
+          balance: {
+            amount: "8853057037",
+            denom: "xlm"
+          },
+          available: null,
+          allocated: 0,
+          allocation_earn: 0
+        },
+        {
+          description: {
+            identity: "ripple",
+            description: "bitsong13kfw8fw58h7zqk6vrsrllvvdee5xw8us9380m6"
+          },
+          balance: {
+            amount: "11530580370",
+            denom: "xrp"
+          },
+          available: {
+            balance: {
+              amount: "11530570370",
+              denom: "xrp"
+            }
+          },
+          allocated: "11110100000000",
+          allocation_earn: "10000000"
+        }
+      ];
+    }
+  }
+};
 </script>
