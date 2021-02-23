@@ -40,7 +40,7 @@
                 </v-list-item-content>
               </v-list-item>
               <p>{{ radio.country.name }}</p>
-              <!-- Social link radio -->
+              <!-- TODO: Disabled Placeholder social links
               <div class="subtitle-1 min-h-24">
                 <v-flex class="d-flex flex-row">
                   <v-btn icon href="#" target="_blank">
@@ -60,7 +60,7 @@
                   </v-btn>
                 </v-flex>
               </div>
-              <!-- End Social link radio -->
+              -->
               <v-card-actions class="px-0">
                 <v-btn
                   class="pr-4"
