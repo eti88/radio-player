@@ -2,7 +2,7 @@
   <v-flex class="px-0 mx-0 black">
     <v-row no-gutters>
       <v-col cols="12">
-        <v-list color="transparent" v-if="coins">
+        <v-list color="transparent" v-if="coins.length">
           <template v-for="(coin, i) in coins">
             <coin-list-item :key="i" :coin="coin" />
           </template>
