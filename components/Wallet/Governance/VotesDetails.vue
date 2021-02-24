@@ -174,7 +174,7 @@ export default {
       return 5
     },
     explorerUrl () {
-      return process.env.URL_ACCOUNT_EXPLORER
+      return this.$store.getters["app/explorer_url"]
     }
   },
 

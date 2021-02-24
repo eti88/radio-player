@@ -92,13 +92,16 @@ export default {
 
   computed: {
     address() {
-      return this.$store.getters["wallet/address"];
+      return this.$store.getters["wallet/address"]
     },
     explorerUrl() {
-      return process.env.URL_ACCOUNT_EXPLORER;
+      return this.$store.getters["app/explorer_url"]
     },
     decimals() {
-      return this.$store.getters["app/decimals"];
+      return this.$store.getters["app/decimals"]
+    },
+    microStakeDenom() {
+      return this.$store.getters["app/micro_stake_denom"]
     }
   },
 
@@ -112,18 +115,18 @@ export default {
         if (account.value != null && account.value.coins.length === 0) {
           this.balance = {
             amount: 0,
-            denom: process.env.MICROSTAKEDENOM
+            denom: this.microStakeDenom
           };
         }
 
         if (account.value !== null && account.value.coins.length > 0) {
           const coin = account.value.coins.find(
-            c => c.denom === process.env.MICROSTAKEDENOM
+            c => c.denom === this.microStakeDenom.toLowerCase()
           );
           if (coin !== undefined) {
             this.balance = {
               amount: coin.amount,
-              denom: process.env.MICROSTAKEDENOM
+              denom: this.microStakeDenom
             };
           }
         }

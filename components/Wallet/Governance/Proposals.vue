@@ -82,7 +82,7 @@ export default {
 
   computed: {
     microStakeDenom () {
-      return process.env.MICROSTAKEDENOM
+      return this.$store.getters["app/micro_stake_denom"]
     }
   },
 
