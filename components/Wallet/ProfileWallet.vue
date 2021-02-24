@@ -125,9 +125,6 @@ export default {
               amount: coin.amount,
               denom: process.env.MICROSTAKEDENOM
             };
-            this.$store.commit(`wallet/setCoins`, [
-              this.balance
-            ])
           }
         }
       } catch (e) {

@@ -2,26 +2,26 @@
   <v-list-item class="mb-3 mx-0 px-0">
     <v-card class="w-full">
       <v-card-subtitle>
-        <h6 class="body-2 font-weight-bold text-uppercase">BitSong</h6>
+        <h6 class="body-2 font-weight-bold text-uppercase">{{ token.description.identity }}</h6>
       </v-card-subtitle>
       <v-card-text>
         <v-flex>
           <v-row>
             <v-col cols="1" align="center" justify="center">
-              <v-avatar size="40">
-                <!-- TODO: Replace with jdenticon when more tokens support introduced -->
-                <img src="/bitsong_logo_circle_red.svg"/>
-              </v-avatar>
+              <validator-avatar
+                :identity="token.description.identity"
+                :valoper="token.description.operator_address"
+                size="40px"
+              />
             </v-col>
             <v-col cols="4" class="element-card flex-col-start">
               <amount
                 v-if="token.balance !== null"
                 style="font-size: 1.3em;"
                 class="my-auto"
-                :micro-amount="this.token.amount"
-                :denom="token.denom"
+                :micro-amount="this.token.balance.amount"
+                :denom="token.balance.denom"
               />
-              <!--
               <div v-if="token.available !== null && token.available.balance !== null">
                 <amount
                   v-if="token.available.balance !== null"
@@ -32,7 +32,6 @@
                 />
                 <span style="font-size: 0.9em" class="grey--text text--darken-1 caption">available</span>
               </div>
-              -->
             </v-col>
             <v-col cols="4" align="start" class="justify-start flex-column">
               <amount
@@ -72,7 +71,7 @@
 <script>
 import ValidatorAvatar from '@/components/Wallet/Common/AvatarToken.vue'
 import Amount from "@/components/Wallet/Common/Amount.vue"
-import { convertMacroToMicroAmount } from '@/lib/utils'
+import { pergentageOf, convertMacroToMicroAmount, convertMicroToMacroAmount } from '@/lib/utils'
 
 /*
     TODO: After changin coingeko api call, we can retrive all price of token with single call
@@ -104,15 +103,12 @@ export default {
       return this.$store.getters['app/decimals']
     },
     percentage () {
-      // TODO: Until ubtsg is the only token the percentage is alway 100%
-      // return pergentageOf(this.token.allocated, this.token.balance.amount)
-      return 100
+      return pergentageOf(this.token.allocated, this.token.balance.amount)
     },
     allocationMoneyValue () {
       // TODO: Check if conversion is right with real values
-      // const total = parseInt(this.token.allocation_earn)* convertMicroToMacroAmount(this.price, this.decimals - 2)
-      // return convertMicroToMacroAmount(total, this.decimals - 2)
-      return 0
+      const total = parseInt(this.token.allocation_earn)* convertMicroToMacroAmount(this.price, this.decimals - 2)
+      return convertMicroToMacroAmount(total, this.decimals - 2)
     }
   },
 
@@ -122,14 +118,13 @@ export default {
 
   methods: {
     async getCounterValue () {
-      // TODO: Cors API error
-      const response = await this.$api.getTokenUsdPrice('btsg', 'usd')
+      const response = await this.$api.getTokenUsdPrice(this.token.description.identity, 'usd')
       if (response !== null) {
         try {
           // Access pragmatically token name from geko api response
-          this.price = convertMacroToMicroAmount(response['bitsong'].usd, this.decimals)
+          this.price = convertMacroToMicroAmount(response[this.token.description.identity].usd, this.decimals)
         } catch (e) {
-          console.log(`Cannot fetch price of this token: btsg`)
+          console.log(`Cannot fetch price of this token: ${this.token.description.identity}`)
         }
       }
     }

@@ -29,7 +29,7 @@
 
               <!-- Balance tab body -->
               <v-tab-item value="balance">
-                <wallet-tokens class="pa-5" />
+                <Balance  class="pa-5" />
               </v-tab-item>
               <!-- End Balance tab body -->
 
@@ -55,13 +55,13 @@
 </template>
 
 <script>
-import WalletTokens from '@/components/Wallet/Bank/WalletTokens.vue'
+import Balance from '~/components/Wallet/WalletTabs/Tabs/Balance.vue'
 import Staking from '~/components/Wallet/WalletTabs/Tabs/Staking.vue'
 import Governance from '~/components/Wallet/WalletTabs/Tabs/Governance.vue'
 
 export default {
   components: {
-    WalletTokens,
+    Balance,
     Staking,
     Governance
   },

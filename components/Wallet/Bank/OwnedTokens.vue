@@ -18,7 +18,7 @@
       <v-col cols="12">
         <v-list color="transparent">
           <template v-for="(token, i) in tokens">
-            <wallet-token-item :key="i" :token="token" />
+            <owned-token-item :key="i" :token="token" />
           </template>
         </v-list>
       </v-col>
@@ -27,37 +27,34 @@
 </template>
 
 <script>
-import WalletTokenItem from "@/components/Wallet/Bank/WalletTokenItem.vue";
+import OwnedTokenItem from "@/components/Wallet/Bank/OwnedTokenItem.vue";
 
 export default {
   components: {
-    WalletTokenItem
+    OwnedTokenItem
+  },
+
+  data() {
+    return {
+      loading: false,
+      tokens: []
+    };
   },
 
   async created() {
-    await this.getTokens();
+    await this.getTokens(this.address);
   },
 
   computed: {
     address() {
       return this.$store.getters["wallet/address"];
-    },
-    wallets() {
-      return this.$store.getters["wallet/wallets"];
-    },
-    tokens() {
-      return this.$store.getters["wallet/coins"];
     }
   },
 
   methods: {
-    async getTokens() {
-      /*
-        from getAccount response missing these props:
-          * identity for token avatar
-          * earns from allocation
-          * currently allocated tokens
-           
+    async getTokens(address) {
+      // TODO: Placeholder
+      this.tokens = [
         {
           description: {
             identity: "stellar",
@@ -70,8 +67,26 @@ export default {
           available: null,
           allocated: 0,
           allocation_earn: 0
-        }  
-      */
+        },
+        {
+          description: {
+            identity: "ripple",
+            description: "bitsong13kfw8fw58h7zqk6vrsrllvvdee5xw8us9380m6"
+          },
+          balance: {
+            amount: "11530580370",
+            denom: "xrp"
+          },
+          available: {
+            balance: {
+              amount: "11530570370",
+              denom: "xrp"
+            }
+          },
+          allocated: "11110100000000",
+          allocation_earn: "10000000"
+        }
+      ];
     }
   }
 };
