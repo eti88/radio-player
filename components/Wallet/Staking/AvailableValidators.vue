@@ -19,7 +19,14 @@
           <v-btn text outlined height="38" class="text-uppercase" value="all">
             All
           </v-btn>
-          <v-btn text outlined height="38" color="green" class="text-uppercase" value="active">
+          <v-btn
+            text
+            outlined
+            height="38"
+            color="green"
+            class="text-uppercase"
+            value="active"
+          >
             Active
           </v-btn>
         </v-btn-toggle>
@@ -31,10 +38,13 @@
       :loading="loading"
       class="px-5"
     >
-      <v-progress-linear v-slot:progress color="blue" indeterminate></v-progress-linear>
+      <v-progress-linear
+        v-slot:progress
+        color="blue"
+        indeterminate
+      ></v-progress-linear>
 
       <template v-slot:item="{ item }">
-
         <tr @click.stop="onSelectRow(item)">
           <td>
             <!-- Name cell -->
@@ -70,16 +80,23 @@
           <!-- Commission cell -->
           <td class="text-right">
             <warning-commission-icon
-              v-if="item.details !== null && item.commission.commission_rates.rate > 0.5"
+              v-if="
+                item.details !== null &&
+                  item.commission.commission_rates.rate > 0.5
+              "
             />
             <span class="mr-5">
-              {{ item.details !== null ? item.commission.commission_rates.rate * 100 : 0 }}%
+              {{
+                item.details !== null
+                  ? item.commission.commission_rates.rate * 100
+                  : 0
+              }}%
             </span>
           </td>
         </tr>
       </template>
     </v-data-table>
-    <validator-dialog 
+    <validator-dialog
       v-if="showModal"
       :value="selected"
       v-on:cancel="onClose"
@@ -88,13 +105,12 @@
 </template>
 
 <script>
-import ValidatorAvatar from '@/components/Wallet/Common/AvatarToken.vue'
-import Amount from '@/components/Wallet/Common/Amount.vue'
-import DotStatusWithTooltip from '@/components/Wallet/Common/DotStatusWithTooltip.vue'
-import WarningCommissionIcon from '@/components/Wallet/Common/WarningCommissionIcon.vue'
+import ValidatorAvatar from "@/components/Wallet/Common/AvatarToken.vue";
+import Amount from "@/components/Wallet/Common/Amount.vue";
+import DotStatusWithTooltip from "@/components/Wallet/Common/DotStatusWithTooltip.vue";
+import WarningCommissionIcon from "@/components/Wallet/Common/WarningCommissionIcon.vue";
 
 export default {
-
   components: {
     ValidatorAvatar,
     Amount,
@@ -103,80 +119,84 @@ export default {
   },
 
   // TODO: replace placeholders
-  data () {
+  data() {
     return {
       loading: false,
       showModal: false,
       query: null,
-      queryType: 'all',
+      queryType: "all",
       selected: null,
       headers: [
-        { text: 'Name', value: 'description' },
-        { text: 'Tokens', value: 'tokens', align: 'right' },
-        { text: 'Commission', value: 'commission', align: 'right' }
-      ],
-      validators: []
-    }
+        { text: "Name", value: "description" },
+        { text: "Tokens", value: "tokens", align: "right" },
+        { text: "Commission", value: "commission", align: "right" }
+      ]
+      //validators: []
+    };
   },
 
   computed: {
-    denom () {
-      return process.env.MICROSTAKEDENOM
+    denom() {
+      return process.env.MICROSTAKEDENOM;
     },
-    decimals () {
+    decimals() {
       return this.$store.getters["app/decimals"];
+    },
+    validators() {
+      return this.$store.getters[`validators/validators`];
     }
   },
 
-  async created () {
-    await this.getValidators()
+  async created() {
+    // await this.getValidators()
   },
-  
+
   methods: {
-    async getValidators () {
-      const validators = await this.$btsg.getValidators()
+    // async getValidators () {
+    //   const validators = await this.$btsg.getValidators()
 
-      if (validators.result.length > 0) {
-        this.validators = validators.result
-          .sort((a, b) => {
-            return b.tokens - a.tokens
-          })
-      }
-    },
-    filterValidators (items, query, type) {
+    //   if (validators.result.length > 0) {
+    //     this.validators = validators.result
+    //       .sort((a, b) => {
+    //         return b.tokens - a.tokens
+    //       })
+    //   }
+    // },
+    filterValidators(items, query, type) {
       if (items === null) {
-        return []
+        return [];
       }
 
-      let results = items
+      let results = items;
       if (query !== null) {
-        results = results.filter(x => x.description.moniker.toLowerCase().includes(query.toLowerCase()))
+        results = results.filter(x =>
+          x.description.moniker.toLowerCase().includes(query.toLowerCase())
+        );
       }
 
-      if (type === 'active') {
-        results = results.filter(x => x.status === 2)
+      if (type === "active") {
+        results = results.filter(x => x.status === 2);
       }
 
-      return results
+      return results;
     },
-    onClose () {
-      this.showModal = false
-      this.selected = null
+    onClose() {
+      this.showModal = false;
+      this.selected = null;
     },
-    onSelectRow (row) {
-      this.selected = row
-      this.showModal = true
+    onSelectRow(row) {
+      this.selected = row;
+      this.showModal = true;
     }
   }
-
-}
+};
 </script>
 
 <style>
 .theme--light.v-data-table tbody tr:nth-of-type(even) {
-  background-color: rgba(0, 0, 0, .1) !important;
+  background-color: rgba(0, 0, 0, 0.1) !important;
 }
 .theme--dark.v-data-table tbody tr:nth-of-type(even) {
-  background-color: rgba(0, 0, 0, .1);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 </style>

@@ -1,36 +1,13 @@
 <template>
-  <page-template>
-    <ProfileWallet class="col-md-10 mx-auto" />
-    <wallet-tabs class="mt-8 col-md-10" />
-  </page-template>
+  <coin-list />
 </template>
 
 <script>
-import PageTemplate from "@/components/PageTemplate";
-import ProfileWallet from "~/components/Wallet/ProfileWallet.vue";
-import WalletTabs from "~/components/Wallet/WalletTabs/WalletTabs.vue";
+import CoinList from "@/components/Wallet/Bank/CoinList";
 
 export default {
   components: {
-    PageTemplate,
-    ProfileWallet,
-    WalletTabs
-  },
-
-  computed: {
-    address() {
-      return "bitsong13kfw8fw58h7zqk6vrsrllvvdee5xw8us9380m6";
-      // TODO placeholder
-      // return this.$store.getters['wallet/address']
-    }
-  },
-
-  head() {
-    const title = `Profilo ${this.address}`;
-    return {
-      title: title,
-      meta: [{ hid: "og-title", name: "og:title", content: title }]
-    };
+    CoinList
   }
 };
 </script>

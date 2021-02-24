@@ -70,9 +70,7 @@
     <v-divider class="mt-6"></v-divider>
     <v-card-actions class="pt-8 pb-0">
       <v-spacer></v-spacer>
-      <p>
-        or <router-link to="/wallet/import">import your wallet</router-link>
-      </p>
+      <p>or <router-link to="/auth/import">import your wallet</router-link></p>
       <v-spacer></v-spacer>
     </v-card-actions>
   </div>
