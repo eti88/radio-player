@@ -3,8 +3,7 @@ import { sleep } from '@/lib/utils'
 export const state = () => ({
   loading: false,
   wallets: [],
-  selectedWallet: null,
-  popupAddress: false
+  selectedWallet: null
 })
 
 export const getters = {
@@ -26,9 +25,6 @@ export const getters = {
   isLoggedIn: state => {
     return state.selectedWallet === null ? false : true
   },
-  showPopupAddress: state => {
-    return state.popupAddress
-  }
 }
 
 export const mutations = {
@@ -48,9 +44,6 @@ export const mutations = {
   },
   disconnect: (state, index) => {
     state.selectedWallet = null
-  },
-  tooglePopup: (state) => {
-    state.popupAddress = !state.popupAddress
   }
 }
 
