@@ -119,7 +119,9 @@ export default {
   
   computed: {
     address () {
-      return this.$store.getters['wallet/address']
+      return 'bitsong13kfw8fw58h7zqk6vrsrllvvdee5xw8us9380m6'
+      // TODO: replace
+      // return this.$store.getters['wallet/address']
     },
     explorerUrl () {
       return process.env.URL_ACCOUNT_EXPLORER

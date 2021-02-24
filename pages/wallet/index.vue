@@ -19,7 +19,9 @@ export default {
 
   computed: {
     address() {
-      return this.$store.getters['wallet/address']
+      return "bitsong13kfw8fw58h7zqk6vrsrllvvdee5xw8us9380m6";
+      // TODO placeholder
+      // return this.$store.getters['wallet/address']
     }
   },
 
