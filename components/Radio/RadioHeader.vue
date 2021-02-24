@@ -96,12 +96,10 @@
 </template>
 
 <script>
-import Genres from '@/components/Genres.vue'
 import DialogRadioDetails from '@/components/Radio/DialogRadioDetails.vue'
 
 export default {
   components: {
-    Genres,
     DialogRadioDetails
   },
   props: {

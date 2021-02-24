@@ -6,12 +6,15 @@
     />
 
     <!-- Body tadio page -->
+    <!--
+      TODO: Disabled until api-radio endpoint updated
     <genres
       v-if="radio.genres.length > 0"
       :items="radio.genres"
       :filter="true"
       style="height: 35px;"
     />
+    -->
    <v-container fluid>
     <v-row>
       <v-col md="10" class="mx-auto">
@@ -31,14 +34,14 @@
 </template>
 
 <script>
-import Genres from '@/components/Genres.vue'
+// import Genres from '@/components/Genres.vue'
 import RadioHeader from '@/components/Radio/RadioHeader.vue'
 
 export default {
 
   components: {
     RadioHeader,
-    Genres
+    // Genres
   },
 
   async asyncData({ app, params }) {
