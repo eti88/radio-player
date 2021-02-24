@@ -18,34 +18,17 @@
               <v-img :src="radio.picture" max-width="265" max-height="265" />
             </v-col>
             <v-col align-self="center" class="flex-grow-1 flex-shrink-0">
-              <h1 class="text-h2">
-                {{ radio.name }}
-                <v-tooltip top v-if="explicit">
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-icon v-bind="attrs" v-on="on">
-                      mdi-alpha-e-box
-                    </v-icon>
-                  </template>
-                  <span>Explicit</span>
-                </v-tooltip>
-              </h1>
-              <v-list-item class="px-0" v-if="subtitles.length">
-                <v-list-item-content>
-                  <v-list-item-subtitle
-                    v-for="(subtitle, i) in subtitles"
-                    :key="i"
-                    v-html="subtitle"
-                  >
-                  </v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
+              <h1 class="text-h2">{{ radio.name }}</h1>
               <p>{{ radio.country.name }}</p>
-              <!-- TODO: Disabled Placeholder social links
               <div class="subtitle-1 min-h-24">
                 <v-flex class="d-flex flex-row">
-                  <v-btn icon href="#" target="_blank">
+                  <v-btn icon :href="radio.website" target="_blank">
                     <v-icon>mdi-web</v-icon>
                   </v-btn>
+                  <v-btn icon :href="radio.contact">
+                    <v-icon>mdi-email-outline</v-icon>
+                  </v-btn>
+                <!-- TODO: Disabled Placeholder social links
                   <v-btn icon href="#" target="_blank">
                     <v-icon>mdi-facebook</v-icon>
                   </v-btn>
@@ -58,9 +41,9 @@
                   <v-btn icon href="#" target="_blank">
                     <v-icon>mdi-youtube</v-icon>
                   </v-btn>
+                -->
                 </v-flex>
               </div>
-              -->
               <v-card-actions class="px-0">
                 <v-btn
                   class="pr-4"
@@ -129,20 +112,11 @@ export default {
     radio: {
       type: Object,
       required: true
-    },
-    subtitles: {
-      type: Array,
-      default() {
-        return []
-      }
-    },
-    explicit: {
-      type: Boolean
     }
   },
-  data() {
+  data () {
     return {
-      showDetails: false 
+      showDetails: false
     }
   },
   methods: {

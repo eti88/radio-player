@@ -2,9 +2,9 @@
   <div>
     <radio-header
       :radio="radio"
-      :explicit="false"
       style="top:-65px;"
     />
+
     <!-- Body tadio page -->
     <genres
       v-if="radio.genres.length > 0"
@@ -31,12 +31,14 @@
 </template>
 
 <script>
+import Genres from '@/components/Genres.vue'
 import RadioHeader from '@/components/Radio/RadioHeader.vue'
 
 export default {
 
   components: {
-    RadioHeader
+    RadioHeader,
+    Genres
   },
 
   async asyncData({ app, params }) {
