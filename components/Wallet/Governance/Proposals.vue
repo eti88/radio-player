@@ -1,65 +1,91 @@
 <template>
-  <v-data-table
-    :headers="headers"
-    :items="proposals"
-    :loading="loading"
-    hide-default-footer
-  >
-    <v-progress-linear
-      v-slot:progress
-      color="blue"
-      indeterminate
-    ></v-progress-linear>
+  <v-card elevation="0">
+    <v-card-title>
+      <v-toolbar flat color="transparent">
+        <v-toolbar-title>Current proposals</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn
+          color="orange darken-1"
+          depressed
+          outlined
+          rounded
+          ripple
+          @click.stop="showModal = true"
+        >
+          New Proposal
+        </v-btn>
+      </v-toolbar>
+    </v-card-title>
+    <v-card-text>
+      <v-data-table
+        :headers="headers"
+        :items="proposals"
+        :loading="loading"
+        hide-default-footer
+      >
+        <v-progress-linear
+          v-slot:progress
+          color="blue"
+          indeterminate
+        ></v-progress-linear>
 
-    <!-- ID cell -->
-    <template v-slot:item.proposal_id="{ item }">
-      <span class="caption-1">{{ `#${item.proposal_id}` }}</span>
-    </template>
+        <!-- ID cell -->
+        <template v-slot:item.proposal_id="{ item }">
+          <span class="caption-1">{{ `#${item.proposal_id}` }}</span>
+        </template>
 
-    <!-- Title cell -->
-    <template v-slot:item.title="{ item }">
-      <a class="caption-1" :href="`/wallet/proposals/${item.proposal_id}`">
-        {{ item.title }}
-      </a>
-    </template>
+        <!-- Title cell -->
+        <template v-slot:item.title="{ item }">
+          <a class="caption-1" :href="`/wallet/proposals/${item.proposal_id}`">
+            {{ item.title }}
+          </a>
+        </template>
 
-    <!-- Status cell -->
-    <template v-slot:item.proposal_status="{ item }">
-      <status-with-dot :status="item.proposal_status" />
-    </template>
+        <!-- Status cell -->
+        <template v-slot:item.proposal_status="{ item }">
+          <status-with-dot :status="item.proposal_status" />
+        </template>
 
-    <!-- Voting start date cell -->
-    <template v-slot:item.voting_start_time="{ item }">
-      <span class="caption-1">{{
-        formatTimestamp(item.voting_start_time)
-      }}</span>
-    </template>
+        <!-- Voting start date cell -->
+        <template v-slot:item.voting_start_time="{ item }">
+          <span class="caption-1">{{
+            formatTimestamp(item.voting_start_time)
+          }}</span>
+        </template>
 
-    <!-- Submit time cell -->
-    <template v-slot:item.submit_time="{ item }">
-      <span class="caption-1">{{ formatTimestamp(item.submit_time) }}</span>
-    </template>
+        <!-- Submit time cell -->
+        <template v-slot:item.submit_time="{ item }">
+          <span class="caption-1">{{ formatTimestamp(item.submit_time) }}</span>
+        </template>
 
-    <!-- Total deposit cell -->
-    <template v-slot:item.total_deposit_amount="{ item }">
-      <amount
-        style="font-size: 12pt"
-        :micro-amount="item.total_deposit_amount"
-        :denom="microStakeDenom"
+        <!-- Total deposit cell -->
+        <template v-slot:item.total_deposit_amount="{ item }">
+          <amount
+            style="font-size: 12pt"
+            :micro-amount="item.total_deposit_amount"
+            :denom="microStakeDenom"
+          />
+        </template>
+      </v-data-table>
+      <dialog-proposal-create
+        v-if="showModal"
+        v-on:cancel="showModal = false"
       />
-    </template>
-  </v-data-table>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
 import StatusWithDot from "@/components/Wallet/Common/StatusWithDot.vue";
 import Amount from "@/components/Wallet/Common/Amount.vue";
 import { formatTimestamp } from "@/lib/utils";
+import DialogProposalCreate from './DialogProposalCreate.vue';
 
 export default {
   components: {
     StatusWithDot,
-    Amount
+    Amount,
+    DialogProposalCreate
   },
 
   data() {
@@ -73,7 +99,8 @@ export default {
         { text: "Voting Start", value: "voting_start_time" },
         { text: "Submit Time", value: "submit_time" },
         { text: "Total Deposit", value: "total_deposit_amount" }
-      ]
+      ],
+      showModal: false
     };
   },
 
