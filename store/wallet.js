@@ -4,6 +4,7 @@ export const state = () => ({
   loading: false,
   wallets: [],
   selectedWallet: null,
+  coins: [],
   popupAddress: false
 })
 
@@ -25,6 +26,9 @@ export const getters = {
   },
   isLoggedIn: state => {
     return state.selectedWallet === null ? false : true
+  },
+  coins: state => {
+    return state.coins
   },
   showPopupAddress: state => {
     return state.popupAddress
@@ -48,6 +52,9 @@ export const mutations = {
   },
   disconnect: (state, index) => {
     state.selectedWallet = null
+  },
+  setCoins: (state, coins) => {
+    state.coins = coins
   },
   tooglePopup: (state) => {
     state.popupAddress = !state.popupAddress

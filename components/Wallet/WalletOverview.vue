@@ -128,6 +128,9 @@ export default {
               amount: coin.amount,
               denom: this.microStakeDenom
             };
+            this.$store.commit(`wallet/setCoins`, [
+              this.balance
+            ])
           }
         }
       } catch (e) {
