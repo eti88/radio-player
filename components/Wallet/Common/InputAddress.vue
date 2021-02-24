@@ -66,7 +66,7 @@ export default {
       return this.$store.getters[`app/address_start_regex`]
     },
     address_regex () {
-      return this.$store.getters[`app/address_regex`]
+      return process.env.ADDRESS_REGEX
     },
     rulesRecipient() {
       return {

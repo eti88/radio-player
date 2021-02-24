@@ -98,10 +98,10 @@ export default {
 
   computed: {
     explorerUrl () {
-      return this.$store.getters["app/explorer_url"]
+      return process.env.URL_ACCOUNT_EXPLORER
     },
     microStakeDenom () {
-      return this.$store.getters["app/micro_stake_denom"]
+      return process.env.MICROSTAKEDENOM
     }
   },
 
