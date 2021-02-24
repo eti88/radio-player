@@ -121,10 +121,10 @@ export default {
 
   computed: {
     denom () {
-      return this.$store.getters["app/micro_stake_denom"]
+      return process.env.MICROSTAKEDENOM
     },
     decimals () {
-      return this.$store.getters["app/decimals"]
+      return this.$store.getters["app/decimals"];
     }
   },
 
