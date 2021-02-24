@@ -122,7 +122,7 @@ export default {
       return this.$store.getters['wallet/address']
     },
     explorerUrl () {
-      return this.$store.getters["app/explorer_url"]
+      return process.env.URL_ACCOUNT_EXPLORER
     }
   },
 

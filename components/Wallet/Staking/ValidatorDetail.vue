@@ -215,10 +215,10 @@ export default {
 
   computed: {
     stakeDenom() {
-      return this.$store.getters["app/stake_denom"]
+      return process.env.STAKEDENOM
     },
     explorerUrl () {
-      return this.$store.getters["app/explorer_url"]
+      return process.env.URL_ACCOUNT_EXPLORER
     }
   },
 

@@ -7,8 +7,6 @@ export const state = () => ({
   decimals: process.env.DECIMALS,
   address_length: process.env.ADDRESS_length,
   address_start_regex: process.env.ADDRESS_START_REGEX,
-  explorer_url: process.env.URL_ACCOUNT_EXPLORER,
-  address_regex: process.env.ADDRESS_REGEX
 })
 
 export const getters = {
@@ -35,12 +33,6 @@ export const getters = {
   },
   decimals: state => {
     return state.decimals
-  },
-  explorer_url: state => {
-    return state.explorer_url
-  },
-  address_regex: state => {
-    return state.address_regex
   }
 }
 
