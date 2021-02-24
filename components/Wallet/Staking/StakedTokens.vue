@@ -16,7 +16,7 @@
           Claim rewards
         </v-btn>
       </v-toolbar>
-      <withdraw-dialog
+      <dialog-withdraw
         v-if="showModal"
         v-on:cancel="onClaimDialogClose"
       />
@@ -88,7 +88,7 @@
 import ValidatorAvatar from '@/components/Wallet/Common/AvatarToken.vue'
 import Amount from '@/components/Wallet/Common/Amount.vue'
 import DotStatusWithTooltip from '@/components/Wallet/Common/DotStatusWithTooltip.vue'
-import WithdrawDialog from '@/components/Wallet/Dialogs/WithdrawDialog.vue'
+import DialogWithdraw from '@/components/Wallet/Dialogs/DialogWithdraw.vue'
 import WarningCommissionIcon from '@/components/Wallet/Common/WarningCommissionIcon.vue'
 
 export default {
@@ -97,7 +97,7 @@ export default {
     ValidatorAvatar,
     Amount,
     DotStatusWithTooltip,
-    WithdrawDialog,
+    DialogWithdraw,
     WarningCommissionIcon
   },
 

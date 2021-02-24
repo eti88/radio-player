@@ -16,7 +16,7 @@
         @click:append="onQrcodeClick"
       ></v-text-field>
     </ValidationProvider>  
-        <qrcode-dialog v-if="qrDialog" v-on:onDecode="onDecode" v-on:close="onQrcodeClose" />
+        <dialog-qrcode v-if="qrDialog" v-on:onDecode="onDecode" v-on:close="onQrcodeClose" />
   </div>
 </template>
 

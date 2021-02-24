@@ -25,28 +25,28 @@
           <v-col cols="10">
             <v-row no-gutters>
               <v-col cols="3">
-                <item-result
+                <proposal-statistic-item-result
                   title="Yes"
                   :totals="totalVotes"
                   :votes="yes"
                 />
               </v-col>
               <v-col cols="3">
-                <item-result
+                <proposal-statistic-item-result
                   title="No"
                   :totals="totalVotes"
                   :votes="no"
                 />
               </v-col>
               <v-col cols="3">
-                <item-result
+                <proposal-statistic-item-result
                   title="NoWithVeto"
                   :totals="totalVotes"
                   :votes="no_with_veto"
                 />
               </v-col>
               <v-col cols="3">
-                <item-result
+                <proposal-statistic-item-result
                   title="Abstain"
                   :totals="totalVotes"
                   :votes="abstain"
@@ -62,14 +62,14 @@
 
 <script>
 import Amount from '@/components/Wallet/Common/Amount.vue'
-import ItemResult from '@/components/Wallet/Governance/ItemResult.vue'
+import ProposalStatisticItemResult from '@/components/Wallet/Governance/ProposalStatisticItemResult.vue'
 import { pergentageOf } from '@/lib/utils'
 
 export default {
   
   components: {
     Amount,
-    ItemResult
+    ProposalStatisticItemResult
   },
 
   props: {
