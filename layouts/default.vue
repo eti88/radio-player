@@ -6,6 +6,10 @@
       <nuxt />
     </v-main>
     <b-player v-show="currentTrack !== null"></b-player>
+    <dialog-wallet-address
+      v-if="showPopupAddress"
+      v-on:close="$store.commit(`wallet/tooglePopup`)"
+    />
     <v-footer> </v-footer>
   </v-app>
 </template>
@@ -14,12 +18,14 @@
 import Toolbar from "@/components/Toolbar";
 import UpdateAvailableDialog from "@/components/UpdateAvailableDialog";
 import BPlayer from "@/components/BPlayer";
+import DialogWalletAddress from "@/components/Wallet/Dialogs/DialogWalletAddress";
 
 export default {
   components: {
     Toolbar,
     UpdateAvailableDialog,
-    BPlayer
+    BPlayer,
+    DialogWalletAddress
   },
 
   data() {
@@ -50,6 +56,9 @@ export default {
   computed: {
     currentTrack() {
       return this.$store.getters["player/currentTrack"];
+    },
+    showPopupAddress() {
+      return this.$store.getters["wallet/showPopupAddress"];
     }
   }
 };
