@@ -33,7 +33,7 @@
               </v-col>
             </v-row>
           </v-container>
-          <bank-receive-dialog v-if="showAddress" v-on:close="onCloseAddress" />
+          <dialog-wallet-address v-if="showAddress" v-on:close="onCloseAddress" />
         </v-col>
         <v-col cols="12" md="4">
           <h6 class="text-h6">Your balance</h6>

@@ -63,18 +63,18 @@
         </v-list-item>
       </v-card>
     </v-menu>
-    <bank-receive-dialog v-if="showAddress" v-on:close="onCloseAddress" />
+    <dialog-wallet-address v-if="showAddress" v-on:close="onCloseAddress" />
   </div>
 </template>
 
 <script>
 import Jdenticon from "@/components/Jdenticon";
-import BankReceiveDialog from "@/components/Wallet/Dialogs/ReceiveDialog";
+import DialogWalletAddress from '@/components/Wallet/Dialogs/DialogWalletAddress.vue';
 
 export default {
   components: {
     Jdenticon,
-    BankReceiveDialog
+    DialogWalletAddress
   },
   data() {
     return {
