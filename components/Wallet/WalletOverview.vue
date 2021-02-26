@@ -64,7 +64,7 @@
 <script>
 import Markup from "@/components/Wallet/Common/Markup.vue";
 import Amount from "@/components/Wallet/Common/Amount.vue";
-import BankReceiveDialog from "@/components/Wallet/Dialogs/ReceiveDialog";
+import DialogWalletAddress from "@/components/Wallet/Dialogs/DialogWalletAddress";
 import BankSend from "@/components/Wallet/Bank/Send";
 import { convertMicroToMacroAmount } from "@/lib/utils";
 
@@ -72,7 +72,7 @@ export default {
   components: {
     Markup,
     Amount,
-    BankReceiveDialog,
+    DialogWalletAddress,
     BankSend
   },
 
@@ -142,6 +142,9 @@ export default {
           parseFloat(convertMicroToMacroAmount(this.balance.amount, 6));
         this.currency = value * 100;
       }
+    },
+    onShowAddress() {
+      this.$store.commit(`wallet/tooglePopup`)
     },
     onOpenSend() {
       this.showModal = true;
