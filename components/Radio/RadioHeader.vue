@@ -28,7 +28,7 @@
                   <v-btn icon :href="radio.contact">
                     <v-icon>mdi-email-outline</v-icon>
                   </v-btn>
-                <!-- TODO: Disabled Placeholder social links
+                  <!-- TODO: Disabled Placeholder social links
                   <v-btn icon href="#" target="_blank">
                     <v-icon>mdi-facebook</v-icon>
                   </v-btn>
@@ -62,16 +62,12 @@
                 </v-btn>
                 <v-menu offset-x>
                   <template v-slot:activator="{ on }">
-                    <v-btn
-                      icon
-                      class="ml-4"
-                      v-on="on"
-                    >
+                    <v-btn icon class="ml-4" v-on="on">
                       <v-icon>mdi-dots-vertical</v-icon>
                     </v-btn>
                   </template>
                   <v-list class="pa-3">
-                    <v-list-tile @click.stop="() => showDetails = true">
+                    <v-list-tile @click.stop="() => (showDetails = true)">
                       <v-list-tile-title>Details</v-list-tile-title>
                     </v-list-tile>
                   </v-list>
@@ -86,7 +82,7 @@
               :stream-type="radio.stream_type"
               :contact="radio.contact"
               :description="radio.description"
-              v-on:close="() => showDetails = false"
+              v-on:close="() => (showDetails = false)"
             />
           </v-row>
         </v-col>
@@ -96,7 +92,7 @@
 </template>
 
 <script>
-import DialogRadioDetails from '@/components/Radio/DialogRadioDetails.vue'
+import DialogRadioDetails from "@/components/Radio/DialogRadioDetails.vue";
 
 export default {
   components: {
@@ -112,14 +108,14 @@ export default {
       required: true
     }
   },
-  data () {
+  data() {
     return {
       showDetails: false
-    }
+    };
   },
   methods: {
     onPlay(item) {
-      this.$store.dispatch(`player/setCurrentTrack`, item);
+      this.$store.dispatch(`player/setCurrentTrack`, item.slug);
     }
   }
 };

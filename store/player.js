@@ -40,17 +40,13 @@ export const mutations = {
 }
 
 export const actions = {
-  setCurrentTrack({ commit, dispatch }, payload) {
-    const radio = {
-      cover: payload.picture,
-      title: payload.name,
-      subtitle: `${payload.city.name}, ${payload.country.name}`,
-      source: payload.stream_url,
-      isHls: payload.stream_type === "hls",
+  async setCurrentTrack({ commit }, payload) {
+    try {
+      const radio = await this.$api.getRadioStreamBySlug(payload)
+      commit('SET_CURRENT_TRACK', radio.data)
+    } catch (e) {
+      console.error(e)
     }
-    commit('SET_CURRENT_TRACK', radio)
-
-    dispatch('recent/addRadio', payload, { root: true })
   },
 
   stop({ commit }) {

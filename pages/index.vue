@@ -7,30 +7,33 @@
 
     <template v-for="country in countries">
       <track-grid-featured
-        :key="country.country"
+        :key="country.country.slug"
         class="mb-8"
         :items="country.radios"
       >
         <template v-slot:title>
           Top Radio in
-          <nuxt-link :to="`/radio/${country.radios[0].country.slug}`">
-            {{ country.country }}
+          <nuxt-link :to="`/radio/`">
+            {{ country.country.name }}
           </nuxt-link>
         </template>
       </track-grid-featured>
     </template>
     <h2 class="text-h2 mb-1" v-if="genres.length">
       Mood & Genres
-      <v-btn :to="`/radio`" icon>
+      <v-btn :to="`/radio/genre`" icon>
         <v-icon color="red darken-1"> mdi-arrow-right </v-icon>
       </v-btn>
     </h2>
 
     <template v-for="genre in genres">
-      <h3 :key="`h-${genre.genre}`" class="text-h3 grey--text text--darken-2">
-        {{ genre.genre }} Radio
+      <h3
+        :key="`h-${genre.genre.slug}`"
+        class="text-h3 grey--text text--darken-2"
+      >
+        {{ genre.genre.name }} Radio
       </h3>
-      <track-list :key="genre.genre" class="mb-8" :items="genre.radios" />
+      <track-list :key="genre.genre.slug" class="mb-8" :items="genre.radios" />
     </template>
   </page-template>
 </template>
@@ -46,13 +49,13 @@ export default {
     PageTemplate,
     TrackGridFeatured,
     Genres,
-    PageMenu,
+    PageMenu
   },
 
   data() {
     return {
       countries: [],
-      genres: [],
+      genres: []
     };
   },
 
@@ -66,7 +69,7 @@ export default {
   computed: {
     recents() {
       return this.$store.getters["recent/radios"];
-    },
-  },
+    }
+  }
 };
 </script>
