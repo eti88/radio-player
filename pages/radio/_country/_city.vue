@@ -57,7 +57,7 @@ export default {
 
   async created() {
     const response = await this.$api.getRadiosByCity(this.slug);
-    this.name = response.city.name;
+    this.name = response.city;
     this.radios = response.radios;
   }
 };

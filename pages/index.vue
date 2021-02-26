@@ -2,9 +2,6 @@
   <page-template>
     <page-menu></page-menu>
 
-    <favorites></favorites>
-    <recently-listened></recently-listened>
-
     <template v-for="country in countries">
       <track-grid-featured
         :key="country.country.slug"
@@ -13,7 +10,7 @@
       >
         <template v-slot:title>
           Top Radio in
-          <nuxt-link :to="`/radio/`">
+          <nuxt-link :to="`/radio/${country.country.slug}`">
             {{ country.country.name }}
           </nuxt-link>
         </template>
@@ -64,12 +61,6 @@ export default {
 
     this.countries = explore.countries;
     this.genres = explore.genres;
-  },
-
-  computed: {
-    recents() {
-      return this.$store.getters["recent/radios"];
-    }
   }
 };
 </script>
