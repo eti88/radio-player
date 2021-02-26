@@ -40,19 +40,19 @@
         Delegate
       </v-btn>
     </v-toolbar>
-    <delegate-dialog
+    <dialog-delegate
       v-if="showModalDelegations"
       v-on:cancel="onCloseDelagatesDialog"
     />
-    <unbond-dialog
+    <dialog-unbond
       v-if="showModalUnbond"
       v-on:cancel="onCloseUnbondDialog"
     />
-    <redelegate-dialog
+    <dialog-redelegate
       v-if="showModalStaking"
       v-on:cancel="onCloseRedelegateDialog"
     />
-    <edit-validator-dialog
+    <dialog-edit-validator
       v-if="showModalEditValidator"
       v-on:cancel="onCloseValidatorDialog"
     />
@@ -60,16 +60,16 @@
 </template>
 
 <script>
-import DelegateDialog from '@/components/Wallet/Dialogs/DelegateDialog.vue'
-import UnbondDialog from '@/components/Wallet/Dialogs/UnbondDialog.vue'
-import RedelegateDialog from '@/components/Wallet/Dialogs/RedelegateDialog.vue'
+import DialogDelegate from '@/components/Wallet/Dialogs/DialogDelegate.vue'
+import DialogUnbond from '@/components/Wallet/Dialogs/DialogUnbond.vue'
+import DialogRedelegate from '@/components/Wallet/Dialogs/DialogRedelegate.vue'
 
 export default {
 
   components: {
-    DelegateDialog,
-    UnbondDialog,
-    RedelegateDialog
+    DialogDelegate,
+    DialogUnbond,
+    DialogRedelegate
   },
   
   data() {

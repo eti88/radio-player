@@ -96,7 +96,7 @@
         </tr>
       </template>
     </v-data-table>
-    <validator-dialog
+    <dialog-validator
       v-if="showModal"
       :value="selected"
       v-on:cancel="onClose"

@@ -19,7 +19,7 @@
             </v-btn>
           </v-list-item-action>
           <v-list-item-action>
-            <v-btn icon @click.stop="toogleAddress">
+            <v-btn icon @click.stop="showAddress = true">
               <v-icon>mdi-qrcode-scan</v-icon>
             </v-btn>
           </v-list-item-action>
@@ -63,19 +63,23 @@
         </v-list-item>
       </v-card>
     </v-menu>
+    <dialog-wallet-address v-if="showAddress" v-on:close="onCloseAddress" />
   </div>
 </template>
 
 <script>
 import Jdenticon from "@/components/Jdenticon";
+import DialogWalletAddress from '@/components/Wallet/Dialogs/DialogWalletAddress.vue';
 
 export default {
   components: {
-    Jdenticon
+    Jdenticon,
+    DialogWalletAddress
   },
   data() {
     return {
-      menu: false
+      menu: false,
+      showAddress: false
     };
   },
   methods: {
@@ -83,8 +87,8 @@ export default {
       this.$store.commit(`app/toggleDarkTheme`);
       this.$vuetify.theme.dark = this.dark_theme;
     },
-    toogleAddress() {
-      this.$store.commit(`wallet/tooglePopup`)
+    onCloseAddress() {
+      this.showAddress = false;
     }
   },
   computed: {
