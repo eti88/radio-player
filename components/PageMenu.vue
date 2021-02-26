@@ -2,7 +2,7 @@
   <v-row justify="space-around">
     <v-col cols="12" class="pt-0 mb-4">
       <v-chip-group mandatory>
-        <v-chip
+        <!-- <v-chip
           class="subtitle-1 px-6font-weight-medium"
           outlined
           :large="$vuetify.breakpoint.mdAndUp"
@@ -12,7 +12,7 @@
           to="/radio/near-you"
           :color="createRandomColor()"
           >Near you</v-chip
-        >
+        > -->
         <v-chip
           class="subtitle-1 px-6 font-weight-medium"
           outlined
