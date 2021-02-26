@@ -2,8 +2,6 @@
   <page-template>
     <page-menu></page-menu>
 
-    <recently-listened></recently-listened>
-
     <template v-for="country in countries">
       <track-grid-featured
         :key="country.country.slug"
@@ -63,12 +61,6 @@ export default {
 
     this.countries = explore.countries;
     this.genres = explore.genres;
-  },
-
-  computed: {
-    recents() {
-      return this.$store.getters["recent/radios"];
-    }
   }
 };
 </script>
