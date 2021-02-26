@@ -35,9 +35,18 @@
     </v-list-item-content>
 
     <v-list-item-action class="text-right ml-0">
-      <v-btn icon color="grey">
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      <v-menu bottom left>
+        <template v-slot:activator="{ on }">
+          <v-btn icon color="grey" class="ml-4" v-on="on">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+        <v-list tile class="py-0">
+          <v-list-item nuxt-link :to="`/radio/radio-station/${item.slug}`">
+            <v-list-item-title>Go to radio page</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-list-item-action>
   </v-list-item>
 </template>

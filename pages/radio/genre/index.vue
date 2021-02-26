@@ -21,7 +21,7 @@
       >
         <template v-slot:title>
           Top Radio in
-          <nuxt-link :to="`/radio/${country.radios[0].country.slug}`">
+          <nuxt-link :to="`/radio/${country.country.slug}`">
             {{ country.country.name }}
           </nuxt-link>
         </template>

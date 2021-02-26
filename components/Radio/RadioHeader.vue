@@ -22,13 +22,14 @@
               <p>{{ radio.country.name }}</p>
               <div class="subtitle-1 min-h-24">
                 <v-flex class="d-flex flex-row">
+                  <!-- TODO: Disabled Placeholder social links
                   <v-btn icon :href="radio.website" target="_blank">
                     <v-icon>mdi-web</v-icon>
                   </v-btn>
                   <v-btn icon :href="radio.contact">
                     <v-icon>mdi-email-outline</v-icon>
                   </v-btn>
-                  <!-- TODO: Disabled Placeholder social links
+
                   <v-btn icon href="#" target="_blank">
                     <v-icon>mdi-facebook</v-icon>
                   </v-btn>
@@ -55,21 +56,21 @@
                   <v-icon left>mdi-play</v-icon>
                   Play
                 </v-btn>
-                <!-- TODO: Connect to contextual action -->
+                <!-- TODO: Connect to contextual action
                 <v-btn outlined>
                   <v-icon left>mdi-plus-box-multiple</v-icon>
                   Follow
-                </v-btn>
-                <v-menu offset-x>
+                </v-btn> -->
+                <v-menu bottom left>
                   <template v-slot:activator="{ on }">
                     <v-btn icon class="ml-4" v-on="on">
                       <v-icon>mdi-dots-vertical</v-icon>
                     </v-btn>
                   </template>
-                  <v-list class="pa-3">
-                    <v-list-tile @click.stop="() => (showDetails = true)">
-                      <v-list-tile-title>Details</v-list-tile-title>
-                    </v-list-tile>
+                  <v-list tile class="py-0">
+                    <v-list-item @click.stop="() => (showDetails = true)">
+                      <v-list-item-title>Details</v-list-item-title>
+                    </v-list-item>
                   </v-list>
                 </v-menu>
               </v-card-actions>

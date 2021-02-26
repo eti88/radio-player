@@ -18,7 +18,10 @@
     </v-list-item-title>
     <v-list-item-title class="grey--text" style="max-width: 320px">
       {{ item.city.name }},
-      <nuxt-link class="track-list__item_link" :to="`/${item.country}`">
+      <nuxt-link
+        class="track-list__item_link"
+        :to="`/radio/${item.country.slug}`"
+      >
         {{ item.country.name }}
       </nuxt-link>
     </v-list-item-title>
@@ -37,9 +40,18 @@
       </template>
     </v-list-item-title>
     <v-list-item-action class="text-right">
-      <v-btn icon color="grey">
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      <v-menu bottom left>
+        <template v-slot:activator="{ on }">
+          <v-btn icon color="grey" class="ml-4" v-on="on">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+        <v-list tile class="py-0">
+          <v-list-item nuxt-link :to="`/radio/radio-station/${item.slug}`">
+            <v-list-item-title>Go to radio page</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-list-item-action>
   </v-list-item>
 </template>

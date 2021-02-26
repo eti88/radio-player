@@ -20,7 +20,7 @@
 
     <template v-for="genre in genres">
       <track-grid-featured
-        :key="genre.genre"
+        :key="genre.genre.slug"
         class="mb-8"
         :items="genre.radios"
       >
