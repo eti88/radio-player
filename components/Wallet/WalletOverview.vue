@@ -8,7 +8,7 @@
             <v-btn
               target="_blank"
               title="Bitsong explorer"
-              :href="`${explorerUrl}/account/${this.address}`"
+              :href="`${explorerUrl}/${this.address}`"
               class="ml-2"
               small
               icon

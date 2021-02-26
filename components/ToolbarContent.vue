@@ -21,9 +21,9 @@
       active-class="no-active"
       class="mr-2"
       to="/auth/create"
-      color="primary"
+      color="red darken-2"
       dark
-      outlined
+      depressed
       >Connect Wallet</v-btn
     >
     <v-btn

@@ -3,8 +3,8 @@
     <v-container fluid class="pa-0">
       <v-row>
         <v-col cols="6" md="2" class="py-0" v-for="i in cities" :key="i.slug">
-          <v-alert colored-border :color="createRandomColor()" border="left" class="fit-content">
-            <nuxt-link :to="`/radio/${country}/${i.slug}`">
+          <v-alert colored-border :color="createRandomColor()" border="left">
+            <nuxt-link :to="`/radio/${country}/${i.slug}`" class="elipsis-wrapper">
               <span
                 class="w-100 fill-height text-truncate white--text font-weight-medium"
                 >{{ i.name }}</span
@@ -61,7 +61,8 @@ export default {
   color: #fff !important;
 }
 
-.fit-content {
-  width: 'fit-content'
+.elipsis-wrapper {
+  text-overflow: ellipsis;
+  display: grid;
 }
 </style>
