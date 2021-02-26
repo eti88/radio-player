@@ -100,7 +100,7 @@ export default {
       return pergentageOf(actualVotes, this.totalVotes)
     },
     microStakeDenom () {
-      return this.$store.getters["app/micro_stake_denom"]
+      return process.env.MICROSTAKEDENOM
     }
   }
 

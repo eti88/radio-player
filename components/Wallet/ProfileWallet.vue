@@ -33,7 +33,6 @@
               </v-col>
             </v-row>
           </v-container>
-          
         </v-col>
         <v-col cols="12" md="4">
           <h6 class="text-h6">Your balance</h6>
@@ -95,13 +94,10 @@ export default {
       return this.$store.getters["wallet/address"];
     },
     explorerUrl() {
-      return this.$store.getters["app/explorer_url"];
+      return process.env.URL_ACCOUNT_EXPLORER;
     },
     decimals() {
       return this.$store.getters["app/decimals"];
-    },
-    denom() {
-      return this.$store.getters["app/micro_stake_denom"]
     }
   },
 
@@ -115,18 +111,18 @@ export default {
         if (account.value != null && account.value.coins.length === 0) {
           this.balance = {
             amount: 0,
-            denom: this.denom
+            denom: process.env.MICROSTAKEDENOM
           };
         }
 
         if (account.value !== null && account.value.coins.length > 0) {
           const coin = account.value.coins.find(
-            c => c.denom === this.denom.toLowerCase()
+            c => c.denom === process.env.MICROSTAKEDENOM
           );
           if (coin !== undefined) {
             this.balance = {
               amount: coin.amount,
-              denom: this.denom
+              denom: process.env.MICROSTAKEDENOM
             };
           }
         }
@@ -153,6 +149,9 @@ export default {
     },
     onCloseSend() {
       this.showModal = false;
+    },
+    onShowAddress() {
+      this.$store.commit(`wallet/tooglePopup`)
     }
   }
 };
