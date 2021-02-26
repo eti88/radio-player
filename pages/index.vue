@@ -2,7 +2,6 @@
   <page-template>
     <page-menu></page-menu>
 
-    <favorites></favorites>
     <recently-listened></recently-listened>
 
     <template v-for="country in countries">

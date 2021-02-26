@@ -34,12 +34,6 @@
       </v-list-item-subtitle>
     </v-list-item-content>
 
-    <v-list-item-action class="text-right">
-      <v-btn icon @click.stop="onFavorite(item)">
-        <v-icon color="red darken-4" v-if="isFavorite(item)">mdi-heart</v-icon>
-        <v-icon color="grey" v-else>mdi-heart-outline</v-icon>
-      </v-btn>
-    </v-list-item-action>
     <v-list-item-action class="text-right ml-0">
       <v-btn icon color="grey">
         <v-icon>mdi-dots-vertical</v-icon>
@@ -62,20 +56,6 @@ export default {
   methods: {
     onClick(item) {
       this.$store.dispatch(`player/setCurrentTrack`, item.slug);
-    },
-    onFavorite(item) {
-      if (!this.isFavorite(item)) {
-        this.$store.dispatch(`favorites/addRadio`, item);
-      } else {
-        this.$store.dispatch(`favorites/removeRadio`, item);
-      }
-    },
-    isFavorite(item) {
-      return this.$store.getters["favorites/radios"].find(
-        r => r.stream_url === item.stream_url
-      )
-        ? true
-        : false;
     }
   }
 };
