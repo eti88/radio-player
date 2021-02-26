@@ -16,9 +16,12 @@
     ></track-img>
 
     <div class="pt-2 track-grid__item_title">
-      <router-link nuxt :to="`/radio/radio-station/${item.slug}`" class="font-weight-medium">{{
-        item.name
-      }}</router-link>
+      <router-link
+        nuxt
+        :to="`/radio/radio-station/${item.slug}`"
+        class="font-weight-medium"
+        >{{ item.name }}</router-link
+      >
     </div>
     <div class="text-wrap track-grid__item_subtitle">
       {{ item.city.name }},
@@ -70,7 +73,7 @@ export default {
 
   methods: {
     onClick(item) {
-      this.$store.dispatch(`player/setCurrentTrack`, item);
+      this.$store.dispatch(`player/setCurrentTrack`, item.slug);
     }
   },
   computed: {

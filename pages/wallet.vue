@@ -1,6 +1,6 @@
 <template>
   <page-template class="col-md-10 mx-auto">
-    <ProfileWallet />
+    <wallet-overview />
     <v-container fluid class="mt-4">
       <v-row>
         <v-col cols="12" class="py-0">
@@ -29,12 +29,12 @@
 
 <script>
 import PageTemplate from "@/components/PageTemplate";
-import ProfileWallet from "~/components/Wallet/ProfileWallet.vue";
+import WalletOverview from '~/components/Wallet/WalletOverview.vue';
 
 export default {
   components: {
     PageTemplate,
-    ProfileWallet
+    WalletOverview
   },
 
   data() {

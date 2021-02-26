@@ -7,7 +7,7 @@
     </v-breadcrumbs>
     <h1 class="text-h2 mb-2">Proposal details</h1>
     <proposal-details :id="id" />
-    <votes-details :id="id" class="my-5" />
+    <proposal-votes-detail :id="id" class="my-5" />
     <depositors :id="id" />
   </page-template>
 </template>
@@ -15,7 +15,7 @@
 <script>
 import PageTemplate from "@/components/PageTemplate"
 import ProposalDetails from '~/components/Wallet/Governance/ProposalDetails.vue'
-import VotesDetails from '~/components/Wallet/Governance/VotesDetails.vue'
+import ProposalVotesDetail from '~/components/Wallet/Governance/ProposalVotesDetail.vue'
 import Depositors from '~/components/Wallet/Governance/Depositors.vue'
 
 export default {
@@ -23,7 +23,7 @@ export default {
   components: {
     PageTemplate,
     ProposalDetails,
-    VotesDetails,
+    ProposalVotesDetail,
     Depositors
   },
 

@@ -16,13 +16,13 @@
       <track-grid-featured
         :key="country.country"
         class="mb-8"
-        :title="`Top Radio in ${country.country}`"
+        :title="`Top Radio in ${country.country.name}`"
         :items="country.radios"
       >
         <template v-slot:title>
           Top Radio in
           <nuxt-link :to="`/radio/${country.radios[0].country.slug}`">
-            {{ country.country }}
+            {{ country.country.name }}
           </nuxt-link>
         </template>
       </track-grid-featured>
@@ -41,7 +41,7 @@ export default {
     const title = `Mood & Genres`;
     return {
       title: title,
-      meta: [{ hid: "og-title", name: "og:title", content: title }],
+      meta: [{ hid: "og-title", name: "og:title", content: title }]
     };
   },
 
@@ -49,13 +49,13 @@ export default {
     PageTemplate,
     TrackGridFeatured,
     Genres,
-    PageMenu,
+    PageMenu
   },
 
   data() {
     return {
       countries: [],
-      genres: [],
+      genres: []
     };
   },
 
@@ -64,6 +64,6 @@ export default {
 
     this.countries = explore.countries;
     this.genres = explore.genres;
-  },
+  }
 };
 </script>

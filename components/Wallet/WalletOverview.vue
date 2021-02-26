@@ -23,7 +23,7 @@
               </v-col>
               <v-col cols="2" class="pt-0">
                 <v-flex class="d-flex flex-row flex-md-column">
-                  <v-btn icon @click.stop="onShowAddress">
+                  <v-btn icon @click.stop="showAddress = true">
                     <v-icon>mdi-qrcode-scan</v-icon>
                   </v-btn>
                   <v-btn title="Send token" icon @click.stop="onOpenSend">
@@ -33,6 +33,7 @@
               </v-col>
             </v-row>
           </v-container>
+          <dialog-wallet-address v-if="showAddress" v-on:close="onCloseAddress" />
         </v-col>
         <v-col cols="12" md="4">
           <h6 class="text-h6">Your balance</h6>
@@ -80,6 +81,7 @@ export default {
       loading: false,
       balance: null,
       currency: 0,
+      showAddress: false,
       showModal: false
     };
   },
@@ -150,8 +152,8 @@ export default {
     onCloseSend() {
       this.showModal = false;
     },
-    onShowAddress() {
-      this.$store.commit(`wallet/tooglePopup`)
+    onCloseAddress() {
+      this.showAddress = false;
     }
   }
 };

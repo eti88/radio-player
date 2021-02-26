@@ -26,7 +26,7 @@
       >
         <template v-slot:title>
           <span class="text-h3 grey--text text--darken-1">{{
-            genre.genre
+            genre.genre.name
           }}</span>
         </template>
       </track-grid-featured>
@@ -45,7 +45,7 @@ export default {
     const title = `Radio in ${this.name}`;
     return {
       title: title,
-      meta: [{ hid: "og-title", name: "og:title", content: title }],
+      meta: [{ hid: "og-title", name: "og:title", content: title }]
     };
   },
 
@@ -53,19 +53,19 @@ export default {
     PageTemplate,
     PageMenu,
     TrackGridFeatured,
-    Cities,
+    Cities
   },
 
   asyncData({ params }) {
     return {
-      slug: params.country,
+      slug: params.country
     };
   },
 
   data() {
     return {
       name: "",
-      genres: [],
+      genres: []
     };
   },
 
@@ -73,6 +73,6 @@ export default {
     const radios = await this.$api.getRadiosByCountry(this.slug);
     this.name = radios.country;
     this.genres = radios.genres;
-  },
+  }
 };
 </script>
