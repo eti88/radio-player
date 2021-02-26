@@ -62,7 +62,7 @@
           </v-list-item-action>
         </v-list-item>
       </v-card>
-    </v-menu> 
+    </v-menu>
   </div>
 </template>
 

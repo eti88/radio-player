@@ -33,7 +33,6 @@
               </v-col>
             </v-row>
           </v-container>
-          
         </v-col>
         <v-col cols="12" md="4">
           <h6 class="text-h6">Your balance</h6>
@@ -150,6 +149,9 @@ export default {
     },
     onCloseSend() {
       this.showModal = false;
+    },
+    onShowAddress() {
+      this.$store.commit(`wallet/tooglePopup`)
     }
   }
 };
