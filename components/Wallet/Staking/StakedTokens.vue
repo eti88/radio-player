@@ -4,8 +4,10 @@
       <v-toolbar flat color="transparent">
         <v-toolbar-title>Your stake</v-toolbar-title>
         <v-spacer></v-spacer>
+        <!-- TODO: disabled until implementation of staking -->
         <v-btn
           :loading="loading"
+          :disabled="true"
           color="orange darken-1"
           depressed
           outlined
