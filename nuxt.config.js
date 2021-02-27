@@ -21,7 +21,8 @@ export default {
     STAKEDENOM: process.env.STAKEDENOM || 'btsg',
     LCD: process.env.LCD || `http://localhost:1317`,
     ADDRESS_PREFIX: process.env.ADDRESS_PREFIX || `bitsong`,
-    HD_PATH: process.env.HD_PATH || `44'/118'/0'/0/`
+    ADDRESS_LENGTH: process.env.ADDRESS_LENGTH || 46,
+    HD_PATH: process.env.HD_PATH || `44'/118'/0'/0/`,
   },
   /*
    ** Nuxt rendering mode
