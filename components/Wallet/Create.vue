@@ -17,7 +17,7 @@
         />
       </v-window-item>
       <v-window-item>
-        <WalletCreateAddressView v-on:onContinue="$router.push('/')" />
+        <WalletCreateAddressView v-on:onContinue="walletCreated" />
       </v-window-item>
     </v-window>
   </v-card>
@@ -48,6 +48,13 @@ export default {
     return {
       step: 0
     };
+  },
+  methods: {
+    async walletCreated() {
+      // await this.$store.dispatch("bank/updateBalance");
+      // this.$store.dispatch("bank/subscribe");
+      this.$router.push("/");
+    }
   }
 };
 </script>

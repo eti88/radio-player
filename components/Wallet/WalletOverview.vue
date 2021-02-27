@@ -33,12 +33,14 @@
               </v-col>
             </v-row>
           </v-container>
-          <dialog-wallet-address v-if="showAddress" v-on:close="onCloseAddress" />
+          <dialog-wallet-address
+            v-if="showAddress"
+            v-on:close="onCloseAddress"
+          />
         </v-col>
         <v-col cols="12" md="4">
           <h6 class="text-h6">Your balance</h6>
           <amount
-            v-if="balance !== null"
             style="font-size: 1.7em"
             :micro-amount="balance.amount"
             :denom="balance.denom"
@@ -46,7 +48,6 @@
           <div>
             <span class="grey--text text--darken-1 caption">≈</span>
             <amount
-              v-if="balance !== null"
               :micro-amount="currency"
               :deciamlsNumber="2"
               style="font-size: 0.9em"
@@ -79,7 +80,6 @@ export default {
   data() {
     return {
       loading: false,
-      balance: null,
       currency: 0,
       showAddress: false,
       showModal: false
@@ -87,7 +87,6 @@ export default {
   },
 
   async created() {
-    await this.getAccount();
     await this.getCounterValue();
   },
 
@@ -100,40 +99,19 @@ export default {
     },
     decimals() {
       return this.$store.getters["app/decimals"];
+    },
+    balance() {
+      return this.$store.getters["bank/balance"];
+    }
+  },
+
+  watch: {
+    balance() {
+      this.getCounterValue();
     }
   },
 
   methods: {
-    async getAccount() {
-      try {
-        this.loading = true;
-
-        let account = await this.$btsg.getAccount(this.address);
-
-        if (account.value != null && account.value.coins.length === 0) {
-          this.balance = {
-            amount: 0,
-            denom: process.env.MICROSTAKEDENOM
-          };
-        }
-
-        if (account.value !== null && account.value.coins.length > 0) {
-          const coin = account.value.coins.find(
-            c => c.denom === process.env.MICROSTAKEDENOM
-          );
-          if (coin !== undefined) {
-            this.balance = {
-              amount: coin.amount,
-              denom: process.env.MICROSTAKEDENOM
-            };
-          }
-        }
-      } catch (e) {
-        console.error(e);
-      } finally {
-        this.loading = false;
-      }
-    },
     async getCounterValue() {
       const response = await this.$api.getTokenUsdPrice("bitsong", "usd");
       if (response !== null) {
@@ -144,7 +122,7 @@ export default {
       }
     },
     onShowAddress() {
-      this.$store.commit(`wallet/tooglePopup`)
+      this.$store.commit(`wallet/tooglePopup`);
     },
     onOpenSend() {
       this.showModal = true;
