@@ -71,13 +71,6 @@
                   </a>
                 </template>
 
-                <!-- Tx cell -->
-                <template v-slot:item.txhash="{ item }">
-                  <a class="caption-1 link-color" :href="`${explorerUrl}/txs/${item.txhash}`">
-                    {{ truncateString(item.txhash) }}
-                  </a>
-                </template>
-
                 <!-- Answer cell -->
                 <template v-slot:item.answer="{ item }">
                   {{ captialize(item.answer) }}
@@ -122,7 +115,6 @@ export default {
       loading: false,
       headers: [
         { text: 'Voter', value: 'voter' },
-        { text: 'TxHash', value: 'txhash' },
         { text: 'Answer', value: 'answer' },
         { text: 'Time', value: 'time', align: 'right' }
       ],
