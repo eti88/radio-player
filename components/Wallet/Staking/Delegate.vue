@@ -9,6 +9,7 @@
     v-on:update:memo="form.memo = $event"
     v-on:update:gas_price="form.gas_price = $event"
     v-on:update:gas_limit="form.gas_limit = $event"
+    :flat="true"
   >
     <template v-slot:fields>
       <input-validator
