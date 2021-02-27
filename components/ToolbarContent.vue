@@ -10,7 +10,7 @@
         alt="BitSong"
         min-width="135"
         width="135"
-        :src="isDarkTheme ?  '/bitsong_logo_light.svg' : '/bitsong_logo_dark.svg'"
+        :src="isDarkTheme ?  '/bitsong_logo_dark.svg' : '/bitsong_logo_light.svg'"
       />
     </router-link>
 
@@ -51,7 +51,7 @@ export default {
       return this.$store.getters[`wallet/isLoggedIn`]
     },
     isDarkTheme() {
-      return this.$store.getters[`dark_theme`]
+      return this.$store.getters[`app/dark_theme`]
     }
   }
 };
