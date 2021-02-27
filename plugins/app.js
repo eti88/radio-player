@@ -30,14 +30,17 @@ export default async (ctx, inject) => {
   await client.initChain()
 
   // get validator set
-  ctx.app.store.dispatch(`validators/getAll`)
+  await ctx.app.store.dispatch(`staking/getValidators`)
 
   // set account
   if (ctx.app.store.getters['wallet/address'] !== null) {
     try {
       await client.setAccountInfo(ctx.app.store.getters['wallet/privateKey'])
+
       await ctx.app.store.dispatch(`bank/updateBalance`)
       ctx.app.store.dispatch(`bank/subscribe`)
+
+      await ctx.app.store.dispatch(`staking/getDelegations`)
     } catch (e) {
       console.error(e)
     }
