@@ -18,7 +18,7 @@
             />
             <staking-delegate
               id="delegate"
-              v-model="delegate"
+              :value="value"
               v-on:txSuccess="getDelegations"
             ></staking-delegate>
           </v-col>
@@ -42,6 +42,13 @@ export default {
   components: {
     StakingDelegate,
     StakingDelegations
+  },
+
+  props: {
+    value: {
+      type: Object,
+      default: null
+    }
   },
 
   computed: {

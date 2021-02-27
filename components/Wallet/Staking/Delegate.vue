@@ -64,7 +64,7 @@ import StakingDelegateConfirmation from '@/components/Wallet/Staking/DelegateCon
 
 export default {
   props: {
-    value: String
+    value: Object
   },
 
   components: {
@@ -93,6 +93,7 @@ export default {
   created() {
     this.form.gas_price = this.$store.getters['app/gas_price']
     this.form.gas_limit = this.$store.getters['app/gas_limit']
+    this.form.validator = this.value.operator_address
   },
 
   watch: {

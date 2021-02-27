@@ -42,14 +42,17 @@
     </v-toolbar>
     <dialog-delegate
       v-if="showModalDelegations"
+      :value="validator"
       v-on:cancel="onCloseDelagatesDialog"
     />
     <dialog-unbond
       v-if="showModalUnbond"
+      :value="validator"
       v-on:cancel="onCloseUnbondDialog"
     />
     <dialog-redelegate
       v-if="showModalStaking"
+      :value="validator"
       v-on:cancel="onCloseRedelegateDialog"
     />
   </v-card>
@@ -66,6 +69,13 @@ export default {
     DialogDelegate,
     DialogUnbond,
     DialogRedelegate
+  },
+
+  props: {
+    validator: {
+      type: Object,
+      required: true
+    }
   },
   
   data() {
