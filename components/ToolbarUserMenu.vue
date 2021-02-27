@@ -77,7 +77,7 @@
 
 <script>
 import Jdenticon from "@/components/Jdenticon";
-import DialogWalletAddress from '@/components/Wallet/Dialogs/DialogWalletAddress.vue';
+import DialogWalletAddress from "@/components/Wallet/Dialogs/DialogWalletAddress.vue";
 
 export default {
   components: {
