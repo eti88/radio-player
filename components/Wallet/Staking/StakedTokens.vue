@@ -38,14 +38,9 @@
                 :valoper="item.validator_address"
                 size="26px"
               />
-              <!-- <dot-status-with-tooltip
+              <dot-status-with-tooltip
                 :status="item.status === 2"
                 :msg="item.status === 2 ? 'Active' : 'Inactive'"
-                class="mx-2"
-              /> -->
-              <dot-status-with-tooltip
-                :status="true"
-                msg="Active"
                 class="mx-2"
               />
               <span class="caption-1">
@@ -65,38 +60,22 @@
           />
         </template>
 
-        <!-- Rewards cell
-        <template v-slot:item.rewards="{ item }">
-          <span
-            :class="item.rewards >= 0 ? 'green--text' : 'red--text'"
-            class="pr-5"
-          >
-            {{ item.rewards >= 0 ? '+' : '-' }}{{ item.rewards }}
-          </span>
-        </template>-->
-
+        <!-- Rewards cell -->
         <template v-slot:item.rewards="{ item }">
           <span class="green--text pr-5">
-            11111
+            <amount
+              style="font-size: 1.4em;"
+              class="my-auto"
+              :micro-amount="item.rewards.amount"
+              :denom="item.rewards.denom"
+            />
           </span>
         </template>
 
         <!-- Commision cell -->
         <template v-slot:item.commission="{ item }">
-          <warning-commission-icon
-            v-if="
-              item.details &&
-                item.details.commission.commission_rates.rate > 0.5
-            "
-          />
-          <span class="pr-5">
-            {{ item.details.commission.commission_rates.rate * 100 }}%
-          </span> </template
-        >-->
-        <template v-slot:item.commission="{ item }">
-          <span class="pr-5">
-            NaN%
-          </span>
+          <warning-commission-icon v-if="item.commission > 0.5" />
+          <span class="pr-5"> {{ item.commission * 100 }}% </span>
         </template>
       </v-data-table>
     </v-card-text>

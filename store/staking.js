@@ -82,6 +82,8 @@ export const actions = {
       if (address === null) return
 
       let delegations = await this.$btsg.getDelegations(address)
+      const rewards = await this.$btsg.getDelegatorRewards(address)
+      console.log(rewards)
       delegations = delegations
         .sort((a, b) => {
           return b.shares - a.shares
@@ -93,7 +95,10 @@ export const actions = {
           return {
             ...d,
             validator_name: val !== undefined ? val.description.moniker : '',
-            identity: val !== undefined ? val.description.identity : ''
+            identity: val !== undefined ? val.description.identity : '',
+            rewards: rewards.rewards.find(v => v.validator_address === val.operator_address).reward[0],
+            commission: val.commission.commission_rates.rate,
+            status: val.status
           }
         })
 
