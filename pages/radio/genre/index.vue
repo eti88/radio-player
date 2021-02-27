@@ -60,10 +60,9 @@ export default {
   },
 
   async created() {
-    const explore = await this.$api.getByExplore();
-
-    this.countries = explore.countries;
-    this.genres = explore.genres.map(g => g.genre);
+    const exploreGenres = await this.$api.getExploreGenres()
+    this.countries = await this.$api.getExploreCountries()
+    this.genres = exploreGenres.map(g => g.genre)
   }
 };
 </script>
