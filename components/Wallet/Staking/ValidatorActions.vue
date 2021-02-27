@@ -52,10 +52,6 @@
       v-if="showModalStaking"
       v-on:cancel="onCloseRedelegateDialog"
     />
-    <dialog-edit-validator
-      v-if="showModalEditValidator"
-      v-on:cancel="onCloseValidatorDialog"
-    />
   </v-card>
 </template>
 

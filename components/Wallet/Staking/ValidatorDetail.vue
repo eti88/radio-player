@@ -63,9 +63,10 @@
             </a>
           </div>
         </v-col>
-        <v-col cols="12" md="1" align-self="right">
-          <!-- TODO: show only on privileged wallets -->
+        <v-col cols="12" md="1" align-self="center">
+          <!-- TODO: show only on privileged wallets (disabled until implementation) -->
           <v-btn
+            v-if="false"
             color="grey"
             class="ml-2"
             icon
@@ -187,6 +188,10 @@
         </v-row>
       </v-card-text>
     </v-container>
+    <dialog-edit-validator
+      v-if="showModalEditValidator"
+      v-on:cancel="onCloseValidatorDialog"
+    />
   </v-card>
 </template>
 

@@ -11,7 +11,7 @@
                 v-for="(item, i) in tabs"
                 :key="i"
                 :to="item.ref"
-                class="black"
+                :class="isDarkTheme ? 'black' : 'grey lighten-3'"
                 exact
               >
                 {{ item.name }}
@@ -50,7 +50,10 @@ export default {
 
   computed: {
     address() {
-      return this.$store.getters["wallet/address"];
+      return this.$store.getters["wallet/address"]
+    },
+    isDarkTheme() {
+      return this.$store.getters[`app/dark_theme`]
     }
   },
 

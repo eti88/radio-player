@@ -1,5 +1,5 @@
 <template>
-  <v-flex class="px-0 mx-0 black">
+  <v-flex class="px-0 mx-0">
     <v-row no-gutters>
       <v-col cols="12">
         <v-list color="transparent" v-if="coins.length">
