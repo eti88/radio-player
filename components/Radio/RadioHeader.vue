@@ -4,16 +4,19 @@
     gradient="to bottom, rgba(0,0,0,.4), rgba(0,0,0,1)"
     :height="$vuetify.breakpoint.mdAndUp ? height : ``"
   >
-    <v-container fluid class="d-flex align-end fill-height">
+    <v-container fluid :class="{'fill-height': $vuetify.breakpoint.mdAndUp}" class="d-flex align-end">
       <v-row align="end">
-        <v-col md="9" class="mx-auto py-8">
+        <v-col
+          md="9"
+          class="mx-auto py-8"
+        >
           <v-row justify="start" align="start">
             <v-col
               :class="{
                 'flex-grow-0 flex-shrink-0 pr-6 pl-0':
                   $vuetify.breakpoint.mdAndUp
               }"
-              v-if="radio.picture !== null"
+              v-if="radio.picture !== null && $vuetify.breakpoint.mdAndUp"
             >
               <v-img :src="radio.picture" max-width="265" max-height="265" />
             </v-col>

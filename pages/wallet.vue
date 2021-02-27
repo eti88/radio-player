@@ -6,7 +6,7 @@
         <v-col cols="12" class="py-0">
           <v-flex class="tabs-wrapper overflow-none mb-3">
             <!-- Tabs menu -->
-            <v-tabs v-model="tab" grow centered show-arrows>
+            <v-tabs v-model="tab" grow centered>
               <v-tab
                 v-for="(item, i) in tabs"
                 :key="i"

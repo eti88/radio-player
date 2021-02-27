@@ -1,7 +1,7 @@
 <template>
   <v-card elevation="0">
     <v-card-title>
-      <v-toolbar flat color="transparent">
+      <v-toolbar v-if="$vuetify.breakpoint.mdAndUp" flat color="transparent">
         <v-toolbar-title>All Validators</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-text-field
@@ -31,6 +31,45 @@
           </v-btn>
         </v-btn-toggle>
       </v-toolbar>
+      <v-flex v-else flat color="transparent">
+        <v-row no-gutters>
+          <v-col>
+            <v-toolbar-title>All Validators</v-toolbar-title>
+          </v-col>
+          <v-col align="end">
+            <v-btn-toggle v-model="queryType" mandatory>
+              <v-btn text outlined height="38" class="text-uppercase" value="all">
+                All
+              </v-btn>
+              <v-btn
+                text
+                outlined
+                height="38"
+                color="green"
+                class="text-uppercase"
+                value="active"
+              >
+                Active
+              </v-btn>
+            </v-btn-toggle>
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col>
+            <v-text-field
+              v-model="query"
+              label="Search"
+              class="my-2"
+              autocomplete="off"
+              clearable
+              solo
+              dense
+              hide-details
+              append-icon="mdi-magnify"
+            />
+          </v-col>
+        </v-row>
+      </v-flex>
     </v-card-title>
     <v-data-table
       :headers="headers"
@@ -46,7 +85,7 @@
 
       <template v-slot:item="{ item }">
         <tr @click.stop="onSelectRow(item)">
-          <td>
+          <td class="d-sm-table-cell">
             <!-- Name cell -->
             <v-flex class="d-flex flex-row align-center">
               <validator-avatar
@@ -64,21 +103,24 @@
               </span>
             </v-flex>
           </td>
-          <td class="text-right">
+          <td class="d-flex align-items-center text-right justify-content-end" :class="$vuetify.breakpoint.mdAndUp ? 'flex-row' : 'flex-column'">
             <!-- Tokens cell -->
             <amount
-              style="font-size: 1.4em;"
+              :style="$vuetify.breakpoint.mdAndUp ? 'font-size: 1.4em': 'font-size: 1em'"
               class="my-auto"
               :micro-amount="item.tokens"
               :noDecimals="true"
               :denom="denom"
             />
-            <span>
+            <span class="ml-1">
               ({{ item.voting_power_percent }}) %
             </span>
           </td>
           <!-- Commission cell -->
-          <td class="text-right">
+          <td 
+            :class="$vuetify.breakpoint.mdAndUp ? 'text-right' : 'justify-content-end'"
+            class="d-flex d-sm-table-cell align-items-center"
+          >
             <warning-commission-icon
               v-if="
                 item.details !== null &&
@@ -183,5 +225,11 @@ export default {
 }
 .theme--dark.v-data-table tbody tr:nth-of-type(even) {
   background-color: rgba(0, 0, 0, 0.1);
+}
+.align-items-center {
+  align-items: center;
+}
+.justify-content-end {
+  justify-content: flex-end;
 }
 </style>

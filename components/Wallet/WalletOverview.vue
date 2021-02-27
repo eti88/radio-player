@@ -22,7 +22,7 @@
                 <markup :content="address"></markup>
               </v-col>
               <v-col cols="2" class="pt-0">
-                <v-flex class="d-flex flex-row flex-md-column">
+                <v-flex class="d-flex" :class="$vuetify.breakpoint.mdAndUp ? 'flex-row' : 'flex-column'">
                   <v-btn icon @click.stop="showAddress = true">
                     <v-icon>mdi-qrcode-scan</v-icon>
                   </v-btn>
