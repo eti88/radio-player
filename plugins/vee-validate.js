@@ -3,7 +3,7 @@ import { ValidationProvider, ValidationObserver, setInteractionMode, extend } fr
 import * as VeeValidate from 'vee-validate'
 import BigNumber from 'bignumber.js'
 /* eslint-disable-next-line camelcase */
-import { required, confirmed, max, min, min_value, max_value, integer } from 'vee-validate/dist/rules.umd.min.js'
+import { required, confirmed, max, min, min_value, max_value, integer, regex } from 'vee-validate/dist/rules.umd.min.js'
 
 extend('required', required)
 extend('integer', integer)
@@ -14,6 +14,7 @@ extend('confirmed', confirmed)
 extend('min_value', min_value)
 /* eslint-disable-next-line camelcase */
 extend('max_value', max_value)
+extend('regex', regex)
 
 extend('decimals', {
   validate(value, args) {
