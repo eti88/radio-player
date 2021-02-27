@@ -70,11 +70,11 @@
               style="font-size: 1.4em;"
               class="my-auto"
               :micro-amount="item.tokens"
+              :noDecimals="true"
               :denom="denom"
             />
             <span>
-              <!-- TODO: Calculate percentage of tokens like bisong explorer -->
-              0.00%
+              ({{ item.voting_power_percent }}) %
             </span>
           </td>
           <!-- Commission cell -->
@@ -131,7 +131,6 @@ export default {
         { text: "Tokens", value: "tokens", align: "right" },
         { text: "Commission", value: "commission", align: "right" }
       ]
-      //validators: []
     };
   },
 
@@ -147,21 +146,7 @@ export default {
     }
   },
 
-  async created() {
-    // await this.getValidators()
-  },
-
   methods: {
-    // async getValidators () {
-    //   const validators = await this.$btsg.getValidators()
-
-    //   if (validators.result.length > 0) {
-    //     this.validators = validators.result
-    //       .sort((a, b) => {
-    //         return b.tokens - a.tokens
-    //       })
-    //   }
-    // },
     filterValidators(items, query, type) {
       if (items === null) {
         return [];
