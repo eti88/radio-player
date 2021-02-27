@@ -17,10 +17,11 @@ export default {
     VERSION: pkg.version,
     GA_ID: process.env.GA_ID || undefined,
     WORKBOX: process.env.WORKBOX || false,
-    MICROSTAKEDENOM: process.env.MICROSTAKEDENOM ? process.env.MICROSTAKEDENOM : `ubtsg`,
-    LCD: process.env.LCD ? process.env.LCD : `http://localhost:1317`,
-    ADDRESS_PREFIX: process.env.ADDRESS_PREFIX ? process.env.ADDRESS_PREFIX : `bitsong`,
-    HD_PATH: process.env.HD_PATH ? process.env.HD_PATH : `44'/118'/0'/0/`
+    MICROSTAKEDENOM: process.env.MICROSTAKEDENOM || 'ubtsg',
+    STAKEDENOM: process.env.STAKEDENOM || 'btsg',
+    LCD: process.env.LCD || `http://localhost:1317`,
+    ADDRESS_PREFIX: process.env.ADDRESS_PREFIX || `bitsong`,
+    HD_PATH: process.env.HD_PATH || `44'/118'/0'/0/`
   },
   /*
    ** Nuxt rendering mode
