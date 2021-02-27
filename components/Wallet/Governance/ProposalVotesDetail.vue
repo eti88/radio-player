@@ -2,50 +2,54 @@
   <v-container fluid class="pa-0">
     <v-row>
       <v-col cols="12" class="py-0">
-        <v-flex class="tabs-wrapper overflow-none mb-3">
-          <v-flex>
-            <!-- Tabs menu -->
-            <v-tabs
-              v-model="tab"
-              grow
-              centered
-              show-arrows
+        <v-flex
+          class="tabs-wrapper overflow-none mb-3"
+        >
+          <!-- Tabs menu -->
+          <v-tabs
+            v-model="tab"
+            grow
+            centered
+            show-arrows
+          >
+            <v-tab
+              href="#all"
+              :class="isDarkTheme ? 'black' : 'grey lighten-3'"
+              class="text-uppercase"
             >
-              <v-tab
-                href="#all"
-                class="text-uppercase black"
-              >
-                All ({{ totalVotes }})
-              </v-tab>
-              <v-tab
-                href="#yes"
-                class="text-uppercase black"
-              >
-                Yes ({{ totalYes }})
-              </v-tab>
-              <v-tab
-                href="#no"
-                class="text-uppercase black"
-              >
-                No ({{ totalNo }})
-              </v-tab>
-              <v-tab
-                href="#noWithVeto"
-                class="text-uppercase black"
-              >
-                NoWithVeto ({{ totalNoWithVeto }})
-              </v-tab>
-              <v-tab
-                href="#abstain"
-                class="text-uppercase black"
-              >
-                Abstain ({{ totalAbstain }})
-              </v-tab>
-            </v-tabs>
-            <!-- End Tabs menu -->
-          </v-flex>
+              All ({{ totalVotes }})
+            </v-tab>
+            <v-tab
+              href="#yes"
+              :class="isDarkTheme ? 'black' : 'grey lighten-3'"
+              class="text-uppercase"
+            >
+              Yes ({{ totalYes }})
+            </v-tab>
+            <v-tab
+              href="#no"
+              :class="isDarkTheme ? 'black' : 'grey lighten-3'"
+              class="text-uppercase"
+            >
+              No ({{ totalNo }})
+            </v-tab>
+            <v-tab
+              href="#noWithVeto"
+              :class="isDarkTheme ? 'black' : 'grey lighten-3'"
+              class="text-uppercase"
+            >
+              NoWithVeto ({{ totalNoWithVeto }})
+            </v-tab>
+            <v-tab
+              href="#abstain"
+              :class="isDarkTheme ? 'black' : 'grey lighten-3'"
+              class="text-uppercase"
+            >
+              Abstain ({{ totalAbstain }})
+            </v-tab>
+          </v-tabs>
+          <!-- End Tabs menu -->
         </v-flex>
-
         <v-card>
           <v-card-title>
             Votes
@@ -175,6 +179,9 @@ export default {
     },
     explorerUrl () {
       return process.env.URL_ACCOUNT_EXPLORER
+    },
+    isDarkTheme() {
+      return this.$store.getters[`app/dark_theme`]
     }
   },
 

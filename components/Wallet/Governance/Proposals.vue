@@ -112,7 +112,6 @@ export default {
   methods: {
     getProposals() {
       // TODO: Placeholder
-      /**/
       return [
         {
           abstain: "712303271059",
@@ -211,8 +210,6 @@ export default {
           yes: "88530588570370"
         }
       ]
-      /**/
-      return []
     },
     onNewProposal () {
       // TODO: Placeholder
