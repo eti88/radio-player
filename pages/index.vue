@@ -57,10 +57,11 @@ export default {
   },
 
   async created() {
-    const explore = await this.$api.getByExplore();
+    const countries = await this.$api.getExploreCountries();
+    this.countries = countries;
 
-    this.countries = explore.countries;
-    this.genres = explore.genres;
+    const genres = await this.$api.getExploreGenres();
+    this.genres = genres;
   }
 };
 </script>
