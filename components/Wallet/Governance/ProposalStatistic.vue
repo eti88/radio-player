@@ -107,7 +107,7 @@ export default {
       return pergentageOf(actualVotes, this.totalVotes)
     },
     microStakeDenom () {
-      return process.env.MICROSTAKEDENOM
+      return this.$store.getters["app/micro_stake_denom"];
     },
     isDarkTheme() {
       return this.$store.getters[`app/dark_theme`]

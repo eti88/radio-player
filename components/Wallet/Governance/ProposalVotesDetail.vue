@@ -170,7 +170,7 @@ export default {
       return 5
     },
     explorerUrl () {
-      return process.env.URL_ACCOUNT_EXPLORER
+      return this.$store.getters["app/url_account_explorer"];
     },
     isDarkTheme() {
       return this.$store.getters[`app/dark_theme`]

@@ -170,10 +170,10 @@ export default {
 
   computed: {
     explorerUrl () {
-      return process.env.URL_ACCOUNT_EXPLORER
+      return this.$store.getters["app/url_account_explorer"];
     },
     microStakeDenom () {
-      return process.env.MICROSTAKEDENOM
+      return this.$store.getters["app/micro_stake_denom"];
     },
     parsedDescription () {
       if (this.proposal === null) {

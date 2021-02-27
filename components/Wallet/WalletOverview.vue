@@ -95,7 +95,7 @@ export default {
       return this.$store.getters["wallet/address"];
     },
     explorerUrl() {
-      return process.env.URL_ACCOUNT_EXPLORER;
+      return this.$store.getters["app/url_account_explorer"];
     },
     decimals() {
       return this.$store.getters["app/decimals"];
