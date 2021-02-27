@@ -1,7 +1,7 @@
 export const state = () => ({
   dark_theme: true,
   stake_denom: process.env.STAKEDENOM,
-  micro_stake_denom: process.env.MICROSTAKEDENOM ?? 'u',
+  micro_stake_denom: process.env.MICROSTAKEDENOM,
   gas_price: process.env.DEFAULT_GAS_PRICE,
   gas_limit: process.env.DEFAULT_GAS_LIMIT,
   decimals: process.env.DECIMALS,

@@ -41,8 +41,8 @@ export const actions = {
       const address = rootGetters['wallet/address']
 
       const client = new Client(
-        "bitsong-testnet-4",
-        "wss://rpc.testnet4.bitsong.network/websocket"
+        process.env.CHAIN_ID,
+        process.env.SOCKET
       );
 
       client.subscribe(
