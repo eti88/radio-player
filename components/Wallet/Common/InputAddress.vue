@@ -1,6 +1,10 @@
 <template>
   <div class="pt-0">
-    <ValidationProvider v-slot="{ errors }" :rules="rulesRecipient" name="recipient">
+    <ValidationProvider
+      v-slot="{ errors }"
+      :rules="rulesRecipient"
+      name="recipient"
+    >
       <v-text-field
         v-model="lazyValue"
         label="To address"
@@ -15,8 +19,12 @@
         append-icon="mdi-qrcode"
         @click:append="onQrcodeClick"
       ></v-text-field>
-    </ValidationProvider>  
-        <dialog-qrcode v-if="qrDialog" v-on:onDecode="onDecode" v-on:close="onQrcodeClose" />
+    </ValidationProvider>
+    <dialog-qrcode
+      v-if="qrDialog"
+      v-on:onDecode="onDecode"
+      v-on:close="onQrcodeClose"
+    />
   </div>
 </template>
 
@@ -30,53 +38,49 @@ export default {
     return {
       lazyValue: this.value,
       qrDialog: false
-    }
+    };
   },
 
   watch: {
     value(val) {
-      this.lazyValue = val
+      this.lazyValue = val;
     }
   },
 
   beforeCreate() {
     this.$_modelEvent =
-      (this.$options.model && this.$options.model.event) || 'input'
+      (this.$options.model && this.$options.model.event) || "input";
   },
 
   methods: {
     onQrcodeClick() {
-      this.qrDialog = true
+      this.qrDialog = true;
     },
     onQrcodeClose() {
-      this.qrDialog = false
+      this.qrDialog = false;
     },
     onDecode(decodedStr) {
-      this.lazyValue = decodedStr
-      this.$emit('update:address', decodedStr)
-      this.qrDialog = false
+      this.lazyValue = decodedStr;
+      this.$emit("update:address", decodedStr);
+      this.qrDialog = false;
     }
   },
 
   computed: {
     address_length() {
-      return this.$store.getters['app/address_length']
+      return this.$store.getters["app/address_length"];
     },
-    address_start_regex() {
-      return this.$store.getters[`app/address_start_regex`]
-    },
-    address_regex () {
-      return process.env.ADDRESS_REGEX
+    address_prefix() {
+      return this.$store.getters["app/address_prefix"];
     },
     rulesRecipient() {
       return {
         required: true,
-        //regex: this.address_start_regex,
-        regex: `^${this.address_regex}`,
+        regex: new RegExp(`^${this.address_prefix}1`),
         max: this.address_length,
         min: this.address_length
-      }
+      };
     }
   }
-}
+};
 </script>

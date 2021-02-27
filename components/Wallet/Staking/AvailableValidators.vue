@@ -143,7 +143,7 @@ export default {
       return this.$store.getters["app/decimals"];
     },
     validators() {
-      return this.$store.getters[`validators/validators`];
+      return this.$store.getters[`staking/validators`];
     }
   },
 

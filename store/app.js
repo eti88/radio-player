@@ -1,12 +1,12 @@
 export const state = () => ({
   dark_theme: true,
   stake_denom: process.env.STAKEDENOM,
-  micro_stake_denom: process.env.MICROSTAKEDENOM ?? 'u',
+  micro_stake_denom: process.env.MICROSTAKEDENOM,
   gas_price: process.env.DEFAULT_GAS_PRICE,
   gas_limit: process.env.DEFAULT_GAS_LIMIT,
   decimals: process.env.DECIMALS,
-  address_length: process.env.ADDRESS_length,
-  address_start_regex: process.env.ADDRESS_START_REGEX,
+  address_length: process.env.ADDRESS_LENGTH,
+  address_prefix: process.env.ADDRESS_PREFIX
 })
 
 export const getters = {
@@ -28,8 +28,8 @@ export const getters = {
   address_length: state => {
     return state.address_length
   },
-  address_start_regex: state => {
-    return state.address_start_regex
+  address_prefix: state => {
+    return state.address_prefix
   },
   decimals: state => {
     return state.decimals
