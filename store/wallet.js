@@ -14,7 +14,7 @@ export const getters = {
     return state.selectedWallet === null ? '' : state.wallets[state.selectedWallet].mnemonic
   },
   address: state => {
-    return state.selectedWallet === null ? '' : state.wallets[state.selectedWallet].address
+    return state.selectedWallet === null ? null : state.wallets[state.selectedWallet].address
   },
   privateKey: state => {
     return state.selectedWallet === null ? '' : state.wallets[state.selectedWallet].privateKey
@@ -49,7 +49,7 @@ export const mutations = {
 
 export const actions = {
   async createAccountWithMnemonic({
-    commit, state
+    commit, state, dispatch
   }, password) {
     try {
       commit(`toggleLoading`)
@@ -62,6 +62,9 @@ export const actions = {
 
       const i = state.wallets.findIndex(w => w.address === address)
       commit(`connect`, i)
+
+      dispatch('bank/updateBalance', null, { root: true })
+      dispatch('bank/subscribe', null, { root: true })
 
       commit(`toggleLoading`)
     } catch (e) {
@@ -86,7 +89,7 @@ export const actions = {
     }
   },
   async recoverAccountFromPrivateKey({
-    commit, state
+    commit, state, dispatch
   }, {
     privateKey, password
   }) {
@@ -102,6 +105,9 @@ export const actions = {
       const i = state.wallets.findIndex(w => w.address === address)
       commit(`connect`, i)
 
+      dispatch('bank/updateBalance', null, { root: true })
+      dispatch('bank/subscribe', null, { root: true })
+
       commit(`toggleLoading`)
 
       return true
@@ -112,7 +118,7 @@ export const actions = {
     }
   },
   async recoverAccountFromMnemonic({
-    commit, state
+    commit, state, dispatch
   }, {
     mnemonic, password
   }) {
@@ -131,6 +137,9 @@ export const actions = {
       const i = state.wallets.findIndex(w => w.address === address)
       commit(`connect`, i)
 
+      dispatch('bank/updateBalance', null, { root: true })
+      dispatch('bank/subscribe', null, { root: true })
+
       commit(`toggleLoading`)
 
       return true
@@ -141,7 +150,7 @@ export const actions = {
     }
   },
   async recoverAccountFromKeystore({
-    commit, state
+    commit, state, dispatch
   }, {
     keystore,
     password
@@ -160,6 +169,9 @@ export const actions = {
 
       const i = state.wallets.findIndex(w => w.address === address)
       commit(`connect`, i)
+
+      dispatch('bank/updateBalance', null, { root: true })
+      dispatch('bank/subscribe', null, { root: true })
 
       commit(`toggleLoading`)
 
