@@ -23,6 +23,11 @@ export default {
     ADDRESS_PREFIX: process.env.ADDRESS_PREFIX || `bitsong`,
     ADDRESS_LENGTH: process.env.ADDRESS_LENGTH || 46,
     HD_PATH: process.env.HD_PATH || `44'/118'/0'/0/`,
+    DECIMALS: process.env.DECIMALS || 6,
+    DEFAULT_GAS_PRICE: process.env.DEFAULT_GAS_PRICE || 0.25,
+    DEFAULT_GAS_LIMIT: process.env.DEFAULT_GAS_LIMIT || 200000,
+    SOCKET: process.env.SOCKET || `wss://rpc.testnet4.bitsong.network/websocket`,
+    CHAIN_ID: process.env.CHAIN_ID || `bitsong-testnet-4`
   },
   /*
    ** Nuxt rendering mode
