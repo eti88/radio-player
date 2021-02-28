@@ -87,20 +87,27 @@
           </v-row>
         </v-flex>
       </v-card-title>
-      <template v-for="(validator, i) in filterValidators(validators, query, queryType)">
+      <v-virtual-scroll
+        :bench="10"
+        :items="filterValidators(validators, query, queryType)"
+        :item-height="$vuetify.breakpoint.mdAndUp ? 86 : 124"
+        height="525"
+      >
+      <template v-slot:default="{ item }">
         <available-validators-item-desktop
-          :key="i"
+          :key="item.operator_address"
           v-if="$vuetify.breakpoint.mdAndUp"
-          :validator="validator"
+          :validator="item"
           @select="onSelectRow"
         />
         <available-validators-item-mobile
           v-else
-          :key="i"
-          :validator="validator"
+          :key="item.operator_address"
+          :validator="item"
           @select="onSelectRow"
         />
       </template>
+      </v-virtual-scroll>
     </v-list>
     <dialog-validator
       v-if="showModal"
